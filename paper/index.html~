@@ -1,0 +1,272 @@
+<html>
+<head>
+ <title>CS552 Advanced Operating Systems Reading List</title>
+</head>
+
+<body style="background-image: url('http://www.cs.binghamton.edu/~kartik/images/bg_sand.jpg'); background-color: rgb(255, 255, 255)" alink="#0000ee" link="#0000ff" vlink="#0000ff">
+
+
+<h2 align=center>Reading List of Papers</h2>
+<h4 align=center>CS552 Advanced Operating Systems</h4>
+<h4 align=center><a href=http://www.cs.binghamton.edu/~kartik/>Kartik Gopalan</a>, Computer Science Department, Binghamton University</h4>
+
+<h3> This is a tentative list of papers from which we will pick and chose the ones to cover  in the class.</h3>
+
+<a name=reading></a>
+<b><font color=brown>How to Read, Write and Review Papers</font></b>
+<ul>
+	<li>
+		<a name=wetherall_reviews href=wetherall_reviews.pdf>[wetherall_reviews]</a> David Wetherall, "Research papers and review considerations." <br>
+	</li>
+	<li>
+		<a name=smith90task href=http://www.computer.org/tpami/taskofreferee.html>[smith90task]</a> Alan Jay Smith, "The Task of the Referee," IEEE Computer, 23(4), April 1990, pp. 65-71.<br>
+	</li>
+	<li>
+		<a name=efficientReading href=efficientReading.pdf>[efficientReading]</a> Michael J. hanson, "Efficient Reading of Papers in Science and Technology." <br>
+	</li>
+	<li>
+		<a name=howtoread href=http://www-cse.ucsd.edu/users/wgg/CSE210/howtoread.html>[howtoread]</a> Bill Griswold, "How to Read an Engineering Research Paper." <br>
+	</li>
+	<li>
+		<a name=levin83evaluation href=http://www.usenix.org/events/samples/submit/advice.html>[levin83evaluation]</a> Roy Levin and David D. Redell, "An Evaluation of the Ninth SOSP Submissions -or- How (and How Not) to Write a Good Systems Paper." ACM SIGOPS Operating Systems Review, Vol. 17, No. 3 (July, 1983), pages 35-40. <br>
+	</li>
+</ul>
+
+<a name=common></a>
+<b><font color=brown>Virtual Memory Subsystem</font></b>
+<ul>
+	<li>
+	<a name=levy82virtual href=levy82virtual.pdf>[levy82virtual]</a>
+	H.M. Levy and P.H. Lipman,
+	"Virtual Memory Management in the VAX/VMS Operating System", IEEE Computer, 15(3):35--41, March 1982.
+	</li>
+
+	<li>
+	<a name=navarro02superpages href=navarro02superpages.pdf>[navarro02superpages]</a>
+	J. Navarro, S. Iyer, P. Druschel, and A. Cox,
+	"Practical, Transparent, Operating System Support for Superpages", OSDI 2002.
+	</li>
+
+	<li>
+	<a name=hines06distributed href=hines06distributed.pdf>[hines06distributed]</a>
+	M. Hines, J. Wang, K. Gopalan,
+	"Distributed Anemone: Transparent Low-Latency
+	Access to Remote Memory", HiPC 2006.
+	</li>
+</ul>
+
+<a name=common></a>
+<b><font color=brown>Virtualization Techniques</font></b>
+<ul>
+	<li>
+		<a name=smith03overview href=smith03overview.pdf>[smith03overview]</a> J. E. Smith and Ravi Nair. An overview of virtual machine architectures. 2003.
+	</li>
+	<li>
+		<a name=barham03xen href=barham03xen.pdf>[barham03xen]</a> P. Barham, "Xen and the Art of Virtualization", SOSP 2003
+	</li>
+	<li>
+		<a name=engler95exokernel href=engler95exokernel.ps>[engler95exokernel]</a> Dawson Engler, "Exokernel: An Operating System Architecture for Application-Level Resource Management", SOSP 1995.
+	</li>
+	<li>
+		<a name=dike00user href=dike00user.pdf>[dike00user]</a>  and 
+		<a name=dike01user href=dike01user.pdf>[dike01user]</a> 
+J. Dike, "A User-mode Port of the Linux Kernel", Linux Showcase and Conference 2000. (see more documentation at <a href=http://user-mode-linux.sourceforge.net/>User Mode Linux website</a>)
+	</li>
+	<li>
+		<a name=hoxer02implementing href=hoxer02implementing.pdf>[hoxer02implementing]</a> H. Hoxer, et al, "Implementing a User-mode Linux with Minimal Changes from the Original Kernel", 2002 Linux System Technology Conference.
+	</li>
+	<li>
+		<a name=whitaker02scale href=whitaker02scale.pdf>[whitaker02scale]</a> Whitaker et al, "Scale and Performance in the Denali Isolation Kernel", OSDI 2002.
+	</li> 
+	<li>
+		<a name=whitaker02denali href=whitaker02denali.pdf>[whitaker02denali]</a> A. Whitaker, M. Shaw, and S. Gribble, Denali: Lightweight Virtual Machines for Distributed and Networked Applications, Usenix 2002.
+	</li> 
+	<li>
+		<a name=lawton99running href=lawton99running.txt>[lawton99running]</a> K. Lawton, "Running Multiple Operating Systems Concurrently on an IA32 PC Using Virtualization Techniques". (Unpublished paper that started the Plex86 project).
+	</li> 
+	<li>
+		<a name=intel05virtualization href=intel05virtualization.pdf>[intel05virtualization]</a> Intel, "Intel Vanderpool Technology for IA-32 Processors (VT-x) Preliminary Specification", January, 2005 
+	</li> 
+	<li>
+		<a name=robin00analysis href=robin00analysis.pdf>[robin00analysis]</a> J. Robin and C. Irvine, "Analysis of the Intel Pentium's ability to support a secure virtual machine monitor", 9th USENIX Security Symposium, Denver, CO, August 2000
+	</li> 
+	<li>
+		<a name=waldspurger02memory href=waldspurger02memory.pdf>[waldspurger02memory]</a> Carl A. Waldspurger, "Memory Resource Management in VMware ESX Server", Operating System Design and Implementation (OSDI 02), Boston, MA, Dec, 2002.
+	</li> 
+	<li>
+		<a name=bugnion00disco href=bugnion00disco.pdf>[bugnion00disco]</a> E. Bugnion, et al, Disco: Running Commodity Operating Systems on Scalable Multiprocessors, ACM Transactions on Computer Systems, 18(3), August 2000.
+	</li> 
+	<li>
+		<a name=popek74formal href=popek74formal.pdf>[popek74formal]</a> G. J. Popek and R. P. Goldberg, Formal requirements for virtualizable third generation architectures, Commun. ACM, vol. 17, no. 7, pp. 412 421, 1974.
+	</li> 
+
+	<li>
+	<a name=kaashoek97application href=kaashoek97application.pdf>[kaashoek97application]</a>
+	M. Frans Kaashoek, Dawson R. Engler, et. al., "Application Performance and Flexibility on Exokernel Systems", SOSP 1997.
+	</li> 
+
+	<li>
+	<a name=hand05virtual href=hand05virtual.pdf>[hand05virtual]</a>
+	Steven Hand, Andrew Warfield, Keir Fraser, "Are VMMs Microkernels Done Right?", HotOS 2005.
+	</li> 
+
+	<li>
+	<a name=garfinkle05when href=garfinkle05when.pdf>[garfinkle05when]</a>
+	Tal Garfinkel,  Mendel Rosenblum, "When Virtual is Harder Than Real : Security Challenges in Virtual Machine Based Computing Environments".
+	</li> 
+
+	<li>
+	<a name=fraser04safe href=fraser04safe.pdf>[fraser04safe]</a>
+	Keir Fraser, Steven Hand, et. al., "Safe Hardware Access With The Xen Virtual Machine Monitor", OASIS ASPLOS 2004 workshop.
+	</li> 
+
+</ul>
+
+<a name=migration></a>
+<b><font color=brown>Migrating VMs</font></b>
+<ul>
+	<li>
+		<a name=sapuntzakis02optimizing href=sapuntzakis02optimizing.pdf>[sapuntzakis02optimizing]</a> Constantine P. Sapuntzakis, Ramesh Chandra, Ben Pfaff, Jim Chow, Monica S. Lam, and Mendel Rosenblum, "Optimizing the Migration of Virtual Computers", OSDI 2002, Boston, MA, Dec, 2002.
+	</li>
+	<li>
+		<a name=osman02design href=osman02design.pdf>[osman02design]</a> S. Osman, "The Design and Implementation of Zap: A System for Migrating Computing Environments", OSDI 2002.
+	</li>
+
+	<li>
+	<a name=clark05live href=clark05live.pdf>[clark05live]</a>
+	Christopher Clark, Keir Fraser, et. al, "Live Migration of Virtual Machines", NSDI 2005.
+	</li> 
+
+</ul>
+
+<a name=virtualdevices></a>
+<b><font color=brown>Virtual Devices</font></b>
+<ul>
+	<li>
+		<a name=sugerman01virtualizing href=sugerman01virtualizing.pdf>[sugerman01virtualizing]</a> J. Sugerman, G. Venkitachalam, B-H Lim, "Virtualizing I/O Devices on VMWare Workstation's Virtual Machine Monitor", USENIX 2001.
+	</li>
+	<li>
+		<a name=king03operating href=king03operating.pdf>[king03operating]</a> S. King, et al, "Operating System Support for Virtual Machines", USENIX 2003.
+	</li>
+
+</ul>
+
+<a name=hll></a>
+<b><font color=brown>High-level Language VMs</font></b>
+<ul>
+	<li>
+		<a name=meijer href=meijer.pdf>[meijer]</a> E. Meijer, J. Gough, Technical Overview of the Common Language Runtime. 
+	</li>
+</ul>
+
+<a name=emulation></a>
+<b><font color=brown>Emulation</font></b>
+<ul>
+	<li>
+		<a name=ebcioglu01dynamic href=ebcioglu01dynamic.pdf>[ebcioglu01dynamic]</a> Ebcioglu, et al., "Dynamic Binary Translation and Optimization," IEEE Transactions on Computers, June 2001, pp. 529-548. 
+	</li>
+	<li>
+		<a name=chernoff98fx32 href=chernoff98fx32.pdf>[chernoff98fx32]</a> Anton Chernoff et. al. "FX!32 A Profile-Directed Binary Translator" MICRO'98 
+	</li>
+</ul>
+
+<a name=system></a>
+<b><font color=brown>System Design Techniques</font></b>
+<ul>
+	<li>
+	<a name=gabriel91rise href=gabriel91rise.html>[gabriel91rise]</a>
+ 	Richard P. Gabriel, The Rise of "Worse is Better".
+	</li>
+
+	<li>
+	<a name=lampson93principles href=lampson93principles.pdf>[lampson93principles]</a>
+	Butler Lampson's Turing Award Lecture: Principles for Computer System Design
+	</li>
+
+	<li>
+	<a name=lampson83hints href=lampson83hints.pdf>[lampson83hints]</a>
+	Butler Lampson, "Hints for Computer System Design" (10 years earlier)
+	</li>
+
+	<li>
+	<a name=saltz84end href=saltz84end.pdf>[saltz84end]</a>
+ 	J.H. Saltzer, D.P. Reed, and D.P. Clark, "The End to End Argument in System Design"
+	</li>
+
+	<li>
+	<a name=thompson84reflections href=thompson84reflections.pdf>[thompson84reflections]</a>
+	Ken Thompson's Turing Award Lecture: Reflections on Trusting Trust
+	</li>
+</ul>
+
+
+<a name=concurrency></a>
+<b><font color=brown>Concurrency</font></b>
+<ul>
+	<li>
+	An Investigation of the Therac-25 Accidents
+	</li> 
+	<li>
+  	Eraser: A Dynamic Data Race Detector for Multithreaded Programs
+	</li> 
+	<li>
+	Experience with Processes and Monitors in Mesa
+	</li> 
+	<li>
+ 	Capriccio: Scalable Threads for Internet Services
+	</li> 
+	<li>
+	Why Threads Are a Bad Idea (for most purposes)
+	</li> 
+	<li>
+	Cooperative Task Management without Manual Stack Management (up to and including Section 3)
+	</li> 
+	<li>
+  	Threads cannot be implemented as a library
+	</li> 
+	<li>
+	Requirements for Programming Language Memory Models
+	</li> 
+</ul>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

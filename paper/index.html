@@ -1,0 +1,410 @@
+<html>
+<head>
+  <meta name="robots" content="noindex,nofollow">
+ <title>CS652 - Advanced OS Reading List</title>
+</head>
+
+<body style="background-image: url('http://www.cs.binghamton.edu/~kartik/images/bg_sand.jpg'); background-color: rgb(255, 255, 255)" alink="#0000ee" link="#0000ff" vlink="#0000ff">
+
+
+<h2 align=center>Reading List of Papers</h2>
+
+<h3> This is a tentative list of papers from which we will pick and chose the ones to cover.</h3>
+
+<!-- <h3><a href=../review.html>[Suggested paper review form]</a></h3> -->
+
+<a name=reading></a>
+<b><font color=brown>How to Read, Write and Review Papers</font></b>
+<ul>
+	<li>
+		<a name=wetherall_reviews href=wetherall_reviews.pdf>[wetherall_reviews]</a> David Wetherall, "Research papers and review considerations." <br>
+	</li>
+	<li>
+		<a name=taskofreferee href=taskofreferee.pdf>[taskofreferee]</a> Alan Jay Smith, "The Task of the Referee," IEEE Computer, 23(4), April 1990, pp. 65-71.<br>
+	</li>
+	<li>
+		<a name=efficientReading href=efficientReading.pdf>[efficientReading]</a> Michael J. hanson, "Efficient Reading of Papers in Science and Technology." <br>
+	</li>
+	<li>
+		<a name=howtoread href=http://www-cse.ucsd.edu/users/wgg/CSE210/howtoread.html>[howtoread]</a> Bill Griswold, "How to Read an Engineering Research Paper." <br>
+	</li>
+	<li>
+		<a name=levin83evaluation href=http://www.usenix.org/events/samples/submit/advice.html>[levin83evaluation]</a> Roy Levin and David D. Redell, "An Evaluation of the Ninth SOSP Submissions -or- How (and How Not) to Write a Good Systems Paper." ACM SIGOPS Operating Systems Review, Vol. 17, No. 3 (July, 1983), pages 35-40. <br>
+	</li>
+</ul>
+
+<a name=common></a>
+<b><font color=brown>Memory Management</font></b>
+<ul>
+	<li>
+		<a name=navarro02superpages href=navarro02superpages.pdf>[navarro02superpages]</a> 
+		Practical, transparent operating system support for superpages,
+		J. Navarro, S. Iyer, P. Druschel, and A. Cox.
+	</li>
+	<li>
+		<a name=rossbach07txlinux href=rossbach07txlinux.pdf>[rossbach07txlinux]</a> 
+		TxLinux: Using and Managing Hardware Transactional Memory in the Operating System,
+		C.J. Rossbach, O.S. Hoffman, D.E. Porter, H.E. Ramadan, A. Bhandari, and E. Witchel.
+		In SOSP 2007.
+	</li>
+</ul>
+
+<a name=common></a>
+<b><font color=brown>Virtualization Techniques</font></b>
+<ul>
+	<li>
+		<a name=smith03overview href=smith03overview.pdf>[smith03overview]</a> J. E. Smith and Ravi Nair. An overview of virtual machine architectures. 2003.
+	</li>
+	<li>
+		<a name=barham03xen href=barham03xen.pdf>[barham03xen]</a> P. Barham, "Xen and the Art of Virtualization", SOSP 2003
+	</li>
+	<li>
+		<a name=engler95exokernel href=engler95exokernel.pdf>[engler95exokernel]</a> Dawson Engler, "Exokernel: An Operating System Architecture for Application-Level Resource Management", SOSP 1995.
+	</li>
+	<li>
+		<a name=dike00user href=dike00user.pdf>[dike00user]</a>  and 
+		<a name=dike01user href=dike01user.pdf>[dike01user]</a> 
+J. Dike, "A User-mode Port of the Linux Kernel", Linux Showcase and Conference 2000. (see more documentation at <a href=http://user-mode-linux.sourceforge.net/>User Mode Linux website</a>)
+	</li>
+	<li>
+		<a name=hoxer02implementing href=hoxer02implementing.pdf>[hoxer02implementing]</a> H. Hoxer, et al, "Implementing a User-mode Linux with Minimal Changes from the Original Kernel", 2002 Linux System Technology Conference.
+	</li>
+	<li>
+		<a name=whitaker02scale href=whitaker02scale.pdf>[whitaker02scale]</a> Whitaker et al, "Scale and Performance in the Denali Isolation Kernel", OSDI 2002.
+	</li> 
+	<li>
+		<a name=whitaker02denali href=whitaker02denali.pdf>[whitaker02denali]</a> A. Whitaker, M. Shaw, and S. Gribble, Denali: Lightweight Virtual Machines for Distributed and Networked Applications, Usenix 2002.
+	</li> 
+	<li>
+		<a name=lawton99running href=lawton99running.txt>[lawton99running]</a> K. Lawton, "Running Multiple Operating Systems Concurrently on an IA32 PC Using Virtualization Techniques". (Unpublished paper that started the Plex86 project).
+	</li> 
+	<li>
+		<a name=robin00analysis href=robin00analysis.pdf>[robin00analysis]</a> J. Robin and C. Irvine, "Analysis of the Intel Pentium's ability to support a secure virtual machine monitor", 9th USENIX Security Symposium, Denver, CO, August 2000
+	</li> 
+	<li>
+		<a name=waldspurger02memory href=waldspurger02memory.pdf>[waldspurger02memory]</a> Carl A. Waldspurger, "Memory Resource Management in VMware ESX Server", Operating System Design and Implementation (OSDI 02), Boston, MA, Dec, 2002.
+	</li> 
+	<li>
+		<a name=vmware_vdi href=vmware_vdi.pdf>[vmware_vdi]</a> "VDI Server Sizing and Scaling", VMWare White Paper..
+	</li> 
+	<li>
+		<a name=bugnion00disco href=bugnion00disco.pdf>[bugnion00disco]</a> E. Bugnion, et al, Disco: Running Commodity Operating Systems on Scalable Multiprocessors, ACM Transactions on Computer Systems, 18(3), August 2000.
+	</li> 
+	<li>
+		<a name=goldberg74survey href=goldberg74survey.pdf>[goldberg74survey]</a> R. P. Goldberg, Surve of Virtual Machine Research, IEEE Computer, Volume 7, No. 6, June 1974.
+	</li> 
+	<li>
+		<a name=popek74formal href=popek74formal.pdf>[popek74formal]</a> G. J. Popek and R. P. Goldberg, Formal requirements for virtualizable third generation architectures, Commun. ACM, vol. 17, no. 7, pp. 412 421, 1974.
+	</li> 
+
+	<li>
+	<a name=kaashoek97application href=kaashoek97application.pdf>[kaashoek97application]</a>
+	M. Frans Kaashoek, Dawson R. Engler, et. al., "Application Performance and Flexibility on Exokernel Systems", SOSP 1997.
+	</li> 
+
+	<li>
+	<a name=hand05virtual href=hand05virtual.pdf>[hand05virtual]</a>
+	Steven Hand, Andrew Warfield, Keir Fraser, "Are VMMs Microkernels Done Right?", HotOS 2005.
+	</li> 
+
+	<li>
+	<a name=garfinkle03terra href=garfinkle03terra.pdf>[garfinkle03terra]</a>
+	Tal Garfinkel, Ben Pfaff, Jim Chow,  Mendel Rosenblum, Dan Boneh, "Terra: A Virtual Machine Based Platform for Trusted Computing", SOSP 2003.
+	</li> 
+
+	<li>
+	<a name=garfinkle05when href=garfinkle05when.pdf>[garfinkle05when]</a>
+	Tal Garfinkel,  Mendel Rosenblum, "When Virtual is Harder Than Real : Security Challenges in Virtual Machine Based Computing Environments".
+	</li> 
+
+	<li>
+	<a name=jones06antfarm href=jones06antfarm.pdf>[jones06antfarm]</a>
+	"Antfarm: Tracking Processes in a Virtual Machine Environment", Stephen Jones et. al, USENIX 2006 Annual Technical Conference
+	</li>
+
+	<li>
+	"Debugging Operating Systems with Time-Traveling Virtual Machines", Samuel T. King, George W. Dunlap, and Peter M. Chen, University of Michigan, USENIX Annual Technical Conference 2005.
+	</li>
+
+
+	<li>
+	"vBlades: Optimized Paravirtualization for the Itanium Processor Family", Daniel J. Magenheimer and Thomas W. Christian, Hewlett-Packard Laboratories, USENIX VM Symposium 2004
+	</li>
+
+	<li>
+	<a name=ganev04kernel href=ganev04kernel.pdf>[ganev04kernel]</a>
+	"Kernel Plugins: When a VM Is Too Much", Ivan Ganev, Greg Eisenhauer, and Karsten Schwan, Georgia Institute of Technology, USENIX VM Symposium 2004
+	</li>
+
+	<li>
+	<a name=chiueh99integrating href=chiueh99integrating.pdf>[chiueh99integrating]</a>
+	"Integrating segmentation and paging protection for safe, efficient and transparent software extensions", Tzi-cker Chiueh, Ganesh Venkitachalam, Prashant Pradhan, SOSP 1999
+	</li>
+
+	</li>
+	Towards Scalable Multiprocessor Virtual Machines Volkmar Uhlig, Joshua LeVasseur, Espen Skoglund, and Uwe Dannowski, UniversitÃ¤t Karlsruhe, USENIX VM Symposium 2004.
+	<li>
+
+	<li>
+	"PDS: A Virtual Execution Environment for Software Deployment", Bowen Alpern, Joshua Auerbach, Vasanth Bala, Thomas Frauenhofer, Todd Mummert, Michael Pigott, VEE 2005
+	</li>
+
+	<li>
+	"Scalability, Fidelity and Containment in the Potemkin Virtual Honeyfarm". Michael Vrable, Justin Ma, Jay Chen, David Moore, Erik Vandekieft, Alex Snoeren, Geoff Voelker, Stefan Savage (UCSD), SOSP 2005
+	</li>
+
+	<li>
+	<a href=chapman05implementing.pdf>[chapman05implementing]</a>
+	"Implementing Transparent Shared Memory on Clusters Using Virtual Machines", Matthew Chapman and Gernot Heiser, University of New South Wales and National ICT Australia, USENIX Annual Technical Conference 2005
+	</li>
+
+	<li>
+	"Diagnosing Performance Overheads in the Xen Virtual Machine Environment", Aravind Menon, Jose Santos, Yoshio Turner, G. (John) Janakiraman, Willy Zwaenepoel, VEE 2005
+	</li>
+
+	<li>
+	<a href=vmware_drs.pdf>[vmware_drs]</a>
+	"Resource Management with VMWare DRS", VMWare White Paper 
+	</li>
+
+	<li>
+	<a href=vmware_infrastructure.pdf>[vmware_infrastructure]</a>
+	"VMWare Infrastructure Architecture Overview", VMWare White Paper 
+	</li>
+</ul>
+
+<a name=hardware></a>
+<b><font color=brown>Hardware support for Virtualization</font></b>
+<ul>
+	<li>
+		<a name=intel05virtualization href=intel05virtualization.pdf>[intel05virtualization]</a> 
+		Intel, "Intel Vanderpool Technology for IA-32 Processors (VT-x) Preliminary Specification", January, 2005 
+	</li> 
+	<li>
+		<a name=neiger06intel href=neiger06intel.pdf>[neiger06intel]</a> 
+		G. Neiger, A. Santoni, F. Leung, D. Rodgers, R. Uhlig, 
+		"Intel Virtualization Technology: Hardware Support for Efficient Processor Virtualization", 
+		Intel Technology Journal, Vol. 10, No. 3, August 2006
+	</li> 
+</ul>
+
+<a name=migration></a>
+<b><font color=brown>Migrating VMs</font></b>
+<ul>
+	<li>
+		<a name=sapuntzakis02optimizing href=sapuntzakis02optimizing.pdf>[sapuntzakis02optimizing]</a> Constantine P. Sapuntzakis, Ramesh Chandra, Ben Pfaff, Jim Chow, Monica S. Lam, and Mendel Rosenblum, "Optimizing the Migration of Virtual Computers", OSDI 2002, Boston, MA, Dec, 2002.
+	</li>
+	<li>
+		<a name=osman02design href=osman02design.pdf>[osman02design]</a> S. Osman, "The Design and Implementation of Zap: A System for Migrating Computing Environments", OSDI 2002.
+	</li>
+
+	<li>
+	<a name=clark05live href=clark05live.pdf>[clark05live]</a>
+	Christopher Clark, Keir Fraser, et. al, "Live Migration of Virtual Machines", NSDI 2005.
+	</li> 
+
+	<li>
+	<a name=nelson05fast href=nelson05fast.pdf>[nelson05fast]</a>
+	"Fast Transparent Migration for Virtual Machines", Michael Nelson, Beng-Hong Lim, and Greg Hutchins, VMware, Inc., USENIX Annual Technical Conference 2005
+	</li>
+
+	<li>
+<!--	<a name=travostino06seamless href=travostino06seamless.pdf>-->[travostino06seamless]
+<!-- </a> -->
+	Seamless Live migration of virtual machines over MAN/WAN
+	F. Travostino, P. Draspit et. al (references?? google for it)
+	</li> 
+
+	<li>
+	<a name=onoue06virtual href=onoue06virtual.pdf>[onoue06virtual]</a>
+	"A virtual Machine Migration System Based on CPU Emulator", K. Onoue, Y. Oyama, and A. Yonezawa, In VTDC 2006.
+	</li>
+
+	<li>
+	<a name=milojicic00process href=milojicic00process.pdf>[milojicic00process]</a>
+	Milojicic, D., Douglis, F., Paindaveine, Y., Wheeler, R., Zhou, S, �Process Migration Survey�, ACM Computing Surveys, September 2000. (Not really VM migration -- but a useful survey)
+	</li> 
+
+	<li>
+	<a name=steketee94implementation href=steketee94implementation.pdf>[steketee94implementation]</a>
+	Implementation of Process Migration in Amoeba,
+	Chris Steketee, Wei Ping Zhu, and Philip Moseley, Proc. of ICDCS, Jun 1994.
+	</li> 
+
+	<li>
+	<a name=steketee95experiences href=steketee95experiences.pdf>[steketee95experiences]</a> 
+	Experiences with the Implementation of a Process Migration Mechanism for Amoeba,
+	Chris Steketee, Wei Ping Zhu, and Philip Moseley, 19th Australasian Computer Science Conference, January 1995,
+	</li> 
+
+	<li>
+	<a name=paoli96performance href=paoli96performance.pdf>[paoli96performance]</a> 
+	Performance comparison of process migration with remote process creation mechanisms in RHODOS,
+	D. de Paoli, A. Goscinski, M. Hobbs, P. Joyce, In Proc of ICDCS 1996.
+	</li> 
+
+	<li>
+	<a name=paindaveine96process href=paindaveine96process.pdf>[paindaveine96process]</a> 
+	Process vs. Task Migration, 
+	Y. Painedaveine and D.J. Milojicic, In Proc. of HICCS 1996.
+	</li> 
+
+	<li>
+	<a name=lothar96logical href=http://www.klammeraffe.org/~fritsch/uni-sb/fsinfo/Papers/migrate/migrate.html>[lothar96logical]</a>
+	Lothar Fritsch, "Logical Machine Migration in contrast to Process Migration"
+	</li> 
+
+</ul>
+
+<a name=vmandio></a>
+<b><font color=brown>VMs and I/O Devices</font></b>
+<ul>
+	<li>
+	"Measuring CPU Overhead for I/O Processing in the Xen Virtual Machine Monitor", Ludmila Cherkasova and Rob Gardner, Hewlett-Packard Laboratories, USENIX Annual Technical Conference 2005
+	</li>
+	<li>
+		<a name=sugerman01virtualizing href=sugerman01virtualizing.pdf>[sugerman01virtualizing]</a> J. Sugerman, G. Venkitachalam, B-H Lim, "Virtualizing I/O Devices on VMWare Workstation's Virtual Machine Monitor", USENIX 2001.
+	</li>
+	<li>
+		<a name=king03operating href=king03operating.pdf>[king03operating]</a> S. King, et al, "Operating System Support for Virtual Machines", USENIX 2003.
+	</li>
+	<li>
+		<a name=menon06optimizing href=menon06optimizing.pdf>[menon06optimizing]</a> Aravind Menon, Alan L. Cox, and Willy Zwaenepoel, "Optimizing Network Virtualization in Xen", USENIX 2006.
+	</li>
+
+	<li>
+	<a name=fraser04safe href=fraser04safe.pdf>[fraser04safe]</a>
+	Keir Fraser, Steven Hand, et. al., "Safe Hardware Access With The Xen Virtual Machine Monitor", OASIS ASPLOS 2004 workshop.
+	</li> 
+
+	<li>
+		<a name=fraser04reconstructing href=fraser04reconstructing.pdf>[fraser04reconstructing]</a> "Reconstructing I/O", K. Fraser, S. Hand, R. Neugebauer, et. al, University of Cambridge Computer Laboratory Technical Report 596, August 2004.
+	</li> 
+
+	<li>
+	"Running Virtualized Native Drivers in User Mode Linux", V. Guffens and G. Bastin, USENIX Annual Technical Conference 2005
+	</li> 
+
+	<li>
+	"Unmodified Device Driver Reuse and Improved System Dependability via Virtual Machines", Joshua LeVasseur, Volkmar Uhlig, Jan Stoess, and Stefan GÃ¶ University of Karlsruhe, Germany , OSDI 2004
+	</li>
+</ul>
+
+<a name=vmandgrid></a>
+<b><font color=brown>VMs and Grid</font></b>
+<ul>
+	<li>
+	"Towards Virtual Networks for Virtual Machine Grid Computing", Ananth I. Sundararaj and Peter A. Dinda, Northwestern University, USENIX VM Symposium 2004
+	</li>
+
+	<li>
+	<a name=calder05entropia href=calder05entropia.pdf>[calder05entropia]</a> 
+	"The Entropia Virtual Machine for Desktop Grids", Brad Calder, Andrew Chien, Ju Wang, Don Yang, VEE 2005 
+	</li>
+</ul>
+
+<a name=hll></a>
+<b><font color=brown>High-level Language VMs</font></b>
+<ul>
+	<li>
+		<a name=meijer href=meijer.pdf>[meijer]</a> E. Meijer, J. Gough, Technical Overview of the Common Language Runtime. 
+	</li>
+</ul>
+
+<a name=emulation></a>
+<b><font color=brown>Emulation</font></b>
+<ul>
+	<li>
+		<a name=ebcioglu01dynamic href=ebcioglu01dynamic.pdf>[ebcioglu01dynamic]</a> Ebcioglu, et al., "Dynamic Binary Translation and Optimization," IEEE Transactions on Computers, June 2001, pp. 529-548. 
+	</li>
+	<li>
+		<a name=chernoff98fx32 href=chernoff98fx32.pdf>[chernoff98fx32]</a> Anton Chernoff et. al. "FX!32 A Profile-Directed Binary Translator" MICRO'98 
+	</li>
+</ul>
+
+
+<a name=system></a>
+<b><font color=brown>System Design</font></b>
+<ul>
+	<li>
+	<a name=gabriel91rise href=gabriel91rise.html>[gabriel91rise]</a>
+ 	Richard P. Gabriel, The Rise of "Worse is Better".
+	</li>
+
+	<li>
+	<a name=lampson93principles href=lampson93principles.pdf>[lampson93principles]</a>
+	Butler Lampson's Turing Award Lecture: Principles for Computer System Design
+	</li>
+
+	<li>
+	<a name=lampson83hints href=lampson83hints.pdf>[lampson83hints]</a>
+	Butler Lampson, "Hints for Computer System Design" (10 years earlier)
+	</li>
+
+	<li>
+	<a name=saltz84end href=saltz84end.pdf>[saltz84end]</a>
+ 	J.H. Saltzer, D.P. Reed, and D.P. Clark, "The End to End Argument in System Design"
+	</li>
+
+	<li>
+	<a name=thompson84reflections href=thompson84reflections.pdf>[thompson84reflections]</a>
+	Ken Thompson's Turing Award Lecture: Reflections on Trusting Trust
+	</li>
+
+	<li>
+	<a name=dijkstra68structure href=dijkstra68structure.pdf>[dijkstra68structure]</a>
+	Edsger W. Dijkstra,
+	"The Structure of the "THE"-Multiprogramming System", Communications of the ACM 11(5), May 1968.<br>
+	<a name=dijkstra-honoring href=dijkstra-honoring.pdf>[dijkstra-honoring]</a>
+	For information of the career of CS pioneer Edsger Dijkstra: In Pursuit of Simplicity, A Symposium Honoring Professor Edsger Wybe Dijkstra
+	</li>
+
+	<li>
+	<a name=ritchie74unix href=ritchie74unix.pdf>[ritchie74unix]</a>
+	D. M. Ritchie and K . Thompson, "The UNIX Time-Sharing System",
+	Communications of the ACM, Vol. 17, No. 7, July 1974, pp. 365-375. 
+	</li>
+</ul>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

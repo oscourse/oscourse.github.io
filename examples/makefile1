@@ -1,0 +1,28 @@
+#
+# Now, only the one file will be recompiled
+#
+CC=gcc
+CFLAG=-g 
+a.out: myprog1.o myprog2.o myprog3.o 
+	$(CC) $(CFLAG) myprog1.o myprog2.o myprog3.o
+myprog1.o: myprog1.c myprog.h
+	$(CC) -c myprog1.c
+myprog2.o: myprog2.c myprog.h
+	$(CC) -c myprog2.c
+myprog3.o: myprog3.c myprog.h
+	$(CC) -c myprog3.c
+
+demo: a.out
+	a.out
+
+clean:
+	rm -f *.o
+	rm -f *~
+	rm -f core
+
+realclean:
+	rm -f a.out
+	rm -f *.o
+	rm -f *~
+	rm -f core
+	

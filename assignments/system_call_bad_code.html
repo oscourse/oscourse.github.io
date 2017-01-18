@@ -1,0 +1,115 @@
+<H1>System Calls</H1>
+
+<H2>Objective</H2>
+<p>
+You will deonstrate how to implement a simple system call, how to write a user-level application to test your implementation, and how to crash your kernel.
+
+<p> Before you start this assignment, make sure you can access your network boot image in the G-7 lab using the <a href=slides/network_boot_image.pdf>Network Boot Instructions</a>.
+
+<H2>Part A: Kernel Compilation.</h2>
+Download, compile and boot your kernel as explained <a href=assignments/kernel_compilation_instructions.html>here</a>.
+
+<H2>Part B: Writing your own System Call</H2>
+
+<ol>
+<li>
+Implement and test a system call that returns the current system time by means of a call-by-reference argument. More specifically, your system call should have the following prototype as seen by user-level applications.
+
+<pre>
+int my_xtime(struct timespec *current_time);
+</pre>
+
+<tt>struct timespec</tt> is defined in include/linux/time.h as follows:
+
+<pre>
+struct timespec {
+        time_t  tv_sec;         /* seconds */
+        long    tv_nsec;        /* nanoseconds */
+};
+</pre>
+
+<p>
+The system call should first verify that user memory space, pointed to by current_time, is valid and writable. If not, is should return a failure (EFAULT) to the user process. If the memory-check succeeds, then it should copy the contents of the kernel's xtime variable to user space address (pointed to by current_time argument). The system call should also print the current time in nanoseconds, to the console using the printk() function.
+
+<li>
+Also write a user-level application which calls your new system call my_xtime(...) and prints out the time obtained from the call-by-reference argument.
+</ol>
+
+<H2>Part C: Experimenting With "Bad" Code</H2>
+
+<OL>
+
+<LI><P>Now, change implementation of 
+your system call so that it does something "bad" to crash/corrupt/fail your kernel. 
+Compile it.  If it compiles OK, test it. But <EM><B>before testing it</B></EM>, use
+"sync" to synchronize the file system in-memory structures with
+those on disk, since it is likely that the system will crash, and
+you will need to reboot.</P>
+
+<P>The following are some typical "bad things" you can do. Try them one at a time.
+Some of these may be caught
+at compilation or link time, some may only cause problems when
+you make the system call.</P>
+
+<UL>
+<LI>division by zero</LI>
+<LI>dereferencing a null pointer</LI>
+<LI>returning no value or an incorrect value from the function that implements your system call</LI>
+<LI>Using a C library routine (<I>e.g.,</I> <I>malloc()</I> or <I>printf()</I>)inside the function that implements your system call.</LI>
+<LI>whatever else that you think might cause a problem</LI>
+</UL>
+
+<P>Repeat a few such experiments, and see if you can hang or
+crash the entire system. Keep a journal of what you try, and what
+effects you observed. 
+
+<p> IMPORTANT; Save copies of the "bad" code that you tested,
+by giving them different names. When the system crashes, you may 
+lose your code.
+
+<P>BEWARE that some of the things you do may have no immediate
+visible effect, but may have a delayed effect that is disastrous.
+This is generally the case if you write garbage into random
+locations of kernel memory.  The location you corrupt may not be
+referenced for a while.  It will be referenced later, and then the
+effect will occur.  Therefore, you cannot assume that the thing
+you did most recently is necessarily the cause of a crash.</P>
+
+<P><EM>Do not go overboard on this part of the assignment.</EM>
+The objective is to expose you to the various ways a kernel
+failure can manifest itself, in preparation for testing your own
+code.  The objective is not to do the most damage possible to your
+system.  In particular, it would better if you you do not trash
+your hard drive, since reinstalling the entire system can take a
+frustratingly long time.  </P>
+
+</OL>
+
+<h2> What to submit </h2>
+
+<p>Turn in all your code (both kernel and user-level) in a tar-gzipped file through the online Blackboard. DO NOT submit the entire kernel source tree. Submit only the specific files that you wrote or modified.
+
+<p>Sign up for your demo. At the time of your demo, bring printout of your journal/notes of the "bad" code you tested, including copies of the code, what behavior they caused (e.g., system locked up, kernel panic), and what output (if any) was generated.
+
+<p>At the demo time be prepared to demonstrate your kernel booting up, your system calls working,  what steps you took to compile and configure the kernel, and demonstrate the code that caused crashes. 
+
+<H2>Grading Guidelines</H2>
+
+<pre>
+	Part A: Explaining how you configured and compiled your kernel - 20
+
+	Part B: System Call - 75
+		Correct functionality - 40
+		User-level test code - 25
+		Error checks and coding style - 10 
+
+	Part C: Experimenting With "Bad" Code - 25
+		Demonstrate and explain your bad code.
+										
+	Total = 120
+</pre>
+
+
+</BODY>
+</HTML>
+

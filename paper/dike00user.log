@@ -1,0 +1,218 @@
+This is pdfTeX, Version 3.14159-1.10b (Web2C 7.4.5) (format=pdflatex 2005.3.21)  30 JUN 2005 10:01
+**dike00user.tex
+(./dike00user.tex{/usr/share/texmf/pdftex/config/pdftex.cfg}
+LaTeX2e <2001/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, n
+ohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2001/04/21 v1.4e Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size10.clo
+File: size10.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf/tex/latex/base/fontenc.sty
+Package: fontenc 2001/06/05 v1.94 Standard LaTeX package
+
+(/usr/share/texmf/tex/latex/base/t1enc.def
+File: t1enc.def 2001/06/05 v1.94 Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 38.
+))
+(/usr/share/texmf/tex/latex/base/inputenc.sty
+Package: inputenc 2001/07/10 v0.99a Input encoding file 
+
+(/usr/share/texmf/tex/latex/base/latin1.def
+File: latin1.def 2001/07/10 v0.99a Input encoding file 
+))
+(/usr/share/texmf/tex/latex/misc/geometry.sty
+Package: geometry 2002/07/08 v3.2 Page Geometry
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+\Gm@cnth=\count87
+\Gm@cntv=\count88
+\c@Gm@tempcnt=\count89
+\Gm@bindingoffset=\dimen103
+\Gm@wd@mp=\dimen104
+\Gm@odd@mp=\dimen105
+\Gm@even@mp=\dimen106
+\Gm@dimlist=\toks15
+
+(/usr/share/texmf/tex/latex/config/geometry.cfg
+File: geometry.cfg 2001/06/05 v1.0 teTeX (uncustomised setup)
+))
+(/usr/share/texmf/tex/latex/graphics/color.sty
+Package: color 1999/02/16 v1.0i Standard LaTeX Color (DPC)
+
+(/usr/share/texmf/tex/latex/config/color.cfg
+File: color.cfg 2001/08/31 v1.1 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 125.
+
+(/usr/share/texmf/tex/latex/graphics/pdftex.def
+File: pdftex.def 2002/06/19 v0.03k graphics/color for pdftex
+\Gread@gobject=\count90
+))
+No file dike00user.aux.
+\openout1 = `dike00user.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+-------------------- Geometry parameters
+paper: letterpaper
+landscape: --
+twocolumn: true
+twoside: --
+asymmetric: --
+h-parts: 72.26999pt, 469.75502pt, 72.26999pt
+v-parts: 72.26999pt, 650.43001pt, 72.26999pt
+hmarginratio: --
+vmarginratio: --
+lines: --
+heightrounded: --
+bindingoffset: 0.0pt
+truedimen: --
+includehead: --
+includefoot: --
+includemp: --
+driver: pdftex
+-------------------- Page layout dimensions and switches
+\paperwidth  614.295pt
+\paperheight 794.96999pt
+\textwidth  469.75502pt
+\textheight 650.43001pt
+\oddsidemargin  0.0pt
+\evensidemargin 0.0pt
+\topmargin  -37.0pt
+\headheight 12.0pt
+\headsep    25.0pt
+\footskip   30.0pt
+\marginparwidth 4.0pt
+\marginparsep   10.0pt
+\columnsep  10.0pt
+\skip\footins  9.0pt plus 4.0pt minus 2.0pt
+\hoffset 0.0pt
+\voffset 0.0pt
+\mag 1000
+\@twocolumntrue 
+(1in=72.27pt, 1cm=28.45pt)
+-----------------------
+(/usr/share/texmf/tex/context/base/supp-pdf.tex
+(/usr/share/texmf/tex/context/base/supp-mis.tex
+loading : Context Support Macros / Missing
+\protectiondepth=\count91
+\scratchcounter=\count92
+\scratchtoks=\toks16
+\scratchdimen=\dimen107
+\scratchskip=\skip43
+\scratchmuskip=\muskip10
+\scratchbox=\box26
+\scratchread=\read1
+\scratchwrite=\write3
+\zeropoint=\dimen108
+\minusone=\count93
+\thousandpoint=\dimen109
+\emptytoks=\toks17
+\nextbox=\box27
+\nextdepth=\dimen110
+\everyline=\toks18
+\!!counta=\count94
+\!!countb=\count95
+\recursecounter=\count96
+)
+loading : Context Support Macros / PDF
+\nofMPsegments=\count97
+\nofMParguments=\count98
+\everyMPtoPDFconversion=\toks19
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <17.28> on input line 48.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 48.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 48.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 48.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 48.
+
+Underfull \hbox (badness 4505) in paragraph at lines 94--97
+[]/ecrm1000/The se-rial line driver al-lo-cates a
+ []
+
+[1{/usr/share/texmf/dvips/config/pdftex.map}
+
+
+]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 139.
+
+
+(/usr/share/texmf/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+) [2]
+Underfull \vbox (badness 5302) has occurred while \output is active []
+
+ [3]
+[4]
+Underfull \hbox (badness 1383) in paragraph at lines 391--393
+[]/ecrm1000/The same is true of semaphores. The i386
+ []
+
+[5]
+Underfull \hbox (badness 3646) in paragraph at lines 533--533
+[]/ecbx1200/Multiple en-vi-ron-ments with-out
+ []
+
+[6]
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 595.
+
+Underfull \hbox (badness 10000) in paragraph at lines 607--613
+[]/ecrm1000/The vir-tual
+ []
+
+[7] [8] [9] (./dike00user.aux) ) 
+Here is how much of TeX's memory you used:
+ 1390 strings out of 95437
+ 16902 string characters out of 1190233
+ 69498 words of memory out of 1000001
+ 4415 multiletter control sequences out of 10000+50000
+ 15986 words of font info for 38 fonts, out of 500000 for 1000
+ 14 hyphenation exceptions out of 1000
+ 30i,8n,20p,221b,317s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 47 PDF objects out of 300000
+ 0 named destinations out of 131072
+ 0 words of extra memory for PDF output out of 65536
+ </var/lib/texmf/pk/ljfour/jknappen/ec/ectt1000
+.600pk>{/usr/share/texmf/dvips/tetex/aae443f0.enc}</usr/share/texmf/fonts/type1
+/bluesky/cm/cmmi6.pfb> </var/lib/texmf/pk/ljfour/jknappen/ec/ecti0800.600pk> </
+var/lib/texmf/pk/ljfour/jknappen/ec/ecrm0800.600pk>{/usr/share/texmf/dvips/tete
+x/bbad153f.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmsy6.pfb> </var/lib/te
+xmf/pk/ljfour/jknappen/ec/ecbx1000.600pk> </var/lib/texmf/pk/ljfour/jknappen/ec
+/ecbx1200.600pk> </var/lib/texmf/pk/ljfour/jknappen/ec/ecrm1000.600pk> </var/li
+b/texmf/pk/ljfour/jknappen/ec/ecbx1440.600pk> </var/lib/texmf/pk/ljfour/jknappe
+n/ec/ecrm1200.600pk></usr/share/texmf/fonts/type1/bluesky/cm/cmsy10.pfb> </var/
+lib/texmf/pk/ljfour/jknappen/ec/ecbx1728.600pk>
+Output written on dike00user.pdf (9 pages, 151406 bytes).

@@ -1,0 +1,109 @@
+This is pdfTeX, Version 3.14159-1.10b (Web2C 7.4.5) (format=pdflatex 2005.3.21)  30 JUN 2005 10:06
+**dike01user.tex
+(./dike01user.tex{/usr/share/texmf/pdftex/config/pdftex.cfg}
+LaTeX2e <2001/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, n
+ohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2001/04/21 v1.4e Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size10.clo
+File: size10.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf/tex/latex/base/fontenc.sty
+Package: fontenc 2001/06/05 v1.94 Standard LaTeX package
+
+(/usr/share/texmf/tex/latex/base/t1enc.def
+File: t1enc.def 2001/06/05 v1.94 Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 38.
+))
+(/usr/share/texmf/tex/latex/base/inputenc.sty
+Package: inputenc 2001/07/10 v0.99a Input encoding file 
+
+(/usr/share/texmf/tex/latex/base/latin1.def
+File: latin1.def 2001/07/10 v0.99a Input encoding file 
+))
+(/usr/share/texmf/tex/generic/babel/babel.sty
+Package: babel 2001/03/01 v3.7h The Babel package
+
+(/usr/share/texmf/tex/generic/babel/english.ldf
+Language: english 2001/04/15 v3.3l English support from the babel system
+
+(/usr/share/texmf/tex/generic/babel/babel.def
+File: babel.def 2001/03/01 v3.7h Babel common definitions
+\babel@savecnt=\count87
+\U@D=\dimen103
+)
+\l@canadian = a dialect from \language\l@english 
+)) (./dike01user.aux)
+\openout1 = `dike01user.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 23.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 23.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 23.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 48.
+
+(/usr/share/texmf/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 48.
+ [1{/usr/share/texmf/dvips/config/pdftex.map}
+
+
+]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 119.
+
+ (/usr/share/texmf/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+) [2] [3]
+Underfull \hbox (badness 3701) in paragraph at lines 262--265
+[]/ecrm1000/Any project which doesn't in-volve machine-
+ []
+
+[4] [5] [6] [7] [8] (./dike01user.aux) ) 
+Here is how much of TeX's memory you used:
+ 808 strings out of 95437
+ 8693 string characters out of 1190233
+ 60277 words of memory out of 1000001
+ 3846 multiletter control sequences out of 10000+50000
+ 12079 words of font info for 31 fonts, out of 500000 for 1000
+ 14 hyphenation exceptions out of 1000
+ 26i,7n,22p,214b,268s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 36 PDF objects out of 300000
+ 0 named destinations out of 131072
+ 0 words of extra memory for PDF output out of 65536
+ </var/lib/texmf/pk/ljfour/jknappen/ec/
+ectt1000.600pk> </var/lib/texmf/pk/ljfour/jknappen/ec/ecbx1200.600pk> </var/lib
+/texmf/pk/ljfour/jknappen/ec/ecbx1000.600pk>{/usr/share/texmf/dvips/tetex/bbad1
+53f.enc}</usr/share/texmf/fonts/type1/bluesky/cm/cmsy10.pfb> </var/lib/texmf/pk
+/ljfour/jknappen/ec/ecrm1000.600pk> </var/lib/texmf/pk/ljfour/jknappen/ec/ecbx1
+440.600pk> </var/lib/texmf/pk/ljfour/jknappen/ec/ecrm1200.600pk> </var/lib/texm
+f/pk/ljfour/jknappen/ec/ecrm1728.600pk>
+Output written on dike01user.pdf (8 pages, 111387 bytes).

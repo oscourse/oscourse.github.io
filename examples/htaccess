@@ -1,0 +1,26 @@
+AuthUserFile /dev/null
+AuthGroupFile /dev/null
+AuthName ExampleAllow
+AuthType Basic
+
+Options +Indexes
+
+order deny,allow
+allow from .fsu.edu
+allow from 192.168.
+allow from 128.186.
+allow from 68.46.239.
+allow from 69.246.160.
+allow from 64.8.66.
+allow from 144.174.
+allow from 24.7.112.
+allow from 67.170.224.
+allow from 17.221.46.
+allow from 207.30.4.
+allow from 207.30.5.
+allow from 207.30.6.
+allow from 207.30.7.
+allow from 71.0.161.
+allow from .lewisweb.net
+allow from .fl.comcast.net
+deny from all

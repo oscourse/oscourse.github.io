@@ -1,0 +1,21 @@
+# an example with inference rules
+CC=gcc
+CFLAG=-g 
+.SUFFIX: .c .o
+a.out: myprog1.o myprog2.o myprog3.o 
+	$(CC) $(CFLAG) myprog1.o myprog2.o myprog3.o
+.c.o:
+	$(CC) -c $<
+demo: a.out
+	a.out
+	
+clean:
+	rm -f *.o
+	rm -f *~
+	rm -f core
+
+realclean:
+	rm -f a.out
+	rm -f *.o
+	rm -f *~
+	rm -f core
