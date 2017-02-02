@@ -84,22 +84,15 @@ For example, if the initial H=3 and C=2, then you get the following process hier
 <pre>
 	This is how we will grade your assignment during the demo. So please prioritize your work accordingly.
 
-	5 - README, Makefile, Compilation without errors
+	20 - Correctly creating a hierarchy of processes with arbitrary H and C using fork() and exec().
 
-	5 - Creating and terminating a single process (H = 1, C = 1) and printing the correct output
+	20 - Correctly terminating the hierarchy for arbitrary H and C using wait()/waitpid().
 
-	5 - Correct use of getpid() and getppid()
+	10 - Recursion is implemented using exec() (and NOT using usual function calls)
 
-	40 - Correctly creating and terminating a hierarchy of processes with arbitrary H and C using fork(), exec(), and wait()
+	10 - Parent process wait()s for child processes ONLY after it creates ALL child processes.
 
-	10 - Demonstrating that recursion is implemented using exec() (and NOT using usual function calls)
-
-	10 - Demonstrating that a parent process wait()s for child processes ONLY after it creates ALL child processes.
-
-	10 - Demonstrating that a parent process wait()s for ALL child processes before terminating itself.
-
-	20 - Explaining the code during demo.
-		You will be asked to explain the logic of the code you wrote.
+	10 - Parent process does not terminate before ALL child processes terminate.
 
 	10 - Error Handling
 		Most important part here is to make sure that you check and handle the errors 
@@ -110,7 +103,10 @@ For example, if the initial H=3 and C=2, then you get the following process hier
 
 	5  - Indented formatting for output of processes at different heights in the hierarchy
 
-	Total points = 120
+	5 - Makefile, Compilation without errors, README 
+
+
+	Total points = 90
 </pre>
 
 <H2>Hints</H2>
