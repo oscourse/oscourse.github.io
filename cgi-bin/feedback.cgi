@@ -31,8 +31,8 @@ print OUTF "$FORM{'comments'}\n";
 
 close(OUTF);
 
-$email="kartik\@cs.binghamton.edu";
-$subject="[CS552] Course Feedback";
+$email="kartik\@binghamton.edu";
+$subject="[CS550] Course Feedback";
 $mailer = Mail::Mailer->new("sendmail");
 $mailer->open({ From	=> $email,
        		To	=> $email,
