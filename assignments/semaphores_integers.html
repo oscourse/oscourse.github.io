@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <title> Nov 21st 2011, Semaphores </title>
+    </head>
+    <body>
+
+<h1> Lab 7: Semaphores </h1>
+
+<h2> Due: Nov 29th</h2>
+
+<h2>Part A </h2> 
+<p> 
+Write a program that takes two integers as arguments:
+
+<pre>partA Integer1 Integer2</pre>
+
+The parent process creates a shared memory and forks a child.<br>
+After forking the child, the parent writes the two integers (Integer1 and Integer2) into the shared memory region.<br>
+Child then reads the two integers, computes their product, and overwrites Integer1 in the
+shared memory with the result.<br>
+Finally the parent should read and print out the result.<br><br>
+Note: the parent forks the child BEFORE writing the two integers
+into the shared memory. Please use semaphore(s) as needed (Do not use busy wait).
+</p>
+
+<h2> Part B: </h2>
+<p>
+Modify your program from part A (save a copy of part A first!) so that the parent forks a second child immediately after forking the first child.
+This second child also reads Integer1 and Integer2,
+and adds them up and overwrites Integer2 with its result.
+Note the necessity to prevent any of the children overwriting the shared
+memory before the other has finished reading the two integers.
+The parent then finally reads and prints the result.
+</p>
+
+<h2> Please compile with the following option:</h2>
+<p>gcc -o yourprogram yourprogram.c -lrt</p>
+<p> Better yet, create a makefile.</p>
+
+<h2>Hints:</h2>
+
+<ul>
+
+<li> Before writing even a single line of code, write the pseudo-code for the program and work out the logic. Start writing code ONLY when you are satisfied with the logical structure of your solution.</li>
+
+<li> Look at <a href=http://www.cs.binghamton.edu/~kartik/cs350/slides/concurrency.ppt>Lecture 12 slides</a> for overview of semaphores. </li>
+
+<li> Here's another brief overview of semaphores <a href="Semaphore.ppt">Semaphore.ppt</a>.  </li>
+
+<li>
+	Look at the man pages for a description of how to use these API calls. <br>
+
+	POSIX Semaphores (recommended for this assignment):
+	<ul>
+		<li>sem_init(sem_t *sem, int pshared, unsigned int value);</li>
+		<li>sem_wait(sem_t *sem);</li>
+		<li>sem_post(sem_t *sem); </li>
+		<li>sem_getvalue(sem_t *sem, int *valp);</li>
+		<li>sem_destroy(sem_t *sem);</li>
+	</ul>
+	Tutorial on using POSIX Semaphores:
+	<ul>
+		<li>
+		You may want to try this example first before starting the assignment: <a href=http://www.csc.villanova.edu/~mdamian/threads/posixsem.html>http://www.csc.villanova.edu/~mdamian/threads/posixsem.html</a>
+		</li>
+	</ul>
+
+	System V Semaphores (alternative to POSIX semaphores, also acceptable):
+	<ul>
+		<li>semget(key_t key, int nsems, int semflg);</li>
+		<li>semctl(int semid, int semnum, int cmd, ...);</li>
+		<li>semop(int semid ,struct sembuf *sops, unsigned int nsops); </li>
+	</ul>
+
+	Tutorial on using System V Semaphores:
+	<ul>
+		<li> <a href=http://beej.us/guide/bgipc/output/html/multipage/semaphores.html> http://beej.us/guide/bgipc/output/html/multipage/semaphores.html </a> </li>
+	</ul>
+
+	Shared Memory (you've used it before):
+	<ul>
+		<li>shmget(key_t key, size_t size, int shmflg);</li>
+		<li>shmat(int shmid, const void *shmaddr, int shmflg);</li>
+		<li>shmdt(const void *shmaddr);</li>
+		<li>shmctl(int shmid, int cmd, struct shmid_ds *buf);</li>
+	</ul>
+</li>
+
+</ul>
+
+</body>
+</html>

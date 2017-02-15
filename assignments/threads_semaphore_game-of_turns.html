@@ -1,0 +1,176 @@
+<html>
+<HEAD>
+<TITLE>CS350 - Operating Systems</TITLE>
+  <meta name="robots" content="noindex,nofollow">
+</HEAD>
+
+<body>
+
+<CENTER>
+<H1>
+Multi-thread Game of Turns</H1>
+</CENTER>
+
+<H2>Multi-thread Game of Turns</H2>
+<P>
+In this part, you are asked to write a simple program that takes two command-line arguments <b>T</b> and <b>N</b>.
+The main thread creates <B>T</B> other child threads, waits for all of them
+to complete, and then exits. All the child threads form one logical ring among
+each other. (In rest of the description, the term "thread" refers to a "child thread".) 
+For example, if the threads are numbered 
+1 to T, then 
+<ul>
+<li>
+The next neighbor of thread 1 is thread 2,
+</li>
+<li>
+The next neighbor of thread i is thread i+1 for all i &lt; T , and
+</li>
+<li>
+The next neighbor of thread T is thread 1, which completes 
+a ring among the threads. 
+</li>
+</ul>
+</P>
+
+<P> Assume that a <i>shared</i> integer variable, called <tt>turn</tt>, is located in a global memory region and identifies the number of the thread whose turn it is at any instant. 
+</p>
+
+<p>
+A second <i>per-thread local</i> variable 
+in each thread, called <tt>me</tt>, identifies the identity 
+of each thread (i.e. each thread stores its own identity in a 
+per-thread local variable <tt>me</tt>). This identity could simply be the position 
+of the thread in the ring. For example, the me=1 for the first thread in the ring, me=2 for the second and so on.
+</p>
+
+<p>
+A third per-thread 
+<i>local</i> variable, called <tt>next</tt>, identifies the next 
+thread in the ring.</P>
+
+<P>The threads sequentially pass
+the turns among each other in the logical ring. 
+When each thread gets its turn, it increments another variable 
+called <tt>counter</tt> in the global memory region.
+The pseudo-code within each thread for passing turns might look something
+as follows. 
+</p>
+<pre>
+	while(turn != me ) 
+		/* do nothing - just busy loop*/ ; 
+
+	/* got my turn - increment counter */
+	counter = counter + 1;
+
+	/* give the turn to next thread */
+	turn = next;  
+</pre>
+
+<p>The program terminates when the each thread has received <tt>N</tt> turns.</p>
+
+<P>In the above description, several programming details have been omitted
+for you to figure out. This includes
+<ul>
+	<li>
+	Creating <tt>T</tt> child threads from the main thread.
+	</li>
+	<li>
+	Constructing the logical ring among child threads.
+	</li>
+	<ul>
+		<li>
+		Initializing each child thread's identity in the <tt>me</tt> variable. 
+		</li>
+		<li>
+		Initializing each child thread' next neighbor in the <tt>next</tt> variable.
+		</li>
+	</ul>
+	<li>
+		Initializing the shared data values.
+	</li>
+	<li>
+		Have the main thread wait for child threads to complete <tt>N</tt> turns before exiting.
+	</li>
+</ul>
+</P>
+
+<H2>Part B: More Efficient Game of Turns</H2>
+<P>You might notice that the program you wrote in Part A 
+is inefficient because each thread <i>busy loops</i> till either (a) it gets its turn or (b) the CPU scheduler
+kicks it out after its time-slice is over(if its not the thread's turn) and allows another 
+thread to execute and make progress.
+(Does the program in Part A have a race condition? Why or why not?)</P>
+
+<P> What we ideally want is that each thread should be given control 
+of the CPU <i><b>only when it is that thread' turn</b></i>. Modify the program you wrote
+in Part A (using appropriate synchronization mechanisms) such that <b><i>each thread
+gets to run (i.e., gets control of the CPU) only when it is that thread's turn, and at no other time.</b></i></P>
+
+<P>Again, you would need to work out the programming details of how and
+where to use inter-thread synchronization. A few hints:
+<ul>
+	<li>
+		You will need to use semaphores.
+	</li>
+	<li>
+		You will need to use more than one semaphore to do it right.
+	</li>
+	<li>
+		Think whether you need semaphores for signaling, or locking critical sections, or for both.
+	</li>
+</ul>
+</P>
+
+<H2>Part C: Profiling the Game of Turns</H2>
+<P>In this part, you are asked to write user-level profiling code in order
+to compare the relative performance of the two versions of programs
+you wrote in Part A and Part B. Use a combination of gettimeofday() 
+system call and inter-thread synchronization to measure (1) the average 
+hand-over time between two consecutive threads in the ring
+and (b) the total execution time to complete N turns. 
+<p>
+Hand-over time is defined here as the time duration from when one thread 
+indicates that it is the next thread's turn to when that next thread 
+realizes it is its turn and starts progressing.
+<p>
+Plot two graphs (a) Hand-over time versus number of threads T, and (b) total execution time versus number of threads T.
+Explain the results you obtain.</P>
+
+<H2>Grading Guidelines</H2>
+<pre>
+	Part A: Multi-Process Game of Turns- 30
+		Correct creation and execution of threads and logical ring - 10
+		Correct initialization of shared data - 20
+
+	Part B: More Efficient Game of Turns - 40 
+		Correct creation and initialization of semaphores - 15
+
+		Correct use of synchronization to wake up ONLY ONE THREAD
+		during its turn without unnecessary busy looping - 25
+
+	Part C: Profiling the Game of Turns - 20
+		Correct implementation and collection of profiling statistics - 5
+		Final report with profiling results, graphs and explanations - 15
+
+	Error Handling - 5
+		Standard error handling with systems calls etc.
+
+	README, Makefile and Coding style - 5
+
+	Total = 100
+</pre>
+
+<H2>Submission Guidelines</H2>
+<ul>
+	<li>
+		Submit all your code files as ONE tarred-gzipped file (.tgz file) on the blackboard. DO NOT SUBMIT EACH FILE INDIVIDUALLY. Make one .tgz file. Check the submission guidelines on course web page for how to prepare a .tgz file.
+	</li>
+	<li>
+		Also submit a report, either in PDF or DOC format, explaining the results from Part C, as part of the above .tgz file.
+	</li>
+</ul>
+
+</body>
+
+</html>

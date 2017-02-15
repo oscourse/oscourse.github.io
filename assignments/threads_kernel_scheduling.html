@@ -1,0 +1,163 @@
+<h1> Assignment 4: Profiling of Thread Scheduling in Linux Kernel</h2>
+<h3> Deadline: May 15 (Last and final day for giving demos -- no extensions, please start early) </h3>
+
+<p>
+In this assignment, you will learn how to observe
+CPU scheduling policies for threads in the Linux Kernel.
+</p>
+
+<ol>
+
+<li>
+	Take a look at the program <a href=mythreads.c>mythread.c</a>.
+	Understand what it does.
+	Compile it using <tt>gcc -o mythread mythread.c -lpthread</tt>.
+	Run it and observe how it executes.
+	Play around with it and see whether (and how much) you can affect
+	thread scheduling from user level without touching the kernel.
+	<br><br>
+</li>
+
+<li>
+	Write two system calls, 
+	called <i>start_pid_record()</i> and <i>stop_pid_record(buf)</i>,
+	to record <i>in a kernel buffer</i> the 
+	exact sequence of process and thread ids that the CPU 
+	scheduler schedules. The first system call should 
+	ask the kernel to start recording the sequence in a 
+	kernel buffer. The second system call should 
+	stop the recording and return the contents of 
+	this buffer to user-space.
+	Each entry in your record should consist of three fields
+	<pre>jiffies, process-id, thread-id</pre>
+	<br>
+	Note that process-id in user space is equivalent to 
+	thread-group-id (or tgid)  in the linux kernel and thread-id from
+	user perspective is equivalent to process-id in the kernel (pid).
+	This will be explained in greater detail in the class, so 
+	don't miss the next few classes!
+	<br>
+	Be careful to allocate a large enough kernel buffer
+	to record the process trace for the entire time interval
+	between start and stop system calls.
+	<br><br>
+</li>
+
+<li>
+	Execute two or more instances of mythreads.c program 
+	<b>simultaneously</b>. Using the above two system calls, 
+	observe how the CPU scheduler 
+	schedules threads across multiple processes.
+	Is it <b>local</b> or <b>global</b> thread scheduling?
+	Does it make a difference in the scheduling order whether 
+	you use pthread_yield() or sleep(1) inside the 
+	thread function? Why or why not?
+	<br> <br>
+	Note: you need to figure out a way to synchronize
+	the execution of the system calls and all the 
+	instances of mythreads so that your trace record is 
+	reasonably accurate. 
+	<br><br>
+</li>
+
+<!--
+<li>
+	Now write a system call <i>toggle_scheduling()</i>,
+	that a process can call to ask the CPU scheduler to 
+	change its thread scheduling policy.
+	<br> <br>
+	If you determined that the default scheduling policy is
+	global thread scheduling, then change the policy to local
+	thread scheduling for the threads of the process which
+	makes this sytem call. In other words,
+	if a process has not exhausted its CPU time-slice,
+	and one of its threads yields the CPU, then the 
+	scheduler should pick another thread from the same process,
+	if available. 
+	Conversly, if you determined that the default scheduling 
+	policy is  local thread scheduling, then make it global
+	for the thread invoking this system call.
+	<br><br>
+	Change your mythreads.c program to invoke <i>toggle_scheduling()</i>
+	system call as soon as it starts.
+	Test your new scheduling policy by
+	running multiple instances of the mythreads.c program.
+	Verify using the profiling system calls you wrote earlier
+	to check if the scheduling behaves as you'd expect.
+	<br><br>
+</li>
+-->
+
+<li>
+	Keep a journal of the problems you face in each step, 
+	your solutions, and the experimental observations/results.
+	Submit your code and journal via the blackboard.
+	Bring a copy of the journal during the demo time, be 
+	ready to show demonstrate and explain your code
+</li>
+</ol>
+
+<h3> Hints </h3>
+<ul>
+	<li>
+		Understand the role of the fields <tt>pid</tt> 
+		and <tt>tgid</tt> in the <tt>task_struct</tt> structure
+		in the kernel.
+	</li>
+	<li>
+		Understand the core part of the context 
+		switching code in the schedule() function in 
+		file kernel/sched.c.
+	</li>
+	<li>
+		Initialize your profile buffer in your 
+		<tt>start_pid_record()</tt> system call.
+	</li>
+	<li>
+		Be careful about where you place your instrumentation code 
+		within the schedule() function to record context switches.
+	</li>
+	<li>
+		Return the collected profile information to user space
+		in one shot when your <i>stop_pid_record(buf)</i> system call 
+		is called.
+	</li>
+	<li>
+		Pay attention to the discussion in the class about the kernel 
+		data structures and code control flow.
+	</li>
+	<li>
+		<i>
+		Start early and make a little bit of progress every day. 
+		Don't try to cram all the work in last few days before the deadline.
+		</i>
+	</li>
+</ul>
+
+<h3> Grading Guidelines </h3>
+
+<pre>
+
+Total = 100 points
+
+- Makefile and README - (5 points)
+
+- Good coding style and code modularity - (5 points)
+
+Part 2: Correctly record the CPU scheduling activity (20 points)
+	- Correct implementation and demonstration of the start and stop system calls  
+
+Part 3: Investigating the default threads scheduling behavior in Linux - (40 points)
+
+	- Low-overhead technique for recording the CPU scheduling activity
+	  when executing multiple concurrent instances of mythreads.c   (20 points)
+
+	- Correct demonstration and explanation of the default thread scheduling 
+	  behavior in Linux.  (20 points)
+
+- Record of your experiments, analysis, and conclusion in your journal (20 points)
+
+- Error handling, overall code robustness, and ease of use (10 points)
+
+</pre>
+
