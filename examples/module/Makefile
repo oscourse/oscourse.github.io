@@ -26,5 +26,5 @@ clean:
 
 else
 	# called from kernel build system: just declare what our modules are
-	obj-m := hello.o hellon.o hello_dev.o
+	obj-m := hello.o hellon.o 
 endif
