@@ -1,0 +1,140 @@
+<H1>Implementing a Number Pipe Using Character-device </H1>
+
+<a href=#problem>[Problem]</a>
+<a href=#tolearn>[To Learn]</a>
+<a href=#samplecode>[Sample Code]</a>
+<a href=#resources>[Resources]</a>
+<a href=#faq>[FAQ]</a>
+<a href=#gg>[Grading]</a>
+
+<H2>Objective</H2>
+You will implement a kernel-level pipe for exchanging numbers among user-level processes.
+You will learn about concurrency, synchronization, and various kernel primitives.
+
+<a name=problem></a>
+<H2>Problem Statement</H2>
+This is a classical producer-consumer problem. 
+Implement a miscellaneous character device in the Linux Kernel. 
+This device must maintain a FIFO queue (i.e. a pipe) of maximum N numbers (configured as a module parameter).
+<ol>
+<li> In user space, there are several concurrent processes that are consumers and producers of numbers.
+<li> Producers produce numbers and write them to a character device (say /dev/mypipe).
+<li> Consumers read the numbers from the character device and print it on the screen.
+<li> When the pipe is full, i.e. when there are N numbers stored in character device, then any producer trying to write will block.
+<li> When the pipe is empty, i.e. when there are 0 numbers stored in character device, then any consumer trying to read will block.
+<li> When a consumer reads from a (full) pipe, it wakes up all blocked producers. In this case, no blocked consumer should be woken up.
+<li> When a producer writes to a (empty) pipe, it wakes up all blocked consumers. In this case, no blocked producer should be woken up.
+</ol>
+
+<H3>Notes</H3>
+<ul>
+<li> You might have noticed that this is not really a "character device" by strict definition, because it doesn't provide a byte-stream abstraction. Instead user processes are writing and reading 32-bit numbers at a time. We are just using the character device  interface in Linux as a convenient mechanism to implement a number pipe.
+<li> The reason "full" and "empty" are in brackets in the last two steps above is to let you choose whether to notify upon every single read/write or only when really necessary. Whatever option you choose, make sure no notifications are "lost" by blocked producers/consumers. 
+</ul>
+ 
+<a name=tolearn></a>
+<H2>What you need to learn to complete this assignment</h2>
+You have to implement a character device as a kernel module, using what you learned earlier about kernel modules and character devices.
+You can use either the semaphore-version of the solution to producer-consumer problem or a monitor-type solution, both of which were covered in class.
+It is likely the semaphore version may be easier to implement.
+You will need to learn the following kernel mechanisms.
+<ul>
+<li>Memory allocation in kernel using kmalloc or kzalloc.
+<li>Using semaphores in kernel using the following functions: sema_init, DEFINE_SEMAPHORE, down_interruptible (preferred over down), and up.
+<li>For alternative implementations using mutexes and waitqs: mutex_init, DEFINE_MUTEX, mutex_lock, mutex_unlock, init_wait_queue_head, wait_event_interruptible (preferred over wait_event), and wake_up_interruptible (or wake_up).
+</ul>
+
+<a name=samplecode></a>
+<H2>Sample user-space code</H2>
+As a hint, below is the sample pseudo-code for producer and consumer processes. You need to modify this code to your implementation of /dev/mypipe character device.
+
+<P>
+First the Producer process:
+<pre>
+	fd = open("/dev/mypipe", O_WRONLY);
+	// check for error during open 
+
+	while (/*some condition*/) {
+
+		//  generate a number somehow, e.g. use the pid of the producer to identify who produced the number
+
+		// write number to pipe
+		n = write( fd, number, size_of_number);
+		// don't forget to check for write error. 
+	}
+
+	close(fd);
+
+</pre>
+
+<P>
+Next the Consumer process:
+<pre>
+	fd = open("/dev/mypipe", O_RDONLY);
+	// check for error during open 
+
+	while (/*some condition*/) {
+
+		// read a number from the pipe
+		n = read( fd, &number, size_of_number );
+		// don't forget to check for read error. 
+
+		// print the number to screen, making sure to identify the consumer who read it
+		// For example,
+		//		"Consumer_pid, iteration j:" followed by number you read above 
+		// increment j across each loop iteration 
+	}
+
+	close(fd);
+</pre>
+
+<a name=resources></a>
+<H2>Resources</H2>
+<ul>
+<li><a href=slides/semaphores_waitqs_kernel_api.pdf>Slides: Kernel API for Semaphores and Waitqueues</a>
+<li> <a href=http://free-electrons.com/doc/books/ldd3.pdf> Linux Device Drivers book </a>
+<li> Any other online resources</li>
+</ul>
+
+<a name=faq></a>
+<H2> Frequently asked questions </H2>
+<P>
+Q: Is there any locking in user space? 
+<br>
+A: No, all synchronization happens in kernel space.
+
+<P>
+Q: Do we use threads or processes to implement producers/consumers in user space.
+<br>
+A: Processes.
+
+<p>
+Q: How to I terminate producers and consumers?
+<br>
+A: After fixed number of iterations would be easiest. If you want to use other termination conditions, check with me/TAs.
+
+<p> 
+Q: Why should I use *_interruptible versions of kernel functions?
+<br>
+A: So that your producer/consumer code can be terminated using Ctrl-C in user space. We'll test for this during demo.
+
+<p>
+Q: How does the producer generate number? Manually, or from a file, or automatically?
+<br>
+A: Please see instructions in the pseudo-code above. Automatic generation would probably be the easiest, since it would help you track which producer and which consumer handle each number.
+
+<a name=gg></a>
+<H2>Grading Guidelines</h2>
+<ul>
+	<li> 20 - Code works for one producer and one consumer.
+	<li> 30 - Code works for multiple concurrent producers and consumers. We may test for up to 5 of each.
+	<li> 20 - No deadlocks. All producers and consumers make progress as long as at least one of each is running.
+	<li> 20 - No race conditions. Each string that is written by producers is read EXACTLY once by one consumer. No string is lost. No string is read more than once. 
+	<li> 10 - Producers block  on write when pipe is full
+	<li> 10 - Consumers block on read when pipe is empty
+	<li> 10 - Blocked producers are not woken up by other producers. Blocked consumers are not woken up by other consumers.
+	<li> 10 - Blocked producers and consumers can be terminated using Ctrl-C
+	<li> 20 - Handle all major error conditions.
+	<li> 40 - Questions based on the assignment.
+	<li> 10 - Clean, modular, and commented code. Clean readable output. No "giant" functions. Minimal use of global variables.
+</ul>
