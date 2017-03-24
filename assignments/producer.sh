@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! $1 ]; then
-	echo "Usage: " $0 "<linepipe name>"
+	echo "Usage: $0 <linepipe name>"
 	exit 1
 fi
 
@@ -14,7 +14,7 @@ fi
 for i in {1..100}
 do
     line="Producer $$ Line $i" 
-    echo "Writing " $line "to " $1
+    echo "Writing: $line"
     echo $line >$1
     sleep 1
 done
