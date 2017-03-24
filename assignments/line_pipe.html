@@ -1,0 +1,116 @@
+<H1> Named Pipe for Exchanging Lines </H1>
+
+
+<H2>Objective</H2>
+You will implement a kernel-level pipe for exchanging lines among user-level processes.
+You will learn about concurrency, synchronization, and various kernel primitives.
+
+<a name=taska></a>
+<H2>Task A</H2>
+Learn what is a named pipe.
+Learn how to create and use a named pipe using command line in Linux (or any UNIX system).
+
+<a name=taskb></a>
+<H2> Task B </H2>
+Read, understand, and run, following two scripts for a consumer and a producer.
+<ul>
+<li> <a href=consumer.sh>Consumer Script</a>
+<li> <a href=producer.sh>Producer Script</a>
+<li> Run one consumer and one producer concurrently.
+<li> Run one consumer and multiple producers concurrently. 
+<li> Run multiple consumers and one producer concurrently. 
+<li> Run multiple consumers and multiple producers concurrently. 
+</ul>
+Explain in your report, what you see, and why.
+
+<a name=taskc></a>
+<H2> Task C </H2>
+Now solve the problem you observed in Task B as follows.
+Replace the UNIX named pipe in the producer and consumer scripts above with 
+your own implementation of a miscellaneous character device (say /dev/linepipe)
+as a kernel module in the Linux Kernel. 
+This device must maintain a FIFO queue (i.e. a pipe) of maximum N lines, where N is configured as a module parameter.
+A line is a sequence of characters terminated by newline character '\n'.
+<ul>
+<li> Producers write lines to /dev/linepipe.
+<li> Consumers read lines from /dev/linepipe and print it on the screen.
+<li> When the pipe is full, i.e. when there are N lines are stored in /dev/linepipe, then any producer trying to write will block.
+<li> When the pipe is empty, i.e. when there are no lines in /dev/linepipe, then any consumer trying to read will block.
+<li> When a consumer reads from a full pipe, it wakes up all blocked producers. In this case, no blocked consumer should be woken up.
+<li> When a producer writes to an empty pipe, it wakes up all blocked consumers. In this case, no blocked producer should be woken up.
+<li> No deadlocks. All producers and consumers make progress as long as at least one of each is running.
+<li> No race conditions. Different lines should not get mixed up (interleaved), as it did in Task B. Each line that is written by producers is read EXACTLY once by one consumer. No line is lost. No line is read more than once. 
+</ul>
+
+
+<a name=tolearn></a>
+<H2>What you need to learn to complete this assignment</h2>
+You can use either the semaphore-version of the solution to producer-consumer problem or a monitor-type solution, both of which were covered in class.
+It is likely the semaphore version may be easier to implement.
+You will need to learn the following kernel mechanisms.
+<ul>
+<li>Using semaphores in kernel using the following functions: sema_init(), DEFINE_SEMAPHORE, down_interruptible() (preferred over down()), and up().
+<li>For alternative implementations using mutexes and waitqs: mutex_init(), DEFINE_MUTEX, mutex_lock(), mutex_unlock(), init_wait_queue_head(), wait_event_interruptible() (preferred over wait_event), and wake_up_interruptible() (or wake_up).
+<li>Memory allocation in kernel using kmalloc or kzalloc.
+</ul>
+
+<a name=resources></a>
+<H2>Resources</H2>
+<ul>
+<li><a href=slides/semaphores_waitqs_kernel_api.pdf>Slides: Kernel API for Semaphores and Waitqueues</a>
+<li> <a href=http://free-electrons.com/doc/books/ldd3.pdf> Linux Device Drivers book </a>
+<li> Any other online resources</li>
+</ul>
+
+<a name=faq></a>
+<H2> Frequently asked questions </H2>
+<P>
+Q: Is there any locking in user space? 
+<br>
+A: No, all synchronization happens in kernel space.
+
+<P>
+Q: Do we implement our own producers and consumers in user space?
+<br>
+A: No, use the two scripts given above. 
+
+<p>
+Q: How to I terminate producers and consumers?
+<br>
+A: After fixed number of iterations OR using Ctrl-C.
+
+<p> 
+Q: Why should I use *_interruptible versions of kernel functions?
+<br>
+A: So that your producer/consumer code can be terminated using Ctrl-C in user space. We'll test for this during demo.
+
+<p>
+Q: How does the producer generate a unique line? 
+<br>
+A: Please see scripts above. "Producer [pid] Line [i]", where [pid] is the process ID of the producer and [i] is a number that increments each iteration.
+
+<p>
+Q: How long should be each line? Can we assume fixed length?
+<br>
+A: Whatever length is needed to store the above line.
+
+<p>
+Q: How to I run multiple producers and consumers concurrently?
+<br>
+A: Open multiple terminals. Run one consumer or producer in the foreground each terminal. 
+
+<a name=gg></a>
+<H2>Grading Guidelines</h2>
+<ul>
+	<li> 20 - Code works for one producer and one consumer.
+	<li> 30 - Code works for multiple concurrent producers and consumers. 
+	<li> 20 - No deadlocks. All producers and consumers make progress as long as at least one of each is running.
+	<li> 20 - No race conditions. Each line is read EXACTLY once by one consumer. No line is lost. No line is read more than once. 
+	<li> 10 - Producers block  on write when pipe is full.
+	<li> 10 - Consumers block on read when pipe is empty.
+	<li> 10 - Blocked producers are not woken up by other producers. Blocked consumers are not woken up by other consumers.
+	<li> 10 - Blocked producers and consumers can be terminated cleanly using Ctrl-C
+	<li> 20 - Handle all major error conditions.
+	<li> 10 - Clean, modular, and commented code. Clean readable output. No "giant" functions. Minimal use of global variables.
+</ul>
+
