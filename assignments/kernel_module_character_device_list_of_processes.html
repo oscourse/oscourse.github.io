@@ -1,15 +1,16 @@
 <HTML>
 
 <HEAD>
-<TITLE>CS350 - Operating Systems</TITLE>
+<TITLE>
+Kernel Modules and Character Device to list all processes
+</TITLE>
   <meta name="robots" content="noindex,nofollow">
 </HEAD>
 
 <BODY>
 
 <CENTER>
-<H1>Assignment:<BR>
-Kernel Modules and Character Device to list all processes</H1>
+<H1>Kernel Modules and Character Device to list all processes</H1>
 </CENTER>
 
 <OL>
@@ -107,13 +108,13 @@ you did most recently is necessarily the cause of a crash.</P>
 
 <li> <a href=http://lxr.free-electrons.com/>Kernel Cross Reference</a></li>
 
-<li> <a href=http://lxr.free-electrons.com/source/include/linux/sched.h#L2931><tt>for_each_process()</tt></a> macro can help you iterate over all processes in the system.
+<li> <a href=http://lxr.free-electrons.com/source/include/linux/sched.h#L3045><tt>for_each_process()</tt></a> macro can help you iterate over all processes in the system.
 
-<li> <tt>struct task_struct</tt> definition can be found <a href=http://lxr.free-electrons.com/source/include/linux/sched.h#L1459>here</a>
+<li> <tt>struct task_struct</tt> definition can be found <a href=http://lxr.free-electrons.com/source/include/linux/sched.h#L1511>here</a>
 
 <li> Process states are defined <a href=http://lxr.free-electrons.com/source/include/linux/sched.h#L207>here</a>
 
-<li> The function <a href=http://lxr.free-electrons.com/source/include/linux/sched.h#L3364><tt>task_cpu()</tt></a> can help you extract the currently assigned CPU for a process.
+<li> The function <a href=http://lxr.free-electrons.com/source/include/linux/sched.h#L3534><tt>task_cpu()</tt></a> can help you extract the currently assigned CPU for a process.
 
 
  <LI> Introductory material on Linux Kernel
