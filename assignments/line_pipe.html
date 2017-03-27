@@ -4,6 +4,13 @@
 <H2>Objective</H2>
 You will implement a kernel-level pipe for exchanging lines among user-level processes.
 You will learn about concurrency, synchronization, and various kernel primitives.
+You may find the following resources helpful in addition to any other online resources.
+<ul>
+<li><a href=slides/semaphores_waitqs_kernel_api.pdf>Slides: Kernel API for Semaphores and Waitqueues</a>
+<li> <a href=http://free-electrons.com/doc/books/ldd3.pdf> Linux Device Drivers book </a>
+<li> Any other online resources</li>
+</ul>
+
 
 <a name=taska></a>
 <H2>Task A</H2>
@@ -52,14 +59,6 @@ You will need to learn the following kernel mechanisms.
 <li>Using semaphores in kernel using the following functions: sema_init(), DEFINE_SEMAPHORE, down_interruptible() (preferred over down()), and up().
 <li>For alternative implementations using mutexes and waitqs: mutex_init(), DEFINE_MUTEX, mutex_lock(), mutex_unlock(), init_wait_queue_head(), wait_event_interruptible() (preferred over wait_event), and wake_up_interruptible() (or wake_up).
 <li>Memory allocation in kernel using kmalloc or kzalloc.
-</ul>
-
-<a name=resources></a>
-<H2>Resources</H2>
-<ul>
-<li><a href=slides/semaphores_waitqs_kernel_api.pdf>Slides: Kernel API for Semaphores and Waitqueues</a>
-<li> <a href=http://free-electrons.com/doc/books/ldd3.pdf> Linux Device Drivers book </a>
-<li> Any other online resources</li>
 </ul>
 
 <a name=faq></a>
