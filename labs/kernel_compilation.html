@@ -1,0 +1,192 @@
+<H1>Configuring and compiling the Linux Kernel</H1>
+
+<ol>
+
+<li>
+<b>Set up an account for kernel programming:</b>
+If you haven't already done so, log in as root at the text console and set yourself up a regular user account and set the password.
+
+<pre>
+$ adduser user_name_of_your_choice
+
+$ passwd user_name_of_your_choice
+</pre>
+
+
+<li>
+<b>Add your newly created account to sudoers list:</b>
+Edit the /etc/sudoers file and add the account you created above so that 
+it has the same permissions as root. This way you can use the <tt>sudo</tt> 
+command to execute certain commands with root privileges. 
+When <tt>sudo</tt> asks you for the password (the first time in a session),
+enter the account password that you created above, NOT the root password.
+<p>
+It is recommended 
+that you only do as root those things that require it, to reduce the 
+risk of clobbering your system if you make a mistake. The <tt>sudo</tt> 
+command forces you to be aware that you are doing something as root.
+<p>
+
+<li>
+Now download a copy of the latest kernel sources 
+from <a href=http://ftp.kernel.org>http://ftp.kernel.org</a>. 
+<p>
+
+<li>
+Extract the kernel source tree from the downloaded file. 
+Do this as a normal user, not as root. 
+For example, if you downloaded the tar.xz file, then execute 
+<pre>
+$ tar xvf linux-4.2.5.tar.xz
+</pre>
+Create a symbolic link for easy access.
+<pre>
+$ ln -s linux-4.2.5 linux
+</pre>
+Notice that the kernel source tree version, "4.2.5" in the example above, should be replaced by whatever kernel version you are using.
+<p>
+
+<li> Install the following packages, if they are not already installed:
+<pre>
+$ sudo apt-get install libncurses5-dev
+$ sudo apt-get install bc
+</pre>
+
+<li>
+<b>Configure the kernel:</b>
+
+<pre>
+$ make menuconfig
+</pre>
+
+<p>
+The kernel comes in a default configuration, determined by the people who put together the kernel source code distribution. It will include support for nearly everything, since it is intended for general use, and is huge. It will take a long time to compile and a long time to load. 
+
+<p>
+The "make menuconfig" step allows you to customize the kernel configuration. It will present you with a series of menus, from which you will choose the options you want to include. For most options you have three choices: (blank) leave it out; (M) compile it as a module, which will only be loaded if the feature is needed; (*) compile it monolithically into the kernel, so it will always be there from the time the kernel first loads.
+
+<p>
+There are couple of specific things you want to accomplish with your reconfiguration.
+<ul>
+
+	<li> Reduce the size of the kernel, by leaving out unnecessary components. This is helpful for kernel development. A small kernel will take less time to compile and less time to load. It will also leave more memory for you to use, resulting in less page swapping and faster compilations.
+
+	<li> Retain the modules necessary to use the hardware installed on your system. 
+	To do this without including just about everything conceivable, you need to know 
+	what hardware is installed on your system. Use the commands <tt>lspci</tt>, <tt>dmesg</tt>, 
+	or check the file <tt>/var/log/syslog</tt> to determine your computer's hardware configuration.
+	You can also ask the TA or the instructor.
+</ul>
+
+These two steps are highly recommended, but don't spend an unreasonable amount of time doing this. The more you can reduce the kernel size and module count, the more it will greatly speed up compile and boot time.
+
+<p>
+Using common sense, select a reasonable set of options for your kernel.
+You can also consult the help descriptions for a least all the top-level menu options, 
+so that you become more familiar with the range of drivers and software components in the Linux kernel.
+
+<p>
+Before exiting the final menu level and saving the configuration, it is also a good idea to save it to 
+a named file, using the "Save Configuration to an Alternate File" option. By saving different 
+configurations under different names you can reload a configuration without going 
+through all the menu options again.
+
+<p>
+You can also compare your .config file with the default one normally present in /boot directory.
+
+<li><b>Compile the kernel:</b>
+
+<pre>
+$ make bzImage
+</pre>
+
+<p>
+The command will compile the kernel and create a 
+compressed binary image of the kernel. 
+The kernel image can be found at arch/x86/boot/bzImage (for a x86 based processor). 
+
+<p>
+If there are error messages from any of the make stages, you may be able to solve them by going back and playing with the configuration options.
+<p>
+
+<li><b>Compile the kernel modules:</b>
+<pre>
+$ make modules
+</pre>
+This command will compile the dynamically loadable kernel modules 
+you have selected in the configuration step. 
+The result will be creation of .ko files for each module. 
+For example, if you chose to compile the network device driver for the 
+Realtek 8139 card as a module, the `driver/net/' directory will 
+contain a file with the name 8139too.ko.
+
+<p>
+<li> <b>Install the compiled kernel and modules as root as follows:</b>
+
+<pre>
+$ sudo make modules_install
+$ sudo make install
+</pre>
+
+<p>
+The "make modules_install" and "make install" steps need to be done as root, 
+since they write into system directories (/boot and /lib/modules). 
+The kernel image (bzImage) is copied into /boot, and has a name starting 
+with "vmlinuz" and including the version number. 
+The modules go into a sub-directory of /lib/modules named after the version number.
+
+<p>
+<li>
+<b>Create an initial RAM disk:</b>
+<pre>
+$ cd /boot
+$ mkinitramfs -o initrd.img-4.2.5 4.2.5
+</pre>
+
+The initial RAM disk is 
+an archive of certain critical modules which need to be preloaded by the system at boot time, 
+i.e. the system cannot wait to load these modules till after a complete boot up of the system.
+At boot time, the kernel unpacks that archive into RAM disk (a block device stored in memory), 
+mounts it and uses it as initial root file system.
+
+<p>
+Do the following two steps only once at the beginning when you start with kernel assignments 
+OR later if you change the kernel versions you use. This creates symbolic links so that 
+system scripts in the G-7 and Q-22 labs can pickup your kernel and RAM disk images.
+<pre>
+$ rm initrd.img
+$ ln -s initrd.img-4.2.5 initrd.img
+</pre>
+
+IMPORTANT: Now check if you have the following two symbolic links are correctly set up in your /boot directory.
+<pre>
+	lrwxrwxrwx 1 root root 14 2008-01-30 22:34 initrd.img -> initrd.img-4.2.5
+	lrwxrwxrwx 1 root root 14 2008-01-30 22:33 vmlinuz -> vmlinuz-4.2.5
+</pre>
+This last step is important for your image to boot correctly using network boot via the 
+network boot system in the G-7 and Q-22 labs. There is a script at the network boot server 
+which runs every few seconds, picks up your kernel image (vmlinuz) and ram disk image 
+(initrd.img), and copies them to correct locations in the server so that next time 
+you can boot off your new kernel image. So make sure that these two symbolic links 
+point to the correct kernel image that you want to boot next time.
+
+<p>
+<li>
+<b>Reboot the system into your new kernel.</b>
+Watch the boot  messages. See if it works. 
+If it does not work, note down the error message.
+Then reboot with the safe kernel image (named yourid.safe) at the <tt>boot:</tt> prompt.
+Try to fix what went wrong, and repeat until you have a working new kernel.
+
+</ol>
+
+
+
+
+
+<TABLE WIDTH="100%"><TR><TD BGCOLOR="cccc99">
+Acknowledgment: Adapted by <a href=http://www.cs.binghamton.edu/~kartik>Kartik Gopalan</a> from original assignment material on kernel installation, configuration and modules by <A HREF="http://www.cs.fsu.edu/~baker">T. P. Baker</A>. 
+</TD></TR></TABLE>
+
+</BODY>
+</HTML>

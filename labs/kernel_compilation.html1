@@ -1,0 +1,148 @@
+<H1>Kernel Compilation</H1>
+
+<H2>Objective</H2>
+<p>
+You will learn how to compile and install a kernel.
+
+
+<H2>Configuring and compiling the Linux Kernel</H2>
+
+There's currently no choice but to use Debian distribution of Linux in the instructional labs due to the way the system is set up (to boot your kernel image over the network). If you are using your personal machine, feel free to use your favorite distribution that works your system.
+
+<ol>
+
+<li>
+Log in again as root at the text console. Set yourself up a user account under a name of your choice (let's call it your_user_name -- replace your_user_name with whatever user name you want). To do this, use the command <i>adduser</i> as follows:
+<tt>adduser your_user_name</tt>
+
+<p>
+Then execute 
+<pre> passwd your_user_name</pre>
+to set the password of this account to some password of your choice.
+
+<p>
+Use this account for most of your development work.
+
+<p>
+It is recommend that you only do as root those things that require it, to reduce the risk of clobbering your system if you make a mistake. In general, it is wise to log in first as a normal user, then add your regular id to sudoers list under "/etc/sudoers", and the use the "sudo" command to execute privileged intructions. This forces you to be aware that you are doing something as root.
+
+<p>
+If you are working from the normal console of the machine, you can select any of six virtual consoles using the function keys F1-F6. F1 is the initial virtual console. F7 is reserved for the X-windows display. To switch between consoles, use the Ctrl-Alt-F(N) keys combination where N = the virtual console number. For example, if you are running X-windows, you can switch over to virtual 2 using Ctrl-Alt-F2 to do something, then switch back to the X-windows display using Ctrl-Alt-F7.
+
+<li>
+At this stage, get a copy of kernel sources. You can download them via ftp from <a href=http://ftp.kernel.org>http://ftp.kernel.org</a>. 
+
+<li>
+As the normal user to whose home directory you copied the kernel source code, extract the kernel source tree from the archive file. For example, you could next do the following:
+<pre>
+cd /home/your_user_name
+tar xvf linux-4.2.5.tar.xz
+ln -s linux-4.2.5 linux
+</pre>
+Notice that the kernel source tree version, "4.2.5" in the example above, should be replaced by whatever kernel version you are using.
+
+<li> Install following packages, if they are not installed:
+<pre>
+sudo apt-get install libncurses5-dev
+sudo apt-get install bc
+</pre>
+
+<li>Configure the kernel as follows:
+
+<ul>
+	<li> cd into the source directory ("linux" in the examples above), and execute the command
+	<pre>
+	cd linux
+	make mrproper
+	</pre>
+	to remove junk left from the old configuration (I've heard this may not be necessary with the latest kernel Makefile, but I have not verified it sufficiently to skip this step. In any case, it does no harm.)
+
+	<li> Do "make menuconfig" (or "make xconfig", if you have a GUI working successfully inside X-windows.)
+</ul>
+
+<p>
+The kernel comes in a default configuration, determined by the people who put together the kernel source code distribution. It will include support for nearly everything, since it is intended for general use, and is huge. It will take a long time to compile and a long time to load. For use in this course, you want a different kernel configuration. The "make menuconfig" step allows you to choose that configuration. It will present you with a series of menus, from which you will choose the options you want to include. For most options you have three choices: (blank) leave it out; (M) compile it as a module, which will only be loaded if the feature is needed; (*) compile it monolithically into the kernel, so it will always be there from the time the kernel first loads.
+
+<p>
+There are couple of specific things you want to accomplish with your reconfiguration.
+<ul>
+
+	<li> Reduce the size of the kernel, by leaving out unnecessary components. This is helpful for kernel development. A small kernel will take less time to compile and less time to load. It will also leave more memory for you to use, resulting in less page swapping and faster compilations.
+
+	<li> Retain the modules necessary to use the hardware installed on your system. To do this without including just about everything conceivable, you need to know what hardware is installed on your system. You can find out about that in several ways.
+</ul>
+
+These two steps are highly recommended, but don't spend an unreasonable amount of time doing this. The more you can reduce the kernel size and module count, the more it will greatly speed up compile and boot time.
+
+<p>
+All of the lab computers for this course should have similar hardware. However, if you have a machine of your own you will need to figure out what hardware it has and what software OS features you need, so that you include all (and only) the necessary components in your kernel.
+
+<p>
+If you have a running Linux system with a working kernel, one way to find out about what hardware drivers you are using is to look at the system log files, /var/log/syslog and /var/log/messages. You can also use the commands "lspci" or "dmesg". Otherwise, check the hardware documentation for your system, or ask the instructor or TA.
+
+<p>
+Using the available information, knowledge about your own system if you are not using the lab, and common sense, select a reasonable set of options. Along the way it would be a good idea to read through the on-line help descriptions for a least all the top-level menu options, so that you become more familiar with the range of drivers and software components in the Linux kernel.
+
+<p>
+Before exiting the final menu level and saving the configuration, it is also a good idea to save it to a named file, using the "Save Configuration to an Alternate File" option. By saving different configurations under different names you can reload a configuration without going through all the menu options again.
+
+<p>
+If you become frustrated with this process, you can compare your .config file with the default one normally present in /boot directory.
+
+<li>Compile the kernel as follows:
+
+<pre>
+make bzImage
+make modules
+</pre>
+
+<p>
+The first command will compile the kernel and create a compressed binary image of the kernel. After the first step, the kernel image can be found at arch/x86/boot/bzImage (for a x86 based processor). The second command will compile the dynamically loadable kernel modules you have selected in the configuration step. The result will be creation of .ko files for each module. For example, if you chose to compile the network device driver for the Realtek 8139 card as a module, the `driver/net/' directory will contain a file with the name 8139too.ko.
+
+<p>
+If there are error messages from any of the make stages, you may be able to solve them by going back and playing with the configuration options.
+
+<li> Install the compiled kernel as root as follows:
+
+<pre>
+make modules_install
+make install
+</pre>
+
+<p>
+The "make modules_install" and "make install" steps need to be done as root, since they write into system directories (/boot and /lib/modules). The kernel goes into /boot, and has a name starting with "vmlinuz" and including the version number. The modules go into a sub-directory of /lib/modules named after the version number.
+
+<li> [ONLY IF USING INSTRUCTIONAL LAB MACHINE] Do the following step each time you compile and install a new kernel (assuming your kernel version is 4.2.5). This creates an initial ramdisk that is an archive of certain critical modules which need to be preloaded by the system at boot time, i.e. the system cannot wait to load these modules till after a complete boot up of the system.
+<pre>
+$ cd /boot
+$ mkinitramfs -o initrd.img-4.2.5 4.2.5
+</pre>
+Do the following two steps only once at the beginning when you start with kernel assignments OR later if you change the kernel versions you use.
+<pre>
+$ rm initrd.img
+$ ln -s initrd.img-4.2.5 initrd.img
+</pre>
+
+IMPORTANT: Now check if you have the following two symbolic links are correctly set up in your /boot directory.
+<pre>
+	lrwxrwxrwx 1 root root 14 2008-01-30 22:34 initrd.img -> initrd.img-4.2.5
+	lrwxrwxrwx 1 root root 14 2008-01-30 22:33 vmlinuz -> vmlinuz-4.2.5
+</pre>
+This last step is important for your image to boot correctly using network boot via the PXE boot system in the instructional labs. There is a script at the PXE boot server which runs every 5 seconds, picks up your kernel image (vmlinuz) and ram disk image (initrd.img), and copies them to correct locations in the server so that next time you can boot off your new kernel image. So make sure that these two symbolic links point to the correct kernel image that you want to boot next time.
+
+<p>
+[ONLY IF USING PERSONAL MACHINE] Edit the file /boot/grub/menu.lst. If it has a line with "nomenu" or "hiddenmenu", comment that out (by adding "#" at the beginning). Also find the line that specifies the timeout for the menu and increase it to a number of seconds large enough for you to read and use the menu. The default timeout is 5 seconds. I use 30 seconds.
+
+<li>Reboot the system into your new kernel. Watch the messages. See if it works. If it does not, reboot with the old (safe) kernel, try to fix what went wrong, and repeat until you have a working new kernel.
+</ol>
+
+
+
+
+
+<TABLE WIDTH="100%"><TR><TD BGCOLOR="cccc99">
+Acknowledgment: Adapted by <a href=http://www.cs.binghamton.edu/~kartik>Kartik Gopalan</a> from original assignment material on kernel installation, configuration and modules by <A HREF="http://www.cs.fsu.edu/~baker">T. P. Baker</A>. 
+</TD></TR></TABLE>
+
+</BODY>
+</HTML>
