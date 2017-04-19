@@ -18,12 +18,12 @@ int main(int argc, char *argv[])
 		exit(1);
 	}	
 
-	while(1) {
-		if ( (fp = fopen(argv[1], "w")) == NULL) {
-			perror(""); printf("error opening %s\n", argv[1]);
-			exit(1);
-		} 
+	if ( (fp = fopen(argv[1], "w")) == NULL) {
+		perror(""); printf("error opening %s\n", argv[1]);
+		exit(1);
+	} 
 	
+	while(1) {
 
 		sprintf(line, "Producer %d Line %d\n", getpid(), linenum++);
 		printf("%s", line);
@@ -31,12 +31,13 @@ int main(int argc, char *argv[])
 		// write a line
 		if ( fputs(line, fp) == -1) {
 			perror("error writing line\n");
-			exit(2);
+			//exit(2);
 		}
-		fclose(fp);
-
+		fflush(fp);
 		sleep(1);
 	}
+
+	fclose(fp);
 
 	return 0;
 }
