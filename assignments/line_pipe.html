@@ -19,10 +19,15 @@ Learn how to create and use a named pipe using command line in Linux (or any UNI
 
 <a name=taskb></a>
 <H2> Task B </H2>
-Read, understand, and run, following two bash scripts for a consumer and a producer (adapted from code in this <a href=http://www.linuxjournal.com/content/using-named-pipes-fifos-bash>link</a>).
+Read, understand, and run, following two user-level C-programs for a consumer and a producer.
+<!-- (adapted from code in this <a href=http://www.linuxjournal.com/content/using-named-pipes-fifos-bash>link</a>).-->
 <ul>
-<li> <a href=assignments/consumer.sh>Consumer Script</a>
-<li> <a href=assignments/producer.sh>Producer Script</a>
+<li> <a href=assignments/consumer.c>Consumer C program</a>
+<li> <a href=assignments/producer.c>Producer C program</a>
+<ul> You can ignore the bash scripts that were released earlier (linked below for reference). Explanation: While these scripts are fine by themselves, the <tt>read line</tt> command in consumer was reading the device byte-by-byte, causing confusion when used with a character device.
+	<li> <a href=assignments/consumer.sh>Old Consumer Script</a>
+	<li> <a href=assignments/producer.sh>Old Producer Script</a>
+</ul>
 <li> Run one consumer and one producer concurrently.
 <li> Run one consumer and multiple producers concurrently. 
 <li> Run multiple consumers and one producer concurrently. 
