@@ -5,6 +5,7 @@
 #include <string.h>
 #include <assert.h>
 #include <ctype.h>
+#include <errno.h>
 
 
 int main(int argc, char *argv[])
@@ -19,24 +20,24 @@ int main(int argc, char *argv[])
 		exit(1);
 	}	
 
-	while(1) {
-		if ( (fp = fopen(argv[1], "r")) == NULL) {
-			perror(""); printf("error opening %s\n", argv[1]);
-			exit(1);
-		} 
+	if ( (fp = fopen(argv[1], "r")) == NULL) {
+		perror(""); printf("error opening %s\n", argv[1]);
+		exit(1);
+	} 
 
+	while(1) {
 		// read a line
 		ssize_t ret = getline(&line, &len, fp);
 		if( ret < 0) {
-			perror("error reading line");
-			exit(2);
+			printf("error reading ret=%ld errno=%d\n", ret, errno);
+			sleep(1);
+		} else {
+			printf("line: %s", line);
+			printf("bytes read: %ld\n", ret);
 		}
 
-		printf("line: %s", line);
-		printf("bytes read: %ld\n", ret);
-
-		fclose(fp);
 	}
+	fclose(fp);
 
 	return 0;
 }
