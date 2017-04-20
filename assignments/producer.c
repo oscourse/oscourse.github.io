@@ -10,6 +10,7 @@
 #include <signal.h>
 #include <errno.h>
 
+// this code assumes a maximum line length of 100 bytes.
 #define MAXLEN 100
 
 int main(int argc, char *argv[])
@@ -39,8 +40,8 @@ int main(int argc, char *argv[])
 		// write a line
 		ssize_t ret = write(fd, line, MAXLEN);
 		if ( ret < 0) {
-			perror("");printf("error writing ret=%ld errno=%d\n", ret, errno);
-			//exit(2);
+			printf("error writing ret=%ld errno=%d ", ret, errno);
+			perror("");
 		} else {
 			printf("Bytes written: %ld\n", ret);
 		}

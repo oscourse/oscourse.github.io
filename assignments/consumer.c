@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+// this code assumes a maximum line length of 100 bytes.
 #define MAXLEN 100
 
 int main(int argc, char *argv[])
@@ -36,7 +37,8 @@ int main(int argc, char *argv[])
 			printf("Line read: %s", line);
 			printf("Bytes read: %ld\n", ret);
 		} else {
-			perror("");printf("error reading ret=%ld errno=%d\n", ret, errno);
+			printf("error reading ret=%ld errno=%d ", ret, errno);
+			perror("");
 			sleep(1);
 		}
 	}
