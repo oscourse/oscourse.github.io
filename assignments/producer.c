@@ -4,13 +4,18 @@
 #include <string.h>
 #include <assert.h>
 #include <ctype.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <errno.h>
 
-#define MAX_LINE_LEN 10000
+#define MAXLEN 100
 
 int main(int argc, char *argv[])
 {
-	FILE *fp;
-	char line[MAX_LINE_LEN];
+	int fd;
+	char line[MAXLEN];
 	int linenum = 0;
 
 	if( argc != 2) {
@@ -18,26 +23,31 @@ int main(int argc, char *argv[])
 		exit(1);
 	}	
 
-	if ( (fp = fopen(argv[1], "w")) == NULL) {
+	if ( (fd = open(argv[1], O_WRONLY)) < 0) {
 		perror(""); printf("error opening %s\n", argv[1]);
 		exit(1);
 	} 
 	
-	while(1) {
+	// Prevent producer from dying due to SIGPIPE when last consumer quits
+	signal(SIGPIPE, SIG_IGN); 
 
+	while(1) {
+		bzero(line, MAXLEN);
 		sprintf(line, "Producer %d Line %d\n", getpid(), linenum++);
-		printf("%s", line);
+		printf("Writing: %s", line);
 
 		// write a line
-		if ( fputs(line, fp) == -1) {
-			perror("error writing line\n");
+		ssize_t ret = write(fd, line, MAXLEN);
+		if ( ret < 0) {
+			perror("");printf("error writing ret=%ld errno=%d\n", ret, errno);
 			//exit(2);
+		} else {
+			printf("Bytes written: %ld\n", ret);
 		}
-		fflush(fp);
 		sleep(1);
 	}
 
-	fclose(fp);
+	close(fd);
 
 	return 0;
 }
