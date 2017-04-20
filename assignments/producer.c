@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 		// write a line
 		ssize_t ret = write(fd, line, MAXLEN);
 		if ( ret < 0) {
-			printf("error writing ret=%ld errno=%d ", ret, errno);
+			fprintf(stderr, "error writing ret=%ld errno=%d perror: ", ret, errno);
 			perror("");
 		} else {
 			printf("Bytes written: %ld\n", ret);

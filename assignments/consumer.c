@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 			printf("Line read: %s", line);
 			printf("Bytes read: %ld\n", ret);
 		} else {
-			printf("error reading ret=%ld errno=%d ", ret, errno);
+			fprintf(stderr, "error reading ret=%ld errno=%d perror: ", ret, errno);
 			perror("");
 			sleep(1);
 		}
