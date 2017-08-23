@@ -2,15 +2,15 @@
 <head>
   <meta name="robots" content="noindex,nofollow">
   <META http-equiv="expires" content="0">
-  <title>CS550 - Operating Systems </title>
+  <title>Operating Systems </title>
 </head>
 
 <body>
 
 <a name=top></a>
 <center>
-<H1> CS550: Operating Systems </H1>
-<H3> Spring 2017, Sections 02 and 03</H3>
+<H1> Operating Systems </H1>
+<H3> Binghamton University</H3>
 </center>
 
 <p align="center">
@@ -41,66 +41,46 @@ This course will cover classical and current concepts in Operating Systems.
 Topics include:
 </p>
 <ul>
+<li> Processes and IPC
 <li> Concurrency
-<li> Virtual Memory Systems
-<li> Scheduling
+<li> Virtual Memory 
+<li> CPU Scheduling
 <li> File Systems and I/O
 <li> Virtualization
 <li> Security and Reliability
 <li> System Design Principles
 </ul>
 
-We will cover a mix of background material followed by research papers in each topic. Assignments and course projects will help you get your hands dirty with Linux kernel.
+We will cover a mix of background material and advanced topics. Assignments and course projects will help you get your hands dirty with Linux kernel.
 
-<p>
-<b>Credit hours and course expectations:</b>
-This course is a 3-credit course, which means that students are expected to do at least 9 to 9.5 hours of course-related work or activity <u>each week</u> during the semester. This includes scheduled class lecture/discussion meeting times as well as time spent completing assigned readings, studying for tests and examinations, participating in lab sessions, preparing written assignments, and other course-related tasks.
-
-<p>
-<b> <a name=prereqs>Prerequisites:</a></b>
-
-<ul>
-
-	<li><b>CS350 -- Undergraduate OS. You must be familiar with the fundamentals concepts in Operating Systems as covered in CS350. This course is not a substitute for an undergraduate OS course.</b> 
-
-	<li>You must be proficient with C programming.
-
-	<li>Proficiency in the use of a debugger (such as gdb) is expected. You must know how to debug your own code.
-
-	<li>You must be comfortable working and programming in the Linux environment.
-
-</ul>
+<p> For <b>Course pre-requisites, Time and Location:</b> please check <a href=http://mycourses.binghamton.edu>blackboard</a>
 
 <b><a name=grading>Evaluation Criteria:</a></b>
 <ul>
-  <li>60% - Tests 
+  <li>70% - Tests 
 	<ul>
-		<li> Test 1 : March 8 at 3:30pm in TBA
-		<li> Test 2 : April 5 at 3:30pm in TBA
-		<li> Test 3 : May 15 at 5:40pm in TBA 
-<!-- During Finals week TBA. Please check the <a href=http://bannertools.binghamton.edu/exams/>university's website</a> for updates. -->
+		<li> Test 1 : Oct 11 at class time in ENGB-Q23
+		<li> Test 2 : During Finals week TBA in ENGB-Q23. Please check the <a href=http://bannertools.binghamton.edu/exams/>university's website</a> for updates. 
 	</ul>
-  <li>40% - Assignments
+  <li>30% - Assignments
 </ul>
 
 <a name=contact></a>
 <p>
-<b>Time and Location:</b> 
-<ul>
-	<li> Lectures: MW 3:30pm to 5pm Science Library 212 (SL212)
-</ul>
 
 <p>
 <b>Instructor:</b> <a href="http://kartikgopalan.github.io/"> Kartik Gopalan</a>, kartik@binghamton.edu<br>
-<b>Office Hours:</b> Mon-Wed 1:30-2:30pm in ENGB Q-17, and 5:00--5:30 in SL212 after class. Feel free to set up an appointment for other times.
+<b>Office Hours:</b> Mon-Wed 2:30-3:30pm and 5:00--5:45pm in ENGB Q-17. 
 
 <p>
 <b>Teaching Assistants:</b> 
 	<ul>
-	<li> Piush Sinha (psinha1@binghamton.edu) 
-		Office Hours: Tuesday 1:30pm-3:30pm, Location: ENGB G-25
-	<li> Spoorti Doddamani (sdoddam1@binghamton.edu)
-		Office Hours: Friday 10am-12noon, Location: ENGB G-25
+	<li> Tianlin Li (tli16@binghamton.edu)
+		Office Hours: TBA
+	<li> Kevin Cheng (tcheng8@binghamton.edu)
+		Office Hours: TBA
+	<li> Aprameya Bhat (abhat3@binghamton.edu)
+		Office Hours: TBA
 	</ul>
 
 <p>
@@ -109,7 +89,7 @@ This course is a 3-credit course, which means that students are expected to do a
 
 The following two textbooks are recommended.
 The second book is free online. 
-You DON'T need to buy either of them.
+You DON'T need to buy either of them, unless you want to.
 
 <ol>
 
@@ -219,32 +199,8 @@ March, 2015 (Version 0.90) </i> <br>
 		<li> Chapters 2 (2.3)  and 6, Tanenbaum's Modern OS
 	</ul>
 
-<li> <a href=slides/threads_vs_events.pdf> Events vs Threads : Ousterhout's talk</a>
+<li> <a href=slides/threads_vs_events.pdf> Events vs Threads</a>
 
-<li> <a href=slides/unix_ritchie.pdf target=slides> "The UNIX time-sharing system"</a>, Dennis M. Ritchie and Ken Thompson, 1974
-	<ul>
-	<li> <a href=paper/ritchie74.pdf target=paper>Paper</a> 
-
-	<li> <a href=slides/file_systems.pdf> Undergraduate Background on File Systems</a>
-	<ul>
-		<li><a href=https://youtu.be/rZyBUE-HlVI>Recorded Lecture</a>
-		<li>Chapter 4: Modern Operating Systems - Andrew Tanenbaum
-	</ul>
-
-	</ul>
-
-
-<li> <a href=slides/io_models.pdf> I/O Models </a>
-	<ul>
-		<li> <a href=https://youtu.be/SDk6nZ26wKw>Recorded Lecture</a>
-		<li> Chapter 6, Unix Network Programming, 3rd Edition, by Richard Stevens
-	</ul>
-
-<li> <a href=slides/raid.pdf>RAID</a>
-	<ul>
-		<li><a href=https://youtu.be/iPVCe77d5I8>Recorded Lecture</a>
-		<li> Chapter 5, Tanenbaum's book
-	</ul>
 
 <li> <a href=slides/virtual_memory_intro.pdf>Virtual Memory Management </a>
 	<ul>
@@ -252,9 +208,43 @@ March, 2015 (Version 0.90) </i> <br>
 		<li> Chapter 3, Tanenbaum's book
 	</ul>
 
+<li> <a href=slides/page_replacement.pdf> Page Faults and Page Replacement </a>
+	<ul>
+		<li> <a href=https://youtu.be/EVt_Oow42wY>Recorded lecture</a> 
+		<li> Chapter 3, Tanenbaum's book
+	</ul>
+
 <li> <a href=slides/superpages.pdf> Memory Management and Superpages </a> 
 	<ul>
 		<li> Paper: <a href=paper/navarro02superpages.pdf> Practical, Transparent, Operating System Support for Superpages </a>
+	</ul>
+
+<li> <a href=slides/file_systems.pdf> File Systems</a>
+	<ul>
+		<li><a href=https://youtu.be/rZyBUE-HlVI>Recorded Lecture</a>
+		<li>Chapter 4: Modern Operating Systems - Andrew Tanenbaum
+	</ul>
+
+<li> <a href=slides/unix_ritchie.pdf target=slides> "The UNIX time-sharing system"</a>, Dennis M. Ritchie and Ken Thompson, 1974
+	<ul>
+	<li> <a href=paper/ritchie74.pdf target=paper>Paper</a> 
+	</ul>
+
+<li> <a href=slides/io_models.pdf> I/O Models</a>
+	<ul>
+		<li> <a href=https://youtu.be/SDk6nZ26wKw>Recorded Lecture</a>
+		<li> Chapter 6, Unix Network Programming, 3rd Edition, by Richard Stevens
+	</ul>
+
+<li> <a href=slides/input_output.pdf> Input/Output </a>
+	<ul>
+		<li> <a href= https://youtu.be/Qqt8xe5-HWM>Recorded Lecture</a>
+		<li> Chapter 5, Tanenbaum's book
+	</ul>
+<li> <a href=slides/raid.pdf>RAID</a>
+	<ul>
+		<li><a href=https://youtu.be/iPVCe77d5I8>Recorded Lecture</a>
+		<li> Chapter 5, Tanenbaum's book
 	</ul>
 
 <li> <a href=slides/virtual_machine_intro.pdf> Introduction to Virtual Machines </a>
@@ -295,7 +285,6 @@ March, 2015 (Version 0.90) </i> <br>
 	<li> Chapter 6 from Srinivas and Keshav's book.
 	</ul>
 
-<!--
 <li> <a href=slides/cpu_scheduling.pdf> CPU Scheduling </a>
 	<ul>
 		<li> <a href=https://youtu.be/32QAHcDivxQ>Recorded lecture</a> 
@@ -303,28 +292,12 @@ March, 2015 (Version 0.90) </i> <br>
 		<li> Chapter 5: Silberschatz's book
 	</ul>
 
+<!--
 <li> <a href=slides/intel_vt.pdf> Hardware support for virtualization</a>
 	<ul>
 	<li><a href=paper/neiger06intel.pdf>[neiger06intel]</a></li>
 	</ul>
-<li> <a href=slides/page_replacement.pdf> Page Faults and Page Replacement </a>
-	<ul>
-		<li> <a href=https://youtu.be/EVt_Oow42wY>Recorded lecture</a> 
-		<li> Chapter 3, Tanenbaum's book
-	</ul>
-
-
-<li> <a href=slides/input_output.pdf> Input/Output </a>
-	<ul>
-		<li> <a href= https://youtu.be/Qqt8xe5-HWM>Recorded Lecture</a>
-		<li> Chapter 5, Tanenbaum's book
-	</ul>
-
-<li> <a href=slides/file_systems.pdf> File Systems </a>
-	<ul>
-		<li><a href=https://youtu.be/rZyBUE-HlVI>Recorded Lecture</a>
-		<li>Chapter 4: Modern Operating Systems - Andrew Tanenbaum
-	</ul>
+-->
 
 <li> <a href=slides/security.pdf> System Security </a>
 	<ul>
@@ -332,7 +305,6 @@ March, 2015 (Version 0.90) </i> <br>
 		<li> Chapter 9 Tanenbaum's book
 	</ul>
 
--->
 
 </ol>
 
@@ -363,8 +335,9 @@ March, 2015 (Version 0.90) </i> <br>
 
 <p>
 <ul>
+	<li><a href=https://docs.google.com/document/d/1m-7sBSG44eVDrIZ8Gj0PVxOaGnPEvKJ7nuw8GgRxKuw/edit?ts=599af03d#heading=h.r4xftb9u6u09>CSVB instructions</a>
 	<li><a href=https://docs.google.com/document/d/1WaQs7uf9KFRpBlcVzQasMOITQaNdTkTOxFjwyym21Rw/edit?usp=sharing>GCP Instructions</a>
-	<li><a href=https://docs.google.com/document/d/1CXQED71LhEV44zkT9oN177muh3yD0beehFaKYAtvZSc/edit?usp=sharing>Network Boot Image Instructions</a>
+<!-- <li><a href=https://docs.google.com/document/d/1CXQED71LhEV44zkT9oN177muh3yD0beehFaKYAtvZSc/edit?usp=sharing>Network Boot Image Instructions</a> -->
 </ul>
 
 <ul>
@@ -377,15 +350,14 @@ March, 2015 (Version 0.90) </i> <br>
 
 </ul>
 
+<!--
 <ul>
 
 <li> <a href=hw1.html>Assignment 1</a>, Due: Feb 15, 7% Grade
-<!-- <a href=sol1.c>Solution</a> -->
 <li> <a href=hw2.html>Assignment 2</a>, Due: March 17, 11% Grade
 <li> <a href=hw3.html>Assignment 3</a>, Due: April 25, 11% Grade
 <li> <a href=hw4.html>Assignment 4</a>, Due: May 17, 11% Grade
 
-<!--
 <li> <a href=hw2.html>Assignment 2: System calls</a> 
 <ul>
 	<li> Due: March 14. 
@@ -472,27 +444,21 @@ DO NOT include object files (.o) or any executable files.
 
 <ul>
 
-<!--
 <li> Sample tests will be posted here.
 
+<!--
 <li> <a href=tests/diagnostic_test_solution.pdf> Diagnostic Test Solution </a>
--->
 
 <li> <a href=tests/test1_samples.pdf>Test 1 Sample Questions</a>
 
-<!--
 <li> <a href=tests/test1_solution.pdf> Test 1 Solution </a>
--->
 
 <li> <a href=tests/test2_samples.pdf>Test 2 Sample Questions</a>
 
-<!--
 <li> <a href=tests/test2_solution.pdf> Test 2 Solution </a>
--->
 
 <li> <a href=tests/test3_samples.pdf>Test 3 Sample Questions</a>
 
-<!--
 <li> <a href=tests/test3_solution.pdf> Test 3 Solution </a>
 
 <li> <a href=tests/test4_samples.pdf>Test 4 Sample Questions</a>
@@ -513,5 +479,7 @@ DO NOT include object files (.o) or any executable files.
 <a href="https://goo.gl/forms/BkIvdvVeoCgSAKZL2">[Feedback]</a> 
 -->
 </p>
+
+
 </body></html>
 
