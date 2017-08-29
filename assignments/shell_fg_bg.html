@@ -1,0 +1,205 @@
+<html> 
+<head> 
+  <title>CS350/550 - Shell: Process control in Foreground and Background</title> 
+</head> 
+
+<body> 
+
+<h1>CS350/550 : Shell: Process control in Foreground and Background</h1>
+
+<p>
+<a href=#description>[Description]</a>
+<a href=#donots>[Do Nots]</a>
+<a href=#hints>[Hints]</a>
+<a href=#gg>[Grading Guideline]</a>
+</p>
+
+
+<a name=description>
+<h2> Description</h2>
+</a>
+
+<p>This assignment helps you learn about 
+processes and basic process management in a shell.
+You are asked to write a simple shell program called <tt>minish</tt>.
+This shell must work as follows. You start the shell by running 
+<tt>minish</tt> program.
+This will give a prompt of your shell as follows:
+
+<pre>
+minish>
+</pre>
+
+From here onwards, you should be able to execute and control 
+<b>any program/command</b> just as you
+would in a normal shell. 
+For instance 
+
+
+<pre>
+minish> ls
+[ Output of ls shown here. Your shell waits for ls to finish. ]
+minish>
+
+</pre>
+
+
+<p>
+Additionally, your shell should be able to do the following: 
+</p>
+
+<ol> 
+
+	<li> Execute commands with multiple arguments. For example:
+		<pre>
+		minish> Command arg1 arg2 arg3
+		[ Output of Command shown here. Your shell waits for Command to finish. ]
+		minish>
+		</pre>
+	</li>
+
+	<li> Execute commands in either foreground or background mode. In foreground mode, the shell just waits for the command to complete before displaying the shell prompt again (as in the above example). In background mode, a command is executed with an ampersand <tt>&</tt> suffix. The shell prompt appears immediately after typing a command name (say Command1) and shell becomes ready to accept and execute the next command (say Command2), even as Command1 continues executing in the <i>background</i>. For example:
+		<pre>
+		minish> Command1 &
+		minish> Command2
+		[Output of Command1 and Command2 may interleave here in arbitrary order. Your shell waits for Command 2 to finish.]
+		minish>
+		</pre>
+
+	</li>
+
+	<li> Maintain multiple processes running in background mode simultaneously. For example:
+		<pre>
+		minish> Command1 &
+		minish> Command2 &
+		minish> Command3 &
+		minish> 
+		[Output of Command1, Command2, and Command3 may interleave here in arbitrary order. Shell does not wait for any of the commands to finish.]
+
+		</pre>
+	</li>
+
+	<li> List all currently running background jobs using "listjobs" command.  
+		<pre>
+		minish> Command1 &
+		minish> Command2 &
+		minish> Command3 &
+		minish> listjobs
+		List of backgrounded processes:
+		Command 1 with PID 1000 Status:RUNNING
+		Command 2 with PID 1005 Status:RUNNING
+		Command 3 with PID 1007 Status:FINISHED
+		minish>
+		</pre>
+	</li>
+
+	<li> Bring a background process to foreground using the fg command with process ID as argument. For instance, continuing from the previous example:
+		<pre>
+		minish> fg 1005
+		[ Your shell waits for Command2 to finish. ]
+		minish>
+		</pre>
+	</li>
+	
+	<li>
+		Terminate a process by pressing <tt>[Ctrl-C]</tt>.  Your shell must not get killed; only the process running inside your shell must terminate.
+	</li>
+	
+	<li>
+		The <tt>exit</tt>  command should terminate your shell.  Take care to avoid orphan processes.
+	</li>
+	
+	<li>
+		The <tt>cd</tt> command must actually change the directory of your shell  and the <tt>pwd</tt> command must return the current directory of your shell. Note that normal <tt>fork-exec</tt> mechanism won't work here. Why?
+	</li>
+
+</ol>
+
+
+<a name=donots>
+<h2>Do Nots:</h2>
+</a>
+<ul> 
+	<li>
+		DO NOT use any special wrapper libraries or classes to borrow the basic functionality required in this assignment. If in doubt, ask the instructor first BEFORE doing so.
+	</li> 
+	<li>
+		DO NOT use the <b>system(...) </b> syscall to execute the programs in your shell directly.
+	</li> 
+	<li> 
+		DO NOT write five or six different programs, one for each feature. Write <b>one single program</b> that includes all the above features. 
+	</li> 
+</ul> 
+
+
+<a name=hints>
+<h2>Hints:</h2> 
+</a>
+
+<ul> 
+  <li>Build  and test one functionality at a time. </li> 
+  <li>Make backup copies of partially working versions of your code. This way, if you irreparably screw up your code, then you can at least roll back to your last backup copy. </li> 
+  <li>First design your data structures and code-structure before you begin coding each feature. Anticipate specific problems you will face. </li> 
+  <li>Check out man page for the following:
+    <ul> 
+	<li>fork()</li>
+	<li>execv(), execl(), execlp(), execvp() (which one should you use?)</li>
+	<li>waitpid()</li> 
+	<li> kill()</li> 
+	<li> chdir()</li> 
+	<li> getcwd()</li> 
+	<!--
+	<li>dup2() (for stdin/stdout redirection) </li>
+	<li>pipe()</li> 
+	<li>open()</li> 
+	<li>close()</li> 
+	<li>fileno()</li> 
+	<li> kill()</li> 
+	<li> chdir()</li> 
+	<li> getcwd()</li> 
+	<li>killpg()</li> 
+	<li>setsid()</li> 
+	<li>getgrp()</li> 
+	<li>getpgid()</li> 
+	<li>tcsetpgrp()</li> 
+	-->
+    </ul> 
+  </li> 
+</ul>
+
+<a name=gg>
+
+<h2> Grading Guidelines </h2>
+</a>
+<p> This is how we will grade your assignment during the demo. So please prioritize your work accordingly.
+<p> The final score = part1 + part2. 
+<h3> Part1 Program Demo</h3>
+<ul>
+<li> 5 - README, Makefile, Compilation without errors 
+<li> 10 - Executing a command with no arguments in foreground
+<li> 10 - Executing a command with multiple arguments in foreground
+<li> 10 - Executing a single command in background
+<li> 10 - Executing multiple commands in background simultaneously
+<li> 10 - Printing an accurate list of background processes with <tt>listjobs</tt> command.
+<li> 15 - Bringing a background process to foreground using the fg command.
+<li> 10 - Terminating a foreground process using Ctrl+C without killing the shell, and killing minish using exit. 
+<li> 10 - Implementation of cd and pwd command
+<li> 10 - Error Handling: 
+                Most important part here is to make sure that you check and handle the errors
+                returned by ALL systems calls used in your program. Also check for other common
+                error conditions in your program. But don't go overboard with error checking.
+                We will not try to intentionally break your code with bad input that may be irrelevant
+                to the assignment's goals.
+<p> Total score of part1 = 100
+</ul>
+
+<h3> Part2 Answering Questions</h3> 
+<ul> 
+TAs will ask the questions about this project/your code. You need to fully understand this project and your implementation. 
+<p> Total score of part2 = 100
+</ul>
+</pre>
+
+
+</body> 
+</html>
