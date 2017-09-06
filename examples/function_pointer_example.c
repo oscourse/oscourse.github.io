@@ -6,8 +6,8 @@
 
 #include <stdio.h>
 
-/* "func" is a pointer to a function that expects an integer argument and
- * returns an integer.
+/* "func" is a pointer to a function that expects an argument of pointer to
+ * integer and returns an integer.
  */
 int (*func)(int *);
 
