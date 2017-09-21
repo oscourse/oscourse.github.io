@@ -1,0 +1,422 @@
+<HTML>
+
+<HEAD>
+<TITLE>CS350 - Operating Systems</TITLE>
+  <meta name="robots" content="noindex,nofollow">
+</HEAD>
+
+<BODY>
+
+<CENTER>
+<H1>Assignment 2<BR>
+Kernel Compilation, System Calls, and Kernel Modules</H1>
+</CENTER>
+<center><i> Due November 8</i></center>
+
+<p>
+<a href=#description>[Description]</a> <br>
+<a href=#beforeyoustart>[Before You Start]</a> <br>
+<a href=#parta>[Part A -- Kernel Compilation]</a> <br>
+<a href=#partb>[Part B -- System Calls]</a> <br>
+<a href=#partc>[Part C -- Kernel Modules]</a> <br>
+<a href=assignments/kernel_compile_syscall_module_faq.txt>[FAQ]</a> <br>
+<a href=#gg>[Grading Guideline]</a> <br>
+<a href=#hints>[Hints]</a> <br>
+<a href=#submission>[Submission]</a> <br>
+</p>
+
+
+<a name=description>
+<H2>Description:</H2></P>
+</a>
+
+<P>You will walk through the
+mechanical steps of configuring, compiling, installing, and
+testing a kernel. This will make sure you can handle the
+mechanics, let you see first-hand the time scales of some of the
+development steps in kernel programming.
+You will then implement a simple system call and a simple
+kernel module, and write user-level applications to test 
+your implementation.</P>
+
+<UL>
+ <LI>Learn a few Linux system administration commands, the
+     bare minimum you need to compile, install, and test a kernel.</LI>
+ <LI>Learn to reduce boot time by turning off unneeded Linux system services.</LI>
+ <LI>Experience configuring, compiling, and installing a Linux kernel.</LI>
+ <LI>Experience compiling and installing a set of Linux kernel modules.</LI>
+ <LI>Experience writing a simple system call.</LI>
+ <LI>Experience writing a simple module.</LI>
+ <LI>Experience a kernel crash.</LI>
+</UL>
+
+<a name=deadline>
+<H2> Deadline and Submission </H2>
+<P>
+For this assignment, you need to submit three parts separately. 
+<b> You will implement your project using GitHub for your version control and track your progress. Submit Git log along with your code.</b>
+Here is the introduction of <a href=slides/short_git_tutorial.docx> GitHub </a>. 
+
+
+<LI> Part A, Due: October 2, 2017 
+<br> After reboot your VM with kernel 4.4.1, run "uname -a", and then take a screenshot including the command prompt. 
+<br> Submit the screenshot file and git log on Blackboard.
+</LI> 
+<br>
+<LI> Part B, Due: October 9, 2017
+<br> Submit only the kernel files that you created/modified AND the user application source code AND git log. 
+<br> DO NOT submit the entire kernel source code.
+</LI>
+<br>
+<LI> Part C, Due: October 16, 2017
+<br> Submit the kernel module source code AND the user application source code AND git log. 
+<br> DO NOT submit the kernel module objects, e.g. .ko file. 
+
+<p>After all parts are submitted, you need to do the demo. </p>
+
+</LI> 
+</P>
+
+
+<a name=beforeyoustart>
+<H2>Important Instructions Before You start</H2>
+</a>
+
+Please read the following instructions carefully. It has important information.
+
+<OL>
+
+<li>
+You are required to do this assignment in your VM (either CSVB or your own linux VM).
+</li>
+<li>
+You are responsible for your VM.
+</li>
+
+<li>
+<b>LOCATION:</B> It is best to do the assignment in the CS department's
+Instructional Lab, which is located in the G-7 or Q22 of Engineering Building. 
+NOTE: This assignment *CANNOT* be done on bingsuns or any other 
+computing facility in the University.
+</LI>
+
+<!--
+<LI>
+<B>TEAMS:</B> I am requesting you all to form teams of maximum 2 members
+each.  The original plan was to have each of you do the assignment
+individually, which seems infeasible now due to a big resource crunch.
+We have only 20 machines in this lab. There are 34 students in our section
+alone. In addition, there is a strong chance that another section of 33
+students may end up doing the same assignment in the Linux lab around the
+same time window. This means about 67 students competing for 20 machines.
+So when you work in the lab, both members of a team should use one single
+machine - not two machines.
+</LI>
+
+<LI>
+<B>DEMOS:</B> You can work in teams of 2, but will give the demo of the
+assignment individually. Hopefully, this will force both team members to
+pay attention to the entire assignment. The goal of teaming up is *NOT* to
+split-up the work among each other. Rather, it is to make better use of
+few computers in the lab, and hopefully, two people can pace each other's
+learning better through discussions.
+</LI>
+
+<LI>
+<B>LONE RANGERS:</B> It is likely that most of you would opt to work in a
+team. If any of you wants to do the assignment individually, please email
+me *soon*. Working alone may be fine if the number of such 'lone rangers'
+is small or if you can use your own computer to do this assignment.
+Otherwise, I may have to require you to work in a team to make better use
+of limited computers.
+</LI>
+
+<LI>
+<B>FINDING A TEAM MEMBER:</B> If you want a team member, but do not know
+anyone, please email me and Rohit soon. We will try to put you in touch
+with someone else in similar position.
+</LI>
+-->
+
+<B>USING YOUR OWN MACHINES:</B> You can potentially use
+your own machine on which you are brave enough
+to experiment with Linux Kernel programming. Note that this should be a
+machine that you can finally bring to the department to show your demo.
+</LI>
+
+<LI>
+<B>START EARLY:</B> Get started on the assignment early. 
+This cannot be stressed enough. It is not difficult, 
+but some steps, such as repeatedly compiling the kernel, may take a long time. 
+Try not to keep work stacked up close to the deadline because too many students may
+try to access the few lab computers during the last few days.
+There are many other classes using the lab, so you may even have trouble
+finding a seat towards the deadline.
+</LI>
+
+<LI>
+<B>ASKING FOR HELP:</B> In this assignment , you are free to ask 
+for help from your classmates on Part A of the assignment, including
+what configurations they use. If anything this is encouraged. However,
+please do Parts B and C on your own. The thumbrule is: never 
+ask for code from others OR give code to others. Of course, you are encouraged to ask
+for help from the TA or the Instructor on any part of the assignment.
+</LI>
+</OL>
+
+
+<a name=parta>
+<H2>Part A: Installing, configuring, and compiling Linux Kernel 4.4.1</H2>
+</a>
+<p>Download, compile and boot your kernel as explained <a href=slides/lab04.pptx>lab04.pptx</a> and <a href=assignments/kernel_compilation_instructions.html> instructions </a>.
+
+<a name=partb>
+<H2>Part B: System Calls</H2>
+</a>
+
+<OL>
+<LI><P>Now, using the concepts learned in the class, 
+implement and test a system call that
+returns the current system time by means of a call-by-reference argument.
+More specifically, your system call should have the following prototype as seen
+by user-level applications.
+
+<pre>
+int my_xtime(struct timespec *current_time);
+</pre>
+
+<tt>struct timespec</tt> is defined in include/linux/time.h as follows:
+
+<pre>
+struct timespec {
+        time_t  tv_sec;         /* seconds */
+        long    tv_nsec;        /* nanoseconds */
+};
+</pre>
+
+The system call should first verify that user memory space, pointed to by <tt>current_time</tt>,
+is valid and writable. If not, is should return a failure (EFAULT) to the user process. 
+If the memory-check succeeds, then it should copy the contents of the kernel's <tt>xtime</tt>
+variable to user space address (pointed to by current_time argument). The system call should also 
+print the current time in nanoseconds, to the console using the <tt>printk()</tt> function.
+</li>
+
+<li>
+Also write a user-level application which calls your new system call <tt>my_xtime(...)</tt>
+and prints out the time obtained from the call-by-reference argument.
+</OL>
+
+<a name=partc>
+<H2>Part C: Kernel Module</H2>
+</a>
+
+<OL>
+
+<LI><P>
+Implement a kernel module that
+creates a <tt>/dev/mytime</tt> character device.
+The character device should support the <tt>read()</tt> operation. When <tt>read()</tt> is
+called, it should return a single string that contains the result both 
+current_kernel_time() and getnstimeofday() functions in the kernel.
+For example, the output should be as follows:
+
+<pre>
+current_kernel_time: 378959784 384958
+getnstimeofday: 378959784 384990
+</pre>
+</LI>
+
+<LI>
+Also, provide a user-level application program that compares the resolution of time reported by your module with that reported by user-level gettimeofday() library routine.
+<b>Understand and explain the reason for any difference in your journal.</b>
+
+<p>
+One such application could be written as follows (please fill in the missing code):
+</LI>
+
+<pre>
+#define N ...
+
+struct timeval gtodTimes[N];
+char *procClockTimes[N];
+
+...
+/* allocate memory for character buffers HERE before you use them */
+
+fd = open("/dev/mytime", O_RDONLY);
+/* check for errors HERE */
+
+for( i=0; i &lt; N; i++)
+{
+	gettimeofday(&ampgtodTimes[i], 0);
+	bytes_read = read(fd, procClockTime[i], MAX_LENGTH);
+	/* check for errors HERE */
+}
+
+close(fd);
+
+for(i=0; i &lt; N; i++) {
+	printf("...", gtodTimes[i], procClockTime[i]);
+	/* fix the output format appropriately in the above line */
+}
+
+</pre>
+
+</LI>
+
+
+Run the user-level program for various values of <tt>N</tt> (both very small and very large).
+In your journal, explain the reason for any differences that you observe between the three timing mechanisms.
+<br>
+<br>
+<br>
+
+<LI>Now, change the module so that <I>init_module()</I> returns -1,
+recompile, and retest. What happens? Why?</LI>
+
+</OL>
+
+
+<a name=gg>
+<H2>Grading Guidelines</H2>
+</a>
+<p> This is how we will grade your assignment during the demo. So please prioritize your work accordingly.
+<p> The final score = part1 + part2.
+ 
+<h3> Part1 Program Demo</h3>
+<pre>
+	Part A: Configuring, and compiling Linux Kernel - 20
+
+	Part B: System Calls - 40 
+		Error checks, correct functionality, user application , coding style
+
+	Part C: Kernel Module - 40
+		Error checks, correct functionality, user application , coding style
+										
+	Total = 100
+</pre>
+
+<h3> Part2 Answering Questions</h3> 
+ 
+TAs will ask the questions about this assignment/your code. You need to fully understand this assignment and your implementation. 
+<p> Total score of part2 = 100
+
+<a name=hints>
+<H2>Hints</H2>
+</a>
+
+<UL TYPE=DISC>
+
+<li>
+		Here's a list of <a href=assignments/kernel_compile_syscall_module_faq.txt>frequently asked questions</a> that I'll keep updating.
+	</li>
+ <LI><A HREF="http://lwn.net/Kernel/LDD3/">Linux Device Drivers</A></LI>
+ <LI><a href=http://lwn.net/images/pdf/LDD3/ch07.pdf>Chapter 7 of O'Reilly's LDD book</a>, especially the section on knowing the current time.</LI>
+ <LI>Man page for gettimeofday().</LI>
+ <LI>Man page for clock_gettime().</LI>
+
+ <LI> Introductory material on Linux Kernel
+    <UL>
+
+	<LI>
+	Chapters 1 and 2 of the following online book provide a good introduction
+	to the kernel, though with a bias towards device-driver development.
+	<BR>
+	<a href=http://lwn.net/Kernel/LDD3/>
+	http://lwn.net/Kernel/LDD3/
+	</a>
+	</LI>
+
+	<LI>
+	In addition, the following website has wealth of information under its
+	Documentation link.
+
+	<a href=http://www.linux.org/>
+	http://www.linux.org/
+	</a>
+	</LI>
+
+	<LI>
+	Here's another useful link for kernel programming newbies
+
+	<a href=http://www.linuxhq.com/lkprogram.html>
+	http://www.linuxhq.com/lkprogram.html
+	</a>
+	</LI>
+
+	<LI>
+	The following HOWTO seems useful, though I haven't gone through it.
+	<a href=http://www.linux.org/docs/ldp/howto/KernelAnalysis-HOWTO.html>
+	http://www.linux.org/docs/ldp/howto/KernelAnalysis-HOWTO.html
+	</a>
+	</LI>
+
+	<LI>
+	The following link seems to have some useful guides, though some
+	information there may be dated.
+	<a href=http://kernelbook.sourceforge.net/#kdocs>
+	http://kernelbook.sourceforge.net/#kdocs
+	</a>
+	</LI>
+
+	<LI>
+	For more info, just google for "Linux Kernel" and you'll get lots more.
+	</LI>
+	</UL>
+
+</UL>
+<a name=submission>
+<H2>Delivery Method</H2>
+</a>
+
+<OL TYPE=1>
+
+<LI><P>Turn in all your code (both kernel and user-level) in a tar-gzipped file through 
+the online Blackboard. <b>DO NOT</b> submit the entire kernel source tree. 
+Submit <b>only</b> the specific files that you wrote or modified.</LI>
+
+
+
+
+<LI>
+<EM>Feel free to ask for information/help from other students
+with the kernel configuration and similar technical set-up
+details, but don't ask/let them do the work for you.  Do it on your
+own. If you can't do this simple exercise by yourself now, you
+won't be able to do the other exercises later.  In particular, do
+not ask someone else what changes they made to the kernel module,
+and what happened to them (until after the due date and all
+assignments are turned in). The odds of two people in the class
+having the same exact results are very slim, so if you just copy we
+are likely to notice.</EM>
+</LI>
+
+<P><EM> Also note that it is possible that you may find parts of the solution to this 
+assignment elsewhere on the Internet. However, you are strongly encouraged to code 
+this simple assignment by yourself for three very good reasons. First, of course,
+is that you want to develop your coding skills by practicing writing <b>your own</b> code.
+Secondly, you will be asked to explain random parts of
+the code you submit during demonstration. So understanding your own code is essential.
+</EM></P>
+</LI>
+
+<!--
+<LI> 
+Be prepared to demonstrate your kernel booting up, your system calls working,
+and your modules loading and executing. Explain what steps you took, 
+walk through your configuration option selections, and demonstrate
+the module(s) that caused crashes.  You will be asked about
+your kernel's configuration, how many services you have running,
+how long the system takes to boot up, and whether you are able to explain 
+and demonstrate your code.</LI>
+-->
+
+</OL>
+
+<TABLE WIDTH="100%"><TR><TD BGCOLOR="cccc99">
+Acknowledgment: Adapted by <a href=http://www.cs.binghamton.edu/~kartik>Kartik Gopalan</a> from original assignment material on kernel installation, configuration and modules by <A HREF="http://www.cs.fsu.edu/~baker">T. P. Baker</A>. 
+</TD></TR></TABLE>
+
+</BODY>
+</HTML>
+
