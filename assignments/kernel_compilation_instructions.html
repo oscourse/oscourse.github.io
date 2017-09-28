@@ -19,43 +19,27 @@ $ tar xvf linux-4.4.1.tar.xz
 <b>Configure the kernel:</b>
 
 <pre>
+$ make localmodconfig
+</pre>
+<!--
+<pre>
 $ make menuconfig
 </pre>
+-->
 
 <p>
-The kernel comes in a default configuration, determined by the people who put together the kernel source code distribution. It will include support for nearly everything, since it is intended for general use, and is huge. It will take a long time to compile and a long time to load. 
+The "make localmodconfig" step allows you to customize the kernel configuration with the default configulation used by the currently running kernel image. 
+The downloaded kernel comes in a default configuration, determined by the people who put together the kernel source code distribution. It will include support for nearly everything, since it is intended for general use, and is huge. It will take a long time to compile and a long time to load. The "localmodconfig" option only picks the options needed for the current hardware/software components on your machine.
 
-<p>
-The "make menuconfig" step allows you to customize the kernel configuration. It will present you with a series of menus, from which you will choose the options you want to include. For most options you have three choices: (blank) leave it out; (M) compile it as a module, which will only be loaded if the feature is needed; (*) compile it monolithically into the kernel, so it will always be there from the time the kernel first loads.
-
-<p>
-There are couple of specific things you want to accomplish with your reconfiguration.
 <ul>
-
-	<li> Reduce the size of the kernel, by leaving out unnecessary components. This is helpful for kernel development. A small kernel will take less time to compile and less time to load. It will also leave more memory for you to use, resulting in less page swapping and faster compilations.
-
-	<li> Retain the modules necessary to use the hardware installed on your system. 
-	To do this without including just about everything conceivable, you need to know 
-	what hardware is installed on your system. Use the commands <tt>lspci</tt>, <tt>dmesg</tt>, 
-	or check the file <tt>/var/log/syslog</tt> to determine your computer's hardware configuration.
-	You can also ask the TA or the instructor.
+<li> [Optional -- not for demo] If you are curious, you may want to explore an alternative command: "make menuconfig". 
+	<ul>
+	<li>It will present you with a series of menus, from which you will choose the options you want to include. For most options you have three choices: (blank) leave it out; (M) compile it as a module, which will only be loaded if the feature is needed; (*) compile it monolithically into the kernel, so it will always be there from the time the kernel first loads. 
+	<li> If you try this option, MAKE SURE that you reduce the size of the kernel, by leaving out unnecessary components. A small kernel will take less time to compile and less time to load. It will also leave more memory for you to use, resulting in less page swapping and faster compilations.
+	<li> Retain ONLY the modules necessary to use the hardware installed on your system. To do this without including just about everything conceivable, you need to know what hardware is installed on your system. Use the commands <tt>lspci</tt>, <tt>dmesg</tt>, or check the file <tt>/var/log/syslog</tt> to determine your computer's hardware configuration. 
+	<li>Before exiting the final menu level and saving the configuration, it is also a good idea to save it to a named file, using the "Save Configuration to an Alternate File" option. By saving different configurations under different names you can reload a configuration without going through all the menu options again.
+	</ul>
 </ul>
-
-<b> These two steps are highly recommended, but don't spend an unreasonable amount of time doing this. The more you can reduce the kernel size and module count, the more it will greatly speed up compile and boot time.</b>
-
-<p>
-Using common sense, select a reasonable set of options for your kernel.
-You can also consult the help descriptions for a least all the top-level menu options, 
-so that you become more familiar with the range of drivers and software components in the Linux kernel.
-
-<p>
-Before exiting the final menu level and saving the configuration, it is also a good idea to save it to 
-a named file, using the "Save Configuration to an Alternate File" option. By saving different 
-configurations under different names you can reload a configuration without going 
-through all the menu options again.
-
-<p>
-You can also compare your .config file with the default one normally present in /boot directory.
 
 <li><b>Compile the kernel:</b>
 
