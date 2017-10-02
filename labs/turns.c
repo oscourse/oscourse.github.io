@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <signal.h>
 #include <assert.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #define MAX_PROCS 1000
 
@@ -14,7 +16,10 @@ void kickoff_handler(int signum)
 {
 	static int init = 0;
 
-	if (++init == C) {
+	++init;
+
+	printf("INIT %d\n", init);
+	if (init >= C) {
 		mypid = pid[0];
 		nextpid = pid[C];
 		printf("KICKOFF me %d next %d\n", mypid, nextpid);
@@ -86,6 +91,8 @@ int main(int argc, char *argv[])
 			assert( signal(SIGUSR1, turn_handler) != SIG_ERR );
 
 			// tell the parent I've initialized
+			sleep (1);
+			printf("Tell %d\n", mypid);
 			kill(pid[0], SIGUSR2);
 
 			while(1) 
