@@ -189,10 +189,11 @@ struct timespec {
 };
 </pre>
 
-The system call should first verify that user memory space, pointed to by <tt>current_time</tt>,
+The system call should verify that user memory space, pointed to by <tt>current_time</tt>,
 is valid and writable. If not, is should return a failure (EFAULT) to the user process. 
-If the memory-check succeeds, then it should copy the contents of the kernel's <tt>xtime</tt>
-variable to user space address (pointed to by current_time argument). The system call should also 
+If the memory-check succeeds, then it should retrieve the value of 
+kernel's <tt>xtime</tt> variable using <tt>current_kernel_time(...)</tt> fucntion, which will read xtime atomically 
+for you. Then copy the retrieved value to user space address (pointed to by current_time argument). The system call should also 
 print the current time in nanoseconds, to the console using the <tt>printk()</tt> function.
 </li>
 
