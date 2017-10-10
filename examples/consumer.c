@@ -30,7 +30,6 @@ int main(void) {
     memset(message, '\0', SIZE);
     read(pipe_descriptor, message, SIZE - 1);
     printf("%s\n", message);
-    sleep(1);
   }
   exit(EXIT_SUCCESS);
 }

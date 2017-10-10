@@ -28,6 +28,7 @@ int main(void) {
   /* Keep sending the important message. */
   while(true) {
     write(pipe_descriptor, SAYING, strlen(SAYING));
+    sleep(1);
   }
   exit(EXIT_SUCCESS);
 }
