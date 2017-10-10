@@ -13,7 +13,6 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <stdbool.h>
-#include <signal.h>
 
 #define PIPE_NAME "batman"
 #define SAYING "All men have limits. They learn what they are and learn not to exceed them. I ignore mine."
