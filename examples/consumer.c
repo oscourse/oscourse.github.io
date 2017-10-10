@@ -19,23 +19,18 @@
 
 int main(void) {
   /* Check if the named pipe exists. */
-  int is_existed = access(PIPE_NAME, F_OK);
-  if (is_existed < 0) {perror("access"); exit(EXIT_FAILURE);}
+  if(access(PIPE_NAME, F_OK) == -1) {perror("access"); exit(EXIT_FAILURE);}
 
-  /* Open a named pipe. */
+  /* Open a named pipe to read. */
   int pipe_descriptor = open(PIPE_NAME, O_RDONLY);
-  if (pipe_descriptor < 0) {perror("open"); exit(EXIT_FAILURE);} 
 
   /* Keep sending the important message. */
   while(true) {
     char message[SIZE];
     memset(message, '\0', SIZE);
-    ssize_t nbytes_read = read(pipe_descriptor, message, SIZE - 1);
-    if (nbytes_read < 0) {perror("read"); exit(EXIT_FAILURE);}
-    else {
-      printf("%s (%ld)\n", message, nbytes_read);
-      sleep(1);
-    }
+    read(pipe_descriptor, message, SIZE - 1);
+    printf("%s\n", message);
+    sleep(1);
   }
   exit(EXIT_SUCCESS);
 }

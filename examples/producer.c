@@ -31,25 +31,20 @@ void sigpipe_handler(int signal);
 
 int main(void) {
   /* Install the SIGINT handler. */
-  sigfunc_t *return_handler = install_signal_handler(SIGINT, sigint_handler);
-  if (return_handler == SIG_ERR) {perror("sigint"); exit(EXIT_FAILURE);}
+  install_signal_handler(SIGINT, sigint_handler);
 
   /* Install the SIGPIPE handler. */
-  return_handler = install_signal_handler(SIGPIPE, sigpipe_handler);
-  if (return_handler == SIG_ERR) {perror("sigpipe"); exit(EXIT_FAILURE);}
+  install_signal_handler(SIGPIPE, sigpipe_handler);
 
   /* Create a named pipe. */
-  int is_named_pipe = mknod(PIPE_NAME, S_IFIFO | 0666, 0);
-  if (is_named_pipe < 0) {perror("mknod"); exit(EXIT_FAILURE);} 
+  mknod(PIPE_NAME, S_IFIFO | 0666, 0);
 
-  /* Open a named pipe. */
+  /* Open a named pipe to write. */
   pipe_descriptor = open(PIPE_NAME, O_WRONLY);
-  if (pipe_descriptor < 0) {perror("open"); exit(EXIT_FAILURE);} 
 
   /* Keep sending the important message. */
   while(true) {
-    ssize_t nbytes_written = write(pipe_descriptor, SAYING, strlen(SAYING));
-    if (nbytes_written < 0) {perror("write"); exit(EXIT_FAILURE);}
+    write(pipe_descriptor, SAYING, strlen(SAYING));
   }
   exit(EXIT_SUCCESS);
 }
@@ -68,15 +63,12 @@ sigfunc_t *install_signal_handler(int signal_number,
   /* Change the signal action based on the input signal handler. */
   struct sigaction old_action;
   int ret_value = sigaction(signal_number, &action, &old_action);
-  if (ret_value < 0) {
-    perror("sigaction");
-    return SIG_ERR;
-  }
+  if (ret_value < 0) {perror("sigaction"); return SIG_ERR;}
 
   return old_action.sa_handler;
 }
 
-/* Define the interrupt signal. */
+/* Define the SIGINT handler. */
 void sigint_handler(int signal) {
   close(pipe_descriptor);
   int is_unlinked = unlink(PIPE_NAME);
