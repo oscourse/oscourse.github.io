@@ -1,3 +1,4 @@
+
 <head>
   <meta name="robots" content="noindex,nofollow">
   <META http-equiv="expires" content="0">
@@ -36,17 +37,16 @@
 </table>
 
 <p>
-This course will cover classical and current concepts in Operating Systems.
+This course will cover classical and advanced concepts in Operating Systems.
 Topics include:
 </p>
 <ul>
-<li> Processes and IPC
+<li> Processes, Threads, and Events
 <li> Concurrency
 <li> Virtual Memory 
-<li> CPU Scheduling
-<li> File Systems and I/O
-<li> Virtualization
-<li> Security and Reliability
+<li> Storage and File Systems
+<li> Virtualization and Cloud
+<li> Security 
 <li> System Design Principles
 </ul>
 
@@ -80,8 +80,9 @@ This course is a 3-credit course, which means that students are expected to do a
 <ul>
   <li>70% - Tests 
 	<ul>
-		<li> Test 1 : Oct 11 at class time in ENGB-Q23
-		<li> Test 2 : During Finals week TBA in ENGB-G7 and ENGB-Q22. Please check the <a href=http://bannertools.binghamton.edu/exams/>university's website</a> for updates. 
+		<li> Test 1 (23%) : Oct 11 at class time in ENGB Q23.
+		<li> Test 2 (23%) : Nov 20 at class time in ENGB-G7.
+		<li> Test 3 (24%) : Dec 15 1pm In ENGB-G7 and Q22. 
 	</ul>
   <li>30% - Assignments
 </ul>
@@ -90,22 +91,22 @@ This course is a 3-credit course, which means that students are expected to do a
 <p>
 
 <p>
-<b>Instructor:</b> <a href="http://kartikgopalan.github.io/"> Kartik Gopalan</a>, oscourse@binghamton.edu<br>
-<b>Office Hours:</b> Mon and Wed 5:00--5:45pm and 7:15--7:45pm
+<b>Instructor:</b> <a href="http://kartikgopalan.github.io/"> Kartik Gopalan</a>.
 
 <p>
 <b>Teaching Assistants:</b> 
 	<ul>
-	<li> Tianlin Li (oscourse@binghamton.edu)
-		Office Hours: TBA <!-- Thursday 2pm-4pm ENGB Q-22 -->
-	<li> Kevin Cheng (oscourse@binghamton.edu)
-		Office Hours: TBA <!-- Friday 1pm-3pm ENGB Q-22 -->
-	<li> Aprameya Bhat (oscourse@binghamton.edu)
-		Office Hours: TBA <!-- Tuesday 1:30pm-2:30pm ENGB Q-22 -->
+	<li> Tianlin Li 
+	<li> Kevin Cheng 
+	<li> Aprameya Bhat 
 	</ul>
+<p>
+<b>Contact email</b> oscourse@binghamton.edu
 
 <p>
+<b>Office Hours:</b> Mon and Wed after Class. Or by appointment within one to two days. Please email oscourse@binghamton.edu for appointments.
 
+<p>
 <b><a name=textbooks>Recommended Textbooks:</a></b>
 <p>
 
@@ -224,21 +225,9 @@ You DON'T need to buy either of them, unless you want to.
 		<li> Chapter 3, Tanenbaum's book
 	</ul>
 
-<li> <a href=slides/page_replacement.pdf> Page Faults and Page Replacement </a>
-	<ul>
-		<li> <a href=https://youtu.be/EVt_Oow42wY>Recorded lecture</a> 
-		<li> Chapter 3, Tanenbaum's book
-	</ul>
-
-<li> <a href=slides/superpages.pdf> Memory Management and Superpages </a> 
+<li> <a href=slides/superpages.pdf>TLB Coverage and Superpages </a> 
 	<ul>
 		<li> Paper: <a href=paper/navarro02superpages.pdf> Practical, Transparent, Operating System Support for Superpages </a>
-	</ul>
-
-<li> <a href=slides/file_systems.pdf> File Systems</a>
-	<ul>
-		<li><a href=https://youtu.be/rZyBUE-HlVI>Recorded Lecture</a>
-		<li>Chapter 4: Modern Operating Systems - Andrew Tanenbaum
 	</ul>
 
 <li> <a href=slides/unix_ritchie.pdf target=slides> "The UNIX time-sharing system"</a>, Dennis M. Ritchie and Ken Thompson, 1974
@@ -252,11 +241,6 @@ You DON'T need to buy either of them, unless you want to.
 		<li> Chapter 6, Unix Network Programming, 3rd Edition, by Richard Stevens
 	</ul>
 
-<li> <a href=slides/input_output.pdf> Input/Output </a>
-	<ul>
-		<li> <a href= https://youtu.be/Qqt8xe5-HWM>Recorded Lecture</a>
-		<li> Chapter 5, Tanenbaum's book
-	</ul>
 <li> <a href=slides/raid.pdf>RAID</a>
 	<ul>
 		<li><a href=https://youtu.be/iPVCe77d5I8>Recorded Lecture</a>
@@ -277,17 +261,12 @@ You DON'T need to buy either of them, unless you want to.
 		<li>Various sources on the internet
 	</ul>
 
-<li> <a href=slides/security.pdf> System Security </a>
+<li> <a href=slides/security.pdf>System Security </a>
 	<ul>
 		<a href=https://youtu.be/IsliF-Hn_aY>Recorded Lecture</a>
 		<li> Chapter 9 Tanenbaum's book
 	</ul>
 
-<li> <a href=slides/segmentation.pdf> Segmentation </a>
-	<ul>
-		<li> <a href=https://youtu.be/eOLTiIuYZLE>Recorded Lecture</a>
-		<li> Chapter 3, Tanenbaum's book
-	</ul>
 
 <li> <a href=slides/live_migration.pdf>Live Migration of Virtual Machines</a>
 	<ul>
@@ -295,17 +274,10 @@ You DON'T need to buy either of them, unless you want to.
 		<li><a href=http://dl.acm.org/citation.cfm?id=1618528>M. Hines, U. Deshpande, K. Gopalan, "Post-copy live migration of virtual machines", Operating Systems Review 2009.</a>
 	</ul>
 
-<li><a href=slides/system_design.pdf>Principles of System Design</a>
+<li> <a href=slides/system_design.pdf>Principles of System Design</a>
 	<ul>
 	<li> <a href=paper/lampson83hints.pdf>Hints for Computer System Design</a>
 	<li> Chapter 6 from Srinivas and Keshav's book.
-	</ul>
-
-<li> <a href=slides/cpu_scheduling.pdf> CPU Scheduling </a>
-	<ul>
-		<li> <a href=https://youtu.be/32QAHcDivxQ>Recorded lecture</a> 
-		<li> Section 2.4: Tanenbaum's book
-		<li> Chapter 5: Silberschatz's book
 	</ul>
 
 <!--
@@ -314,13 +286,6 @@ You DON'T need to buy either of them, unless you want to.
 	<li><a href=paper/neiger06intel.pdf>[neiger06intel]</a></li>
 	</ul>
 -->
-
-<li> <a href=slides/security.pdf> System Security </a>
-	<ul>
-		<a href=https://youtu.be/IsliF-Hn_aY>Recorded Lecture</a>
-		<li> Chapter 9 Tanenbaum's book
-	</ul>
-
 
 </ol>
 
@@ -342,58 +307,48 @@ You DON'T need to buy either of them, unless you want to.
   <tbody>
     <tr>
 	<td valign="top">
-		<font size="4"><strong><b><a name="assignments">Assignments</a></strong></font>
+		<font size="4"><strong><b><a name="assignments">Assignments </a></strong></font>
 	</td>
     </tr>
   </tbody>
 </table>
 </p>
 
-<p>
-
+<p> Background material for assignments:
 <ul>
-<!--
-	<li>Lab 01: VM Assignment and Process Creation
+	<li>VM Assignment and Process Creation
 	<a href=https://docs.google.com/document/d/1m-7sBSG44eVDrIZ8Gj0PVxOaGnPEvKJ7nuw8GgRxKuw/edit?ts=599af03d#heading=h.r4xftb9u6u09>[Virtual Machine Instructions]</a>
-	<a href=slides/lab01.pptx>[Slides]</a>
-	<li>Lab 02: Inter-Process Communication 
-	<a href=slides/lab02.pptx>[Slides]</a>
-	<li>Lab 03: Processes and Threads 
-	<a href=slides/lab03.pptx>[Slides]</a>
-	<li>Lab 04: Linux Kernel Compilation and System Calls 
-	<a href=slides/lab04.pptx>[Slides]</a>
-	<li>Lab 05: Git, GitHub and Linux Kernel Modules
-	<a href=slides/short_git_tutorial.docx>[Short Git Tutorial]</a>
-	<a href=examples/hello_template.c>[hello_template.c]</a>
--->
+	<a href=labs/vm_assignment.pdf>[Slides]</a></li>
 
-<!--
-	<li><a href=https://docs.google.com/document/d/1WaQs7uf9KFRpBlcVzQasMOITQaNdTkTOxFjwyym21Rw/edit?usp=sharing>GCP Instructions</a>
--->
+	<li>Linux Kernel Compilation and System Calls 
+	<a href=labs/kernel_compilation_system_calls.pptx>[Slides]</a></li>
+
+	<li>Git, GitHub and Linux Kernel Modules
+	<a href=labs/short_git_tutorial.pdf>[Short Git Tutorial]</a>
+	<a href=examples/hello_template.c>[hello_template.c]</a></li>
+
+	<li>Miscellaneous Character Device and Process List
+	<a href=labs/misc_char_dev_process_list.pptx>[Slides]</a></li>
+
+	<li>In-Kernel Synchronization Using Mutex or Semaphores
+	<a href=labs/in_kernel_synchronization.pptx>[Slides]</a></li>
+<!-- <li><a href=https://docs.google.com/document/d/1WaQs7uf9KFRpBlcVzQasMOITQaNdTkTOxFjwyym21Rw/edit?usp=sharing>GCP Instructions</a> -->
 <!-- <li><a href=https://docs.google.com/document/d/1CXQED71LhEV44zkT9oN177muh3yD0beehFaKYAtvZSc/edit?usp=sharing>Network Boot Image Instructions</a> -->
-</ul>
-
-<ul>
-<!--	<li> <a href=https://www.cs.binghamton.edu/~sysadmin/services.html>Accessing/Using CS Department Services</a> -->
-<!--
-	<li> <a href=slides/network_boot_image.pdf>Network Boot Instructions</a>
--->
-
-
+<!-- <li> <a href=slides/network_boot_image.pdf>Network Boot Instructions</a> -->
 
 </ul>
 
 
 <ul>
 
-<li> <a href=hw1.html>Assignment 1</a>, Due: 23:59:59, September 24, 10% Grade
+<li> <a href=hw1.html>Assignment 1</a>, Due: September 24, 10% Grade
 
 <li> <a href=hw2.html>Assignment 2</a>, 10% Grade
     <ul>
-<LI> Part A, Due: 23:59:59 October 2, 2017 
-<LI> Part B, Due: 23:59:59 October 9, 2017
-<LI> Part C, Due: 23:59:59 October 16, 2017
-    </ul>
+<LI> Part A, Due: October 2, 2017 
+<LI> Part B, Due: October 12, 2017
+<LI> Part C, Due: October 20, 2017
+</ul>
 <!--
 <li> <a href=hw3.html>Assignment 3</a>, Due: April 25, 11% Grade
 <li> <a href=hw4.html>Assignment 4</a>, Due: May 17, 11% Grade
@@ -451,8 +406,8 @@ You DON'T need to buy either of them, unless you want to.
 
 <p>
 <b> Assignment Submission:</b>
-Submit your assignment on the blackboard as one tar-gzipped file (generated using the <i>tar</i> command with <i>cvzf</i> options).
-In the tar-gzipped file, include all your code, a README file, and a Makefile.
+Submit your assignment on the blackboard as one zipped compressed file.
+Include all your code, a README file, and a Makefile.
 If you do not know how to do this, please contact us for help.
 DO NOT submit each file individually.
 DO NOT include the entire linux kernel (for kernel programming assignments) -- include only the files you change.
@@ -488,8 +443,11 @@ DO NOT include object files (.o) or any executable files.
 
 <!--
 <li> <a href=tests/diagnostic_test_solution.pdf> Diagnostic Test Solution </a>
+-->
 
 <li> <a href=tests/test1_samples.pdf>Test 1 Sample Questions</a>
+
+<!--
 
 <li> <a href=tests/test1_solution.pdf> Test 1 Solution </a>
 
