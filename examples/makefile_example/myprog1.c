@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include "myprog.h"
+
+void step1(void);
+void step2(void);
+
 int main()
 { 
   int i;
