@@ -1,3 +1,4 @@
+
 <H1> Named Pipe for Exchanging Numbers</H1>
 
 
@@ -49,7 +50,7 @@ Replace the UNIX named pipe in the producer and consumer scripts from Task B wit
 your own implementation of a <a href=http://tldp.org/LDP/lkmpg/2.4/html/x579.html>character device</a> (say /dev/numpipe)
 as a kernel module in Linux. (You can also implement a <a href=https://www.linuxjournal.com/article/2920>miscellaneous character device</a> for this part, instead of a regular character device.)
 This device must maintain a FIFO queue (i.e. a pipe) of maximum N numbers. N must be given as a module parameter during the insmod command.
-<ul>
+<ol>
 <li> Producers write numbers to /dev/numpipe.
 <li> Consumers read numbers from /dev/numpipe and print it on the screen.
 <li> When the pipe is full, i.e. when there are N numbers are stored in /dev/numpipe, then any producer trying to write will block.
@@ -58,7 +59,7 @@ This device must maintain a FIFO queue (i.e. a pipe) of maximum N numbers. N mus
 <li> When a producer writes to an empty pipe, it wakes up all blocked consumers. In this case, no blocked producer should be woken up.
 <li> No deadlocks. All producers and consumers make progress as long as at least one of each is running.
 <li> No race conditions. Each number that is written by producers is read EXACTLY once by one consumer. No number is lost. No number is read more than once. 
-</ul>
+</ol>
 
 
 <a name=tolearn></a>
@@ -84,7 +85,7 @@ Q: Do we implement our own producers and consumers in user space?
 A: No, use the two C programs given above. 
 
 <p>
-Q: How to I terminate producers and consumers?
+Q: How do I terminate producers and consumers?
 <br>
 A: After fixed number of iterations OR using Ctrl-C.
 
@@ -99,10 +100,15 @@ Q: How does the producer generate a unique number?
 A: Please see C programs above. 
 
 <p>
-Q: How to I run multiple producers and consumers concurrently?
+Q: How do I run multiple producers and consumers concurrently?
 <br>
 A: Open multiple terminals. Run one consumer or producer in the foreground each terminal. 
 
+<H2>Submission Guidelines</h2>
+<ul>
+<li> For Parts A and B: Submit any code that you wrote and README file as one zipped file, by November 10.
+<li> For Part C: Submit your code, README, and Makefile for Part C only by December 7th.
+</ul>
 <a name=gg></a>
 <H2>Grading Guidelines</h2>
 <ul>
