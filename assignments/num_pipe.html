@@ -7,7 +7,7 @@ You will implement a kernel-level pipe for exchanging numbers among user-level p
 You will learn about concurrency, synchronization, and various kernel primitives.
 You may find the following resources helpful in addition to any other online resources.
 <ul>
-<li> <a href=http://tldp.org/LDP/lkmpg/2.4/html/index.html>Linux kernel module programming</a>
+<li> <a href=http://tldp.org/LDP/lkmpg/2.6/html/index.html>Linux kernel module programming</a>
 <li> <a href=https://www.linuxjournal.com/article/2920>Miscellaneous Character Devices</a>
 <li><a href=/slides/semaphores_waitqs_kernel_api.pdf>Kernel API for Semaphores and Waitqueues</a>
 <li> <a href=http://free-electrons.com/doc/books/ldd3.pdf> Linux Device Drivers book </a>
@@ -17,9 +17,9 @@ You may find the following resources helpful in addition to any other online res
 <a name=taska></a>
 <H2>Task A - Learn kernel modules, character devices, and named pipes</H2>
 <ol>
-<li> Learn how to create kernel modules from chapters 1, 2, and 3 of <a href=http://tldp.org/LDP/lkmpg/2.4/html/index.html>Linux kernel module programming</a> website.
+<li> Learn how to create kernel modules from chapters 1, 2, and 3 of <a href=http://tldp.org/LDP/lkmpg/2.6/html/index.html>Linux kernel module programming</a> website. 
 <li> Try the <a href=https://oscourse.github.io/examples/module/>Example module code</a> and understand how it works.
-<li> Learn how to write a <i>character device kernel module</i> from Chapter 4 of <a href=http://tldp.org/LDP/lkmpg/2.4/html/x579.html>Linux kernel module programming</a> website.
+<li> Learn how to write a <i>character device kernel module</i> from Chapter 4 of <a href=http://tldp.org/LDP/lkmpg/2.6/html/x569.html>Linux kernel module programming</a> website.
 <li> Learn what is a <i>named pipe</i> in UNIX.
 <li> Figure out how to create and use a named pipe using command line in Linux using the <tt>mkfifo</tt> command.
 </ol>
@@ -47,7 +47,7 @@ You may find the following resources helpful in addition to any other online res
 <a name=taskc></a>
 <H2> Task C - Creating a Number Pipe</H2>
 Replace the UNIX named pipe in the producer and consumer scripts from Task B with 
-your own implementation of a <a href=http://tldp.org/LDP/lkmpg/2.4/html/x579.html>character device</a> (say /dev/numpipe)
+your own implementation of a <a href=http://tldp.org/LDP/lkmpg/2.6/html/x569.html>character device</a> (say /dev/numpipe)
 as a kernel module in Linux. (You can also implement a <a href=https://www.linuxjournal.com/article/2920>miscellaneous character device</a> for this part, instead of a regular character device.)
 This device must maintain a FIFO queue (i.e. a pipe) of maximum N numbers. N must be given as a module parameter during the insmod command.
 <ol>
