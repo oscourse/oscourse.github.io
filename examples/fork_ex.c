@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 
 
 int main()
@@ -19,7 +20,7 @@ int main()
 
 	if (pid == 0) { // Child executes this block
 		printf("This is the child\n"); 
-		exit(0); 
+		exit(99); 
 	} 
 
 	if (pid > 0) { //Parent executes this block
@@ -32,7 +33,7 @@ int main()
 		}
 
 
-		printf("Child exited with status %d\n", status);
+		printf("Child exited with status %d\n", WEXITSTATUS(status));
 	} 
 
 	return 0;
