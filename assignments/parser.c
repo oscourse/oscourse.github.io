@@ -8,13 +8,14 @@
 #define MAX_TOKENS 100
 #define MAX_STRING_LEN 100
 
+size_t MAX_LINE_LEN = 10000;
+
 
 // builtin commands
 #define EXIT_STR "exit"
 #define EXIT_CMD 0
 #define UNKNOWN_CMD 99
 
-size_t MAX_LINE_LEN = 10000;
 
 FILE *fp; // file struct for stdin
 char **tokens;
