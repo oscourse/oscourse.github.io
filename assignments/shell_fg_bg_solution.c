@@ -3,6 +3,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <assert.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+
 
 //limits
 #define MAX_TOKENS 100
