@@ -199,13 +199,13 @@ int run_command()
 		return EXIT_CMD;
 	}
 
-	// TODO: fg
+	// fg
 	if (strcmp( tokens[0], FG_STR ) == 0) {
 		handle_fg();
 		return FG_CMD;
 	}
 
-	// TODO; listjobs
+	// listjobs
 	if (strcmp( tokens[0], LISTJOBS_STR) == 0) {
 		handle_listjobs();
 		return FG_CMD;
