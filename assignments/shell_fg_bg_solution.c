@@ -106,6 +106,14 @@ void read_command()
 void handle_exit() 
 {
 	//printf("Exit command\n");
+	
+	// cleanup terminated tasks
+	for(int i=0; i<MAX_BG_TASKS; i++) {
+		if( bgtask[i].pid == FREE) continue;
+
+		if (waitpid( bgtask[i].pid, NULL, WNOHANG) < 0)
+			perror("error cleaning up background task:");
+	}
 }
 
 void handle_listjobs() 
@@ -117,7 +125,6 @@ void handle_listjobs()
 
 		//update status
 		ret = waitpid( bgtask[i].pid, &status, WNOHANG);
-
 
 		if (ret > 0) {
 
