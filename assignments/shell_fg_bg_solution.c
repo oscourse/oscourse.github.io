@@ -269,7 +269,7 @@ int main()
 	do {
 		ret = 0;
 
-		printf("sh550> ");
+		printf("Terminal2> ");
 
 		read_command();
 
