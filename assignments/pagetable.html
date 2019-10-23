@@ -58,6 +58,7 @@ You can either use the VM assigned to you or you can use your own Linux VM on yo
 
 <h2> Understand how to look up the virtual address to physical address mapping in the Linux kernel.</h2>
 <ol>
+	<li><a href="https://oscourse.github.io/slides/pagetable.pdf">Slides to 5-level page table</a>
 	<li> Get Page Global Directory (PGD) from mm_struct. mm_struct structure holds the process virtual memory information. CR3 register is loaded with <b>mm_struct->pgd</b> which points to the process page table or base physical address of page global directory.     
 
 	<li>Each entry in the PGD points to a page frame of next level page directory called p4d directory. Use <b>pgd_offset()</b> to get the offset in PGD page frame that points to the next level p4d page directory.
