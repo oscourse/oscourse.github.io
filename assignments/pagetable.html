@@ -71,9 +71,7 @@ You can either use the VM assigned to you or you can use your own Linux VM on yo
 
 	<li>Use <b>pte_offset_map()</b> to get the offset in the page directory that contains a list of page table entries.
 
-	<li>Finally, check if the page table entry points to page using <b>pte_present</b>. If a page table entry is present, get the page frame number or PFN for the give virtual address using <b>pte_pfn().</b> 
-
-	<li>Return the <b>PFN</b> to user space. 
+	<li>Finally, check if the page table entry points to page using <b>pte_present</b>. If a page table entry is present, get the page frame number or PFN for the given virtual address using <b>pte_pfn().</b> 
 </ol>
 
 
