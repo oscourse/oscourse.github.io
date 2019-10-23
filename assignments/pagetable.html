@@ -1,0 +1,97 @@
+<H1> Kernel Module to translate virtual to physical address mapping by page table walk</H1?
+
+<H2>
+Objective 
+</H2>
+
+<p> You will learn how to develop and use kernel modules. You will also learn how the Linux OS maintains virtual to physical address mappings in per-process page tables.
+
+<h2>Problem Description:
+Write a kernel module to translate virtual addresses to physical addresses for a target process</h2>
+
+<ol>
+<li> Create a kernel module that takes the process-ID of an active process as 
+an argument (module parameter) and outputs all the virtual to physical address mappings 
+of the target process. Print the virtual address and the corresponding  physical addresses 
+to the system log using printk(). Show that your code works for any arbitrary target process.
+
+<li> Plot the virtual addresses you tracked as a scatter-plot graph with X-axis 
+representing the time and Y-axis representing the virtual address. Try at least three 
+different types of target applications, such as CPU-intensive, memory-intensive, 
+or I/O intensive. See if you can find any interesting trends in memory access patterns 
+of the target processes. 
+Describe your observations concisely in a concise report (MS word or PDF file).
+
+</ol>
+
+<p> Below we describe all the resources you will need to learn and/or use to completethis assignment. Start early and ask us for help if you get stuck.
+
+<h2> Accessing your Virtual Machines</h2>
+<p> This assignment will be carried out on a Linux virtual machine. Each student has been assigned a VM with a unique IP address. 
+The login credentials have been emailed to you. 
+You can either use the VM assigned to you or you can use your own Linux VM on your personal computer.
+<p> <a href=https://docs.google.com/document/d/1S4XSvTLoq3S13eOPyDe63EpB5YjD80N5eoI4qcpCr-8/edit?usp=sharing>Instructions to access your virtual machine remotely</a>
+
+
+<h2> Learn how to write and execute a Linux kernel module. </h2>
+<p>Kernel modules allow the code to be dynamically added to the kernel, dynamically. Try compiling and inserting the kernel modules <a href=https://oscourse.github.io/examples/module/>hello.c and hellon.c</a>.
+
+<ol>
+	<li> Save the Makefile, hello.c, and hellon,c in your home directory. The files hello.c  has initialization and cleanup functions that are invoked upon loading and unloading the kernel module. The second file hellon.c is similar, except that it takes command-line arguments with insmod command to print a custom message.
+
+	<li> Compile the kernel module:
+		<pre>make</pre>
+
+	<li> Load the kernel module:
+		<pre>sudo insmod hello.ko</pre>
+		<p>If the module was successfully inserted, you will see "mymodule: Hello World!" message in kernel log. Use commands "dmesg" or "cat /var/log/kern.log" to see the kernel log messages.</p>
+
+	<li> Unload the kernel module:
+		<pre>sudo rmmod hello</pre>
+		<p>Upon removing the kernel module, use the "dmesg" command to check if kernel log prints the message "mymodule: Goodbye, cruel world!!"</p>
+
+	<li> For hellon,c, module insertion command is <tt>sudo insmod hellon.ko whom=class howmany=10</tt> (or any other argument values you want to give). Removal is the same as for hello.c.
+</ol>
+
+<h2> How to browse Linux source code</h2>
+<p> There are a couple of ways you can browse linux source code.
+<ul>
+	<li> Use the <a href=https://elixir.bootlin.com/linux/latest/source>Linux cross reference website</a>
+	<li> Download the entire <a href=https://www.kernel.org >linux source code</a> to your VM (or any other Linux computer) and use the <tt>cscope</tt> tool to browse. (slightly faster as you get familiar with cscope).
+	<ul>
+		<li> <tt>wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.19.80.tar.xz</tt> (replace with whatever kernel verssion you are developing your module against)
+		<li> <tt>sudo apt install cscope</tt>
+		<li> <a href=http://cscope.sourceforge.net/large_projects.html>Cscope tutorial</a>
+	</ul>
+</ul>
+
+<h2> Understand how to look up the virtual address to physical address mapping in the Linux kernel.</h2>
+<ol>
+	<li> Get Page Global Directory (PGD) from mm_struct. mm_struct structure holds the process virtual memory information. CR3 register is loaded with <b>mm_struct->pgd</b> which points to the process page table or base physical address of page global directory.     
+
+	<li>Each entry in the PGD points to a page frame of next level page directory called p4d directory. Use <b>pgd_offset()</b> to get the offset in PGD page frame that points to the next level p4d page directory.
+
+	<li>Each entry in the P4D points to a page frame of next level page directory called page upper directory (PUD). Use <b>p4d_offset()</b> to get the offset in P4D page frame that points to the next level pud.
+
+	<li>Each entry in the PUD points to a page frame of next level page directory called page middle directory (PMD). Use <b>pud_offset()</b> to get the offset in PUD page frame that points to the next levelpmd.
+
+	<li>Each entry in the PMD points to a page frame of next level page directory that contains page table entries. Use <b>pmd_offset()</b> to get the offset in PMD page frame that points page frame with page table entries.
+
+	<li>Use <b>pte_offset_map()</b> to get the offset in the page directory that contains a list of page table entries.
+
+	<li>Finally, check if the page table entry points to page using <b>pte_present</b>. If a page table entry is present, get the page frame number or PFN for the give virtual address using <b>pte_pfn().</b> 
+
+	<li>Return the <b>PFN</b> to user space. 
+</ol>
+
+
+<H2>
+Grading guidelines
+</H2>
+
+<p>  60 - Part A: Demonstrating that your code works for a any arbitrary process
+<br> 30 - Part B: Report explaining scatterplot results from three different applications.
+<br> 10 - Handle all major error conditions. Clean, modular, and commented code. Clean readable output. No "giant" functions. 
+<br> Total = 100
+<br>
+
