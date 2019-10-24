@@ -23,13 +23,13 @@ int ifPrime(int num){
 
 void *get_prime_count(){
 	int num, primeCount = 0;
-	//for(num = 0; num < INT_MAX; num++){
+
+	// How does increase in MAX_NUM value affect page allocation? 
+
 	for(num = 0; num < MAX_NUM; num++){
 		if(ifPrime(num))
 			primeCount++;
 	}
-
-	//return primeCount;
 }
 
 int main(){
@@ -50,8 +50,6 @@ int main(){
 		pthread_join(tid[i], NULL);
 	}
  
-	//primeCount = get_prime_count();
-	
 	end = time(NULL);
 
 	printf("Time taken to find prime numbers: %ld seconds\n", end - start);
