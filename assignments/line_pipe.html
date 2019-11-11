@@ -57,7 +57,7 @@ A line is a sequence of characters terminated by newline character '\n'.
 <li> When a consumer reads from a full pipe, it wakes up all blocked producers. In this case, no blocked consumer should be woken up.
 <li> When a producer writes to an empty pipe, it wakes up all blocked consumers. In this case, no blocked producer should be woken up.
 <li> No deadlocks. All producers and consumers make progress as long as at least one of each is running.
-<li> No race conditions. Different lines should not get mixed up (interleaved), as it did in Task B. Each line that is written by producers is read EXACTLY once by one consumer. No line is lost. No line is read more than once. 
+<li> No race conditions. Different lines should not get mixed up. Each line that is written by producers is read EXACTLY once by one consumer. No line is lost. No line is read more than once. 
 </ul>
 
 
