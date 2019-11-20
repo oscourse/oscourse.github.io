@@ -39,8 +39,8 @@ int main(int argc, char *argv[])
 		} else {
 			fprintf(stderr, "error reading ret=%ld errno=%d perror: ", ret, errno);
 			perror("");
-			sleep(1);
 		}
+		sleep(1);
 	}
 	close(fd);
 
