@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 
 	while(1) {
 		bzero(line, MAXLEN);
-		sprintf(line, "Producer %d Line %d ", getpid(), linenum++);
+		sprintf(line, "Producer %d Line %d\n", getpid(), linenum++);
 		printf("Writing: %s", line);
 
 		// write a line
