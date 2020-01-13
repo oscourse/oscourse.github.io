@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <unistd.h>
 #include <sys/types.h>
 
 /* type definition of "pointer to a function that takes integer argument and returns void */
