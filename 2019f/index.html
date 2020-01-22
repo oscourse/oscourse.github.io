@@ -1,0 +1,407 @@
+
+<head>
+  <meta name="robots" content="noindex,nofollow">
+  <META http-equiv="expires" content="0">
+  <title>Operating Systems </title>
+</head>
+
+
+<body>
+
+<a name=top></a>
+<center>
+<H1> CS550 (Sections 02 and 03) - Operating Systems </H1>
+<H3> Prof. Kartik Gopalan</H3>
+</center>
+
+<p align="center">
+<a href="#syllabus">[Syllabus]</a> 
+<a href="#slides">[Lectures]</a> 
+<a href="#calendar">[Tests and Assignments]</a> 
+<a href="policies.html">[Policies]</a> 
+<!--
+<a href="https://goo.gl/forms/BkIvdvVeoCgSAKZL2">[Feedback]</a> 
+-->
+</p>
+
+
+<p>
+<table bgcolor="lightgrey" border="0" width="100%">
+  <tbody>
+    <tr>
+	<td valign="top">
+		<font size="4"><strong><b><a name="syllabus">Syllabus</a></strong></font>
+	</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+This course will cover classical and advanced concepts in Operating Systems. Topics include:
+</p>
+<ul>
+<li> Processes, Threads, and Events
+<li> Concurrency
+<li> Virtual Memory 
+<li> Storage and File Systems
+<li> Virtualization 
+<li> Security 
+<li> Introduction to Linux Kernel Programming
+</ul>
+
+We will cover a mix of background material and advanced topics. Assignments and course projects will help you get your hands dirty with Linux kernel.
+
+<p>
+<b> Course Information</b>
+<br>
+Time: Mon and Wed 4:40PM -- 6:05PM
+<br>
+Location:  FA 258
+
+
+<p>
+<b>Credit hours and course expectations:</b>
+This course is a 3-credit course, which means that students are expected to do at least 9 to 9.5 hours of course-related work or activity each week during the semester. This includes scheduled class lecture/discussion meeting times as well as time spent completing assigned readings, studying for tests and examinations, participating in lab sessions, preparing written assignments, and other course-related tasks.
+
+<p>
+<b>Prerequisites:</b>
+
+<ul>
+<li> CS350 -- Undergraduate OS. You must be familiar with the fundamentals concepts in Operating Systems as covered in CS350.
+<li> You must be proficient with C programming.                                                                          
+<li> Proficiency in the use of a debugger (such as gdb) is expected. 
+<li> You must be comfortable working and programming in the Linux environment.
+</ul>
+
+<p>
+<b><a name=grading>Evaluation Criteria:</a></b>
+<ul>
+  <li>60% - Tests 
+  <li>36% - Assignments
+  <li>4%  - Attendance and Class notes
+</ul>
+
+<a name=contact></a>
+<p>
+
+<p>
+<b>Instructor:</b> <a href="http://kartikgopalan.github.io/"> Kartik Gopalan</a>. 
+<br>
+<b>Office Hours:</b> Mon and Wed 6:05PM to 7PM in  FA 258 or by appointment.
+
+<p>
+<b>Teaching Assistant:</b> Spoorti Doddamani and Yongheng Li
+<br>
+<b>Office Hours:</b> TBA
+
+<p>
+<b>Contact email</b> oscourse@binghamton.edu : Please use this address to reach both the intructor and the TAs. One of us will respond to you.
+
+<p>
+<b><a name=textbooks>Textbooks:</a></b>
+<p>
+The primary textbook will be <i>Modern Operating Systems</i>, by Andrew Tanenbaum, Prentice Hall; 4th edition. We will also cover various research papers that will be available online.
+
+</ol>
+
+<p>
+<b>Other Recommended Material:</b>
+<ul>
+  	<li> Kernighan, Ritchie, The C Programming Language 
+	<li> Linux Device Drivers, 3rd Edition  by Jonathan Corbet, Alessandro Rubini, and Greg Kroah-Hartman. (This book is also available online at <a href=http://lwn.net/Kernel/LDD3/>http://lwn.net/Kernel/LDD3/</a>).
+	<li> Unix Network programming, Vol 1: The Socket Networking API (3rd edition),  by W. Richard Stevens, Bill Fenner, Andrew M. Rudoff, Addison-Wesley Professional.
+	<li> <a href=http://pages.cs.wisc.edu/~remzi/OSTEP/> <i>Operating Systems: Three Easy Pieces (a.k.a. the OSTEP book)</i> <br> </a> Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau </i>  
+	<li> Silberschatz, Galvin, Gagne, Operating System Concepts; 7th or 8th edition
+	<li> Virtual Machines: Versatile Platforms for Systems and Processes, By James E. Smith Jim, Jr. Smith, Ravi Nair.
+</ul>
+
+
+
+<p>
+<a href="#syllabus">[Syllabus]</a> 
+<a href="#slides">[Lectures]</a> 
+<a href="#calendar">[Tests and Assignments]</a> 
+<a href="policies.html">[Policies]</a> 
+<!--
+<a href="https://goo.gl/forms/BkIvdvVeoCgSAKZL2">[Feedback]</a> 
+-->
+</p>
+
+<p>
+<table bgcolor="lightgrey" border="0" width="100%">
+  <tbody>
+    <tr>
+	<td valign="top">
+		<font size="4"><strong><a name="slides">Lecture Slides</a></strong></font>
+	</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+<font color=red> Please clear your browser's cache and reload this page to see the latest listing of slides below.</a> </font><br>
+
+
+<ol>
+
+<li> <a href=slides/logistics.pdf>Course Information</a> 
+
+<li> <a href=slides/overview.pdf>Introduction </a> 
+	<ul>
+		<li> <a href=https://youtu.be/bvCiwPMIbG4>Recorded Lecture</li></a>
+		<li> <a href=tests/overview_samples.pdf>Sample Questions</li></a>
+		<li> Chapter 1 of Tanenbaum's book.
+		<li> Chapter 1 of OSTEP book.
+	</ul>
+
+<li> <a href=slides/processes.pdf> Processes </a>
+	<ul>
+		<li> <a href=https://youtu.be/Hu82HSUi5iQ>Recorded Lecture</a>
+		<li> <a href=tests/processes_samples.pdf>Sample Questions</li></a>
+		<li> References: Chapter 2, Sections 10.2, and 10.3 of Tanenbaum's book
+	</ul>
+
+<li> <a href=slides/ipc.pdf>Inter Process Communication</a>
+	<ul>
+		<li><a href=https://youtu.be/biXBs1amGxs>Recorded lecture</a> 
+		<li> <a href=tests/ipc_samples.pdf>Sample Questions</li></a>
+		<li> Chapters 7 to 10, and 14, Advanced Programming in Unix Environment, by Richard Stevens.
+		<li> Unix man pages 
+	</ul>
+
+
+<li> <a href=slides/threads.pdf>Threads</a>
+	<ul>
+		<li><a href=https://youtu.be/5vB3Kt2aHkM>Recorded Lecture</a>
+		<li><a href=tests/threads_samples.pdf>Sample Questions</li></a>
+		<li> Chapter 2 (Section 2.2), Modern Operating Systems, Andrew Tanenbaum
+		<li> Chapter 11: Advanced Programming in Unix Environment, by Richard Stevens
+	</ul>
+
+<li> <a href=slides/concurrency_race_and_locks.pdf>Race Conditions and Deadlocks</a>
+	<ul>
+		<li> <a href=https://youtu.be/OcKBHUTs2eA>Recorded Lecture</a>
+		<li> <a href=tests/concurrency_a_samples.pdf>Sample Questions</li></a>
+		<li> Chapters 2 (2.3)  and 6, Tanenbaum's Modern OS
+	</ul>
+
+<li> <a href=slides/concurrency_semaphores_pc.pdf>Semaphores and Condition Variables</a>
+	<ul>
+		<li><a href=https://youtu.be/8JCL-3am0CU>Recorded Lecture</a>
+		<li> <a href=tests/concurrency_b_samples.pdf>Sample Questions</li></a>
+		<li> Chapters 2 (2.3)  and 6, Tanenbaum's Modern OS
+	</ul>
+
+
+<li> <a href=slides/threads_vs_events.pdf>Events vs Threads</a>
+	<ul>
+		<li><a href=tests/events_vs_threads_samples.pdf>Sample Questions</li></a>
+	</ul>
+
+<li> <a href=slides/kernel_modules.pdf>Kernel Modules </a>
+	<ul>
+		<li><a href=https://youtu.be/uNW0GKXyFNQ>Recorded Lecture</a>
+		<li> <a href=examples/module/index.html>Example Code</a>
+		<li><a href=tests/kernel_modules_samples.pdf>Sample Questions</li></a>
+	</ul>
+
+<li> <a href=slides/system_calls.pdf>System Calls</a>
+	<ul>
+		<li><a href=https://youtu.be/Hc45ySBCjPw>Recorded Lecture</a>
+		<li><a href=tests/syscalls_samples.pdf>Sample Questions</li></a>
+<!--
+		<li><a href=slides/system_call_extra_slides.pdf>Additional slides explaining syscall implementation</a>
+-->
+	</ul>
+
+
+<li> <a href=slides/virtual_memory_intro.pdf>Virtual Memory Management </a>
+	<ul>
+		<li> <a href=https://youtu.be/rdpwFMr5gC4>Recorded lecture</a> 
+		<li><a href=tests/virtual_memory_samples.pdf>Sample Questions</li></a>
+		<li> Chapter 3, Tanenbaum's book
+	</ul>
+
+<li> <a href=slides/superpages.pdf>TLB Coverage and Superpages </a> 
+	<ul>
+		<li><a href=https://youtu.be/cScfSwwhEMs>Recorded Lecture</a>
+		<li><a href=tests/superpages_samples.pdf>Sample Questions</li></a>
+		<li> Paper: <a href=paper/navarro02superpages.pdf> Practical, Transparent, Operating System Support for Superpages </a>
+	</ul>
+
+<li> <a href=slides/segmentation.pdf>Segmentation</a>
+	<ul>
+		<li><a href=https://youtu.be/eOLTiIuYZLE>Recorded Lecture</a>
+		<li><a href=tests/segmentation_samples.pdf>Sample Questions</li></a>
+		<li> Chapter 3 Tanenbaum's book
+	</ul>
+
+<li> <a href=slides/unix_ritchie.pdf target=slides> "The UNIX time-sharing system"</a>, Dennis M. Ritchie and Ken Thompson, 1974
+	<ul>
+	<li><a href=https://youtu.be/rZyBUE-HlVI>Recorded Lecture: Introduction to File Systems</a>
+	<li><a href=tests/file_systems_samples.pdf>Sample Questions</li></a>
+	<li> <a href=paper/ritchie74.pdf target=paper>Paper</a> 
+	<li> Chapter 4 Tanenbaum's book
+	</ul>
+
+<li> <a href=slides/virtual_machine_intro.pdf> Introduction to Virtual Machines </a>
+	<ul>
+		<li><a href=https://youtu.be/UFhe79nYPTE>Recorded Lecture</a>
+		<li><a href=tests/virtual_machines_questions.pdf>Sample Questions</li></a>
+		<li> <a name=smith03overview href=slides/smith03overview.pdf> Chapter 1, "Virtual Machines - Versatile platforms for Systems and Processes", Smith and Nair.</a>
+		<li> Chapter 7 Tanenbaum's book 
+	</ul>
+
+<li> <a href=slides/live_migration.pdf>Live Migration</a>
+	<ul>
+		<li><a href=https://youtu.be/4axYrG5QBvY>Recorded Lecture</a>
+		<li><a href=tests/live_migration_questions.pdf>Sample Questions</li></a>
+		<li><a href=https://www.usenix.org/legacy/event/nsdi05/tech/full_papers/clark/clark.pdf>C. Clark et. al, "Live migration of virtual machines", NSDI 2005</a>
+		<li><a href=http://dl.acm.org/citation.cfm?id=1618528>M. Hines, U. Deshpande, K. Gopalan, "Post-copy live migration of virtual machines", Operating Systems Review 2009.</a>
+	</ul>
+
+<li> <a href=slides/containers.pdf> Operating-System-Level Virtualization (Containers)</a>
+	<ul>
+		<li><a href=https://youtu.be/yQRnvnykrFI>Recorded Lecture</a>
+		<li><a href=tests/containers_questions.pdf>Sample Questions</li></a>
+		<li>Various sources on the internet
+	</ul>
+
+<li> <a href=slides/security.pdf>System Security </a>
+	<ul>
+		<a href=https://youtu.be/IsliF-Hn_aY>Recorded Lecture</a>
+		<li><a href=tests/security_questions.pdf>Sample Questions</li></a>
+		<li> Chapter 9 Tanenbaum's book
+	</ul>
+
+<li> <a href=slides/raid.pdf>RAID</a>
+	<ul>
+		<li><a href=https://youtu.be/iPVCe77d5I8>Recorded Lecture</a>
+		<li><a href=tests/raid_questions.pdf>Sample Questions</li></a>
+		<li> Chapter 5, Tanenbaum's book
+	</ul>
+
+
+<li> <a href=slides/io_models.pdf> I/O Models</a>
+	<ul>
+		<li> <a href=https://youtu.be/SDk6nZ26wKw>Recorded Lecture</a>
+		<li><a href=tests/io_models_questions.pdf>Sample Questions</li></a>
+		<li> Chapter 6, Unix Network Programming, 3rd Edition, by Richard Stevens
+	</ul>
+
+
+<li> <a href=slides/system_design.pdf>Principles of System Design</a>
+	<ul>
+		<li><a href=https://youtu.be/_q2vH5c5g4U>Recorded Lecture</a>
+		<li> <a href=paper/lampson83hints.pdf>Hints for Computer System Design</a>
+		<li><a href=tests/system_design_questions.pdf>Sample Questions</li></a>
+		<li> Chapter 6 from Srinivas and Keshav's book.
+	</ul>
+
+<!--
+<li> <a href=slides/intel_vt.pdf> Hardware support for virtualization</a>
+	<ul>
+	<li><a href=paper/neiger06intel.pdf>[neiger06intel]</a></li>
+	</ul>
+-->
+
+</ol>
+
+<p>
+
+<p>
+<a href="#syllabus">[Syllabus]</a> 
+<a href="#slides">[Lectures]</a> 
+<a href="#calendar">[Tests and Assignments]</a> 
+<a href="policies.html">[Policies]</a> 
+<!--
+<a href="https://goo.gl/forms/BkIvdvVeoCgSAKZL2">[Feedback]</a> 
+-->
+</p>
+
+<p>
+<table bgcolor="lightgrey" border="0" width="100%">
+  <tbody>
+    <tr>
+	<td valign="top">
+		<font size="4"><strong><b><a name="calendar">Tests and Assignments </a></strong></font>
+	</td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<!--
+<p> Background material for assignments:
+<ul>
+	<li>VM Assignment and Process Creation
+	<a href=https://docs.google.com/document/d/1m-7sBSG44eVDrIZ8Gj0PVxOaGnPEvKJ7nuw8GgRxKuw/edit?ts=599af03d#heading=h.r4xftb9u6u09>[Virtual Machine Instructions]</a>
+	<a href=labs/vm_assignment.pdf>[Slides]</a></li>
+
+	<li>Linux Kernel Compilation and System Calls 
+	<a href=labs/kernel_compilation_system_calls.pptx>[Slides]</a></li>
+
+	<li>Git, GitHub and Linux Kernel Modules
+	<a href=labs/short_git_tutorial.pdf>[Short Git Tutorial]</a>
+	<a href=examples/hello_template.c>[hello_template.c]</a></li>
+
+	<li>Miscellaneous Character Device and Process List
+	<a href=labs/misc_char_dev_process_list.pptx>[Slides]</a></li>
+
+	<li>In-Kernel Synchronization Using Mutex or Semaphores
+	<a href=labs/in_kernel_synchronization.pptx>[Slides]</a></li>
+</ul>
+-->
+<!-- <li><a href=https://docs.google.com/document/d/1CXQED71LhEV44zkT9oN177muh3yD0beehFaKYAtvZSc/edit?usp=sharing>Network Boot Image Instructions</a> -->
+<!-- <li> <a href=slides/network_boot_image.pdf>Network Boot Instructions</a> -->
+<!-- <li><a href=https://docs.google.com/document/d/1WaQs7uf9KFRpBlcVzQasMOITQaNdTkTOxFjwyym21Rw/edit?usp=sharing>Instructions to use VM on Google Cloud</a> -->
+
+
+<!--
+	<li><a href=https://oscourse.github.io/examples/>Example code</a></li>
+	<li><a href=https://oscourse.github.io/examples/makefile_example/>Example makefile</a></li>
+-->
+
+<ul>
+	<li> Feb 14: <a href=hw1.html>Assignment 1</a> due
+	<li> Feb 24: Test 1 during class time in EB-G7 and EB-N01
+	<li> Mar 13: <a href=hw2.html>Assignment 2</a> due.
+	<li> Mar 23: Test 2 during class time in EB-G7 and EB-N01
+	<li> Apr 10: <a href=hw3.html>Assignment 3</a> due.
+	<li> May 5:<a href=hw4.html>Assignment 4</a>, 
+<!--
+	<ul>
+		<li> Due Nov 20: Learn, try out code, and submit code (if any) and README for Tasks A and B. Submit brief plan for how to solve Task C.
+		<li> Due Dec 6: Submit completed Task C code and README.
+		<li> Dec 1 to 6: Firm deadline to complete all demos. 
+	</ul>
+-->
+	<li> May 7-13 (TBA): Test 3 in EB-G7 and EB-N01 
+</ul>
+
+
+<p>
+<b> Assignment Submission:</b>
+Submit your assignment on <a href=https://mycourses.binghamton.edu>mycourses.binghamton.edu</a> as one zipped compressed file.
+Include all your code, a README file, and a Makefile.
+If you do not know how to do this, please contact us for help.
+DO NOT submit each file individually.
+DO NOT include the entire linux kernel (for kernel programming assignments) -- include only the files you change.
+DO NOT include object files (.o) or any executable files.
+<p>
+
+<p>
+<a href="#syllabus">[Syllabus]</a> 
+<a href="#slides">[Lectures]</a> 
+<a href="#calendar">[Tests and Assignments]</a> 
+<a href="policies.html">[Policies]</a> 
+<!--
+<a href="https://goo.gl/forms/BkIvdvVeoCgSAKZL2">[Feedback]</a> 
+-->
+</p>
+
+
+
+</body></html>
+
+
