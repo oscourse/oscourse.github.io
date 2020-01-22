@@ -1,0 +1,138 @@
+<html> 
+<head> 
+  <title>Shell: Signals, Filters and I/O redirection</title> 
+</head> 
+
+<body> 
+
+<h1>Shell: Signals, Filters and I/O redirection</h1>
+
+<a name=description>
+<h2> Description</h2>
+</a>
+
+<p> Extend the basic shell that you wrote in Assignment 1 to implement the following additional features.
+
+	<li> 
+		<b>I/O Redirection:</b> Redirect the input of a command from a file. For example:
+		<pre>
+		sh550> Command < input_file
+		</pre>
+		Redirect the output of a command to a file. For example:
+		<pre>
+		sh550> Command > output_file
+		</pre>
+	</li>
+
+	<li>
+		<b>Command Filters:</b> Implement command filters, i.e., redirect the stdout of one command to stdin of another using pipes. For example:
+		<pre>
+		sh550> ls -l | wc -l
+		</pre>
+		<pre>
+		sh550> cat somefile | grep somestring | less
+		</pre>
+
+		Ideally, your shell should be able to handle any number of filter components.
+	</li>
+
+	<li>
+		<b>Foreground Process Termination:</b>
+		Terminate a foreground process by pressing <tt>[Ctrl-C]</tt>.  Your shell must not get killed; only the process running in foreground mode must terminate. If executing a chain of filters (as in the above example), all processes in the filter chain must terminate.
+	</li>
+
+	<li> 
+		<b>Background Process Termination:</b>
+		Terminate a process in background using the <tt>kill</tt> command. 
+		<pre>
+		sh550> kill give_process_id_here
+		</pre>
+	</li>
+	
+	<li>
+		<b>Combinations:</b>
+		Be able to execute any feasible combinations of filters and file I/O redirection.
+	</li>
+
+</ol>
+
+
+<a name=donots>
+<h2>Do Nots:</h2>
+</a>
+<ul> 
+	<li> DO NOT use any special wrapper libraries or classes to borrow the basic functionality required in this assignment. If in doubt, ask the instructor first BEFORE doing so.
+	<li> DO NOT use the <b>system(...) </b> syscall to execute the programs in your shell directly.
+	<li> DO NOT write five or six different programs, one for each feature. Write <b>one single program</b> that includes all the above features. 
+</ul> 
+
+
+<a name=hints>
+<h2>Hints:</h2> 
+</a>
+
+<ul> 
+  <li><a href=assignments/parser.c>Here is a sample code to get you started.</a> It reads a line of input, breaks it up into individual tokens, and then waits for next line of input. Typing "exit" terminates the shell.
+  <li>Build  and test one functionality at a time. </li> 
+  <li>Make backup copies of partially working versions of your code. This way, if you irreparably mess up your code, then you can at least roll back to your last backup copy. </li> 
+  <li>First design your data structures and code-structure before you begin coding each feature. Anticipate specific problems you will face. </li> 
+  <li>Check out man page for the following:
+    <ul> 
+	<li>fork()</li>
+	<li>execv(), execl(), execlp(), execvp() (which one should you use?)</li>
+	<li>waitpid()</li> 
+	<li>dup2() (for stdin/stdout redirection) </li>
+	<li>pipe()</li> 
+	<li>open()</li> 
+	<li>close()</li> 
+	<li>fileno()</li> 
+	<li>kill()</li> 
+	<li>killpg()</li> 
+	<!--
+	<li> chdir()</li> 
+	<li> getcwd()</li> 
+	-->
+	<li>setsid()</li> 
+	<li>getgrp()</li> 
+	<li>getpgid()</li> 
+	<li>tcsetpgrp()</li> 
+	<li>sigaction()</li> 
+	<li>signal()</li> 
+    </ul> 
+  </li> 
+</ul>
+
+<a name=gg>
+
+<h2> Grading Guidelines </h2>
+</a>
+<p> This is how we will grade your assignment during the demo. So please prioritize your work accordingly.
+<ul>
+<li> 10 - README, Makefile, Compilation without errors  or warnings
+<li> 10 - Input redirection from file: Executing a single command that takes standard input (stdin) from a file
+<li> 10 - Output redirection to file: Executing a single command that sends standard output (stdout) to a file
+<li> 10 - Terminating a foreground process using Ctrl+C without killing the shell
+<li> 10 - Terminate a background process using kill command
+<li> 30 - Filters
+	<ul>
+		<li> 10 - Be able to execute filter chain with two components
+		<li> 20 - Be able to execute filter chain of arbitrary length
+	</ul>
+<li> 20 - Combinations
+	<ul>
+		<li> 10 - Executing a filter chain while redirecting input of the first command and/or output of the last command
+		<li> 10 - Terminating a chain of filters
+	</ul>
+<li> 10 - Error Handling: 
+                Most important part here is to make sure that you check and handle the errors
+                returned by ALL systems calls used in your program. Also check for other common
+                error conditions in your program. But don't go overboard with error checking.
+                We will not try to intentionally break your code with bad input that's irrelevant
+                to the assignment's goals.
+<li> Total score = 110
+<li> During the demo, the TA will ask questions about your code. To get full credit, you need to be able to fully understand and explain your code, besides showing that the code works.
+</ul>
+
+
+</body> 
+</html>
