@@ -1,0 +1,170 @@
+<html> 
+<head> 
+  <title>I/O Redirection and Filters in Shell</title> 
+</head> 
+
+<body> 
+
+<h1>I/O Redirection and Filters in Shell</h1> 
+
+<p>
+<a href=#description>[Description]</a>
+<a href=#donots>[Do Nots]</a>
+<a href=#hints>[Hints]</a>
+<a href=#gg>[Grading Guideline]</a>
+</p>
+
+
+<a name=description>
+<h2> Description</h2>
+</a>
+
+<p>This assignment helps you learn about 
+I/O redirection and inter-process communication.
+You are asked to write a simple shell program called <tt>mysh</tt>.
+This shell must work as follows. You start the shell by running 
+<tt>mysh</tt> program.
+This will give a prompt of your shell as follows:
+
+<pre>
+mysh>
+</pre>
+
+From here onwards, you should be able to execute and control 
+<b>any program/command</b> just as you
+would in a normal shell. 
+For instance 
+
+
+<pre>
+mysh> Command
+[ Output of Command shown here ]
+mysh>
+</pre>
+
+
+<p>
+Additionally, your shell should be able to do the following: 
+</p>
+
+<ol> 
+	<li> Redirect the input of a command from a file. For example:
+		<pre>
+		mysh> Command < input_file
+		</pre>
+	</li>
+
+	<li> Redirect the output of a command to a file. For example:
+		<pre>
+		mysh> Command > output_file
+		</pre>
+	</li>
+
+	<li> Implement filters, i.e., redirect the stdout of one command to stdin of another using pipes. For example:
+		<pre>
+		mysh> ls -l | wc -l
+		</pre>
+		<pre>
+		mysh> cat somefile | grep somestring | less
+		</pre>
+
+		Ideally, your shell should be able to handle any number of filter components.
+		</br><b>Hint:</b> Use of recursion is recommended but not mandatory.
+	</li>
+
+	<li> Combine filters, file redirection, and backgrounding. For example:
+		<pre>
+		mysh> Command1 | Command2  > output_file
+		mysh> Command1 < input_file  | Command 2 
+		mysh> Command1 < input_file  | Command 2 | Command 3 > output_file
+		mysh> Command1 < input_file  | Command 2 | Command 3 > output_file &
+		[Or any such valid combinations]
+		</pre>
+	</li>
+
+</ol>
+
+
+<a name=donots>
+<h2>Do Nots:</h2>
+</a>
+<ul> 
+	<li>
+		DO NOT use any special wrapper libraries or classes to borrow the basic functionality required in this assignment. If in doubt, ask the instructor first BEFORE doing so.
+	</li> 
+	<li>
+		DO NOT use the <b>system(...) </b> syscall to execute the programs in your shell directly.
+	</li> 
+	<li> 
+		DO NOT write five or six different programs, one for each feature. Write <b>one single program</b> that includes all the above features. 
+	</li> 
+</ul> 
+
+
+<a name=hints>
+<h2>Hints:</h2> 
+</a>
+
+<ul> 
+  <li>Build  and test one functionality at a time. </li> 
+  <li>Make backup copies of partially working versions of your code. This way, if you irreparably screw up your code, then you can at least roll back to your last backup copy. </li> 
+  <li>First design your data structures and code-structure before you begin coding each feature. Anticipate specific problems you will face. </li> 
+  <li>Check out man page for the following:
+    <ul> 
+	<li>fork()</li>
+	<li>execv(), execl(), execlp(), execvp() (which one should you use?)</li>
+	<li>waitpid()</li> 
+	<li>dup2() (for stdin/stdout redirection) </li>
+	<li>pipe()</li> 
+	<li>open()</li> 
+	<li>close()</li> 
+<!--	<li>fileno()</li> 
+	<li> kill()</li> 
+	<li> chdir()</li> 
+	<li> getcwd()</li> 
+	<li>killpg()</li> 
+	<li>setsid()</li> 
+	<li>getgrp()</li> 
+	<li>getpgid()</li> 
+	<li>tcsetpgrp()</li> 
+	-->
+    </ul> 
+  </li> 
+</ul>
+
+<a name=gg>
+
+<h2> Grading Guidelines </h2>
+</a>
+<p> This is how we will grade your assignment. So please prioritize your work accordingly.
+<ul>
+<li> 10 - README, Makefile, Compilation without errors
+<li> 10 - Input redirection from file: Executing a single command that takes standard input (stdin) from a file
+<li> 10 - Output redirection to file: Executing a single command that sends standard output (stdout) to a file
+<li> 30 - Filters
+	<ul>
+	<li> 15 - Be able to execute filter chain with two components
+	<li> 15 - Be able to execute filter chain of arbitrary length
+	</ul>
+
+<li> 30 - Combinations
+	<ul>
+	<li> 10 - Executing a background command with redirected stdin/stdout
+	<li> 10 - Executing a filter chain while redirecting input of first command and output of last command
+	<li> 10 - Executing a filter chain with I/O redirection in the background
+	</ul>
+
+<li> 10 - Code Modularity and Error Handling:
+		Don't write long big functions that do everything. Write small functions that call other small functions.
+                Check and handle the errors
+                returned by ALL systems calls used in your program. Also check for other common
+                error conditions in your program. But don't go overboard with error checking.
+                We will not try to intentionally break your code with bad input that may be irrelevant
+                to the assignment's goals.
+
+<li> Total = 100
+</ul>
+
+
+</body> 
+</html>
