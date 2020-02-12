@@ -35,7 +35,7 @@ main(int argc, char **argv)
 
 	switch (fork()) { // ???
 	case 0:	/* child */
-		dup2(fd, 1); 	/* fd becomes the standard output */
+		dup2(newfd, 1); 	/* fd becomes the standard output */
 		execvp(cmd[0], cmd);
 		perror(cmd[0]);		/* execvp failed */
 		exit(1);
