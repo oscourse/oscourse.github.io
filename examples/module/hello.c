@@ -1,6 +1,6 @@
 #include <linux/init.h>
 #include <linux/module.h>
-MODULE_LICENSE("DUAL BSD/GPL");
+MODULE_LICENSE("Dual BSD/GPL");
 
 // called when module is installed
 int __init init_module()
