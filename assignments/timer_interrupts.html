@@ -10,9 +10,7 @@ Objective
 <h2>Problem Description:
 Write a kernel module to generate 1000 interrupts per second using hrtimer subsystem.</h2>
 
-<p>Create a kernel module that intializes the hrtimer and fires 1000 interrupts per second. Plot 
-a graph of number of interrupts observed before and after inserting and removing the kernel module and
-explain your observation in a report.
+<p>Create a kernel module that intializes the hrtimer and fires an interrupt every 1 ms. Measure if the timer interrupt fired at the expected time in nanoseconds.
 
 <p> Below we describe all the resources you will need to learn and/or use to completethis assignment. Start early and ask us for help if you get stuck.
 
@@ -22,7 +20,7 @@ The login credentials have been emailed to you.
 You can either use the VM assigned to you or you can use your own Linux VM on your personal computer.
 <p> <a href=https://docs.google.com/document/d/1S4XSvTLoq3S13eOPyDe63EpB5YjD80N5eoI4qcpCr-8/edit?usp=sharing>Instructions to access your virtual machine remotely</a>
 
-
+<h2>TASK 1</h2>
 <h2> Learn how to write and execute a Linux kernel module. </h2>
 <p>Kernel modules allow the code to be dynamically added to the kernel, dynamically. Try compiling and inserting the kernel modules <a href=https://oscourse.github.io/examples/module/>hello.c and hellon.c</a> from <a href=https://oscourse.github.io/slides/kernel_modules.pdf>kernel module slides</a>.
 
@@ -41,6 +39,8 @@ You can either use the VM assigned to you or you can use your own Linux VM on yo
 		<p>Upon removing the kernel module, use the "dmesg" command to check if kernel log prints the message "mymodule: Goodbye, cruel world!!"</p>
 
 	<li> For hellon,c, module insertion command is <tt>sudo insmod hellon.ko whom=class howmany=10</tt> (or any other argument values you want to give). Removal is the same as for hello.c.
+	
+	<li> Submit a kernel module practice_module.c that takes loop_count as kernel module parameter, and prints the message "Hello world!" loop_count times on inserting the module.
 </ol>
 
 <h2> How to browse Linux source code</h2>
@@ -55,34 +55,39 @@ You can either use the VM assigned to you or you can use your own Linux VM on yo
 	</ul>
 </ul>
 
+<h2>TASK 2</h2>
 <h2> Understand how to initialize and start the timers in the Linux kernel using hrtimers.</h2>
 <ol>
 	<li> <em>hrtimers</em> are software timers in Linux kernel used to schedule timer interrupts. Hrtimers use ktime to get the current time and to set the expiry time at which the timer interrupt fires.     
-	<li> hrtimer structure has a number of fields including expiry time and a callback function on time expiration. <a href=https://elixir.bootlin.com/linux/v4.15/source/include/linux/hrtimer.h#L93>struct hrtimer</a>
+	<li> hrtimer structure has a number of fields including expiry time and a callback function on time expiration <a href=https://elixir.bootlin.com/linux/v4.15/source/include/linux/hrtimer.h#L93>struct hrtimer</a>.
 
-	<li> Initialize a hrtimer and register a call function using <a href=https://elixir.bootlin.com/linux/v4.15/source/kernel/time/hrtimer.c#L1121>hrtimer_init()</a>.
+	<li> Initialize hrtimer and register a callback function using <a href=https://elixir.bootlin.com/linux/v4.15/source/kernel/time/hrtimer.c#L1121>hrtimer_init()</a>.
+	
+	<li> The timer interval or expiry time at which the timer fires an interrupt is passed as a kernel module parameter, timer_interval.
 
-	<li> Get the current time using ktime and set the expiry time such that 1000 timer interrupts are generated per second and start the timer using <a href=https://elixir.bootlin.com/linux/v4.15/source/include/linux/hrtimer.h#L374>hrtimer_start()</a>.
+	<li> Get the current time and set the expiry time using the ktime related functions to generate timer interrupts at 1000 interrupts per second. Start the timer using <a href=https://elixir.bootlin.com/linux/v4.15/source/include/linux/hrtimer.h#L374>hrtimer_start()</a>.
 
 	<li> Callback function: A callback function executes when the timer expires.  The callback function also reset the timer to fire 1000 interrupts in the next second using <a href=https://elixir.bootlin.com/linux/v4.15/source/kernel/time/hrtimer.c#L796>hrtimer_forward()</a>.
 
-	<li>Finally, cancel the timer using <a href=https://elixir.bootlin.com/linux/v4.15/source/kernel/time/hrtimer.c#L1029>hrtimer_cancel()</a> when the timer is no longer needed.
- 
-	<li>To measure the number of timer interrupts on each CPU, every second use the command <b>watch -n1 'cat /proc/interrupts | grep -ie loc'</b><li>
-
-	<li> Plot a graph of number of interrupts on each CPU observed before inserting the kernel module and after inserting the kernel module. The X-axis represents time in seconds and Y-axis represents number of interrupts per second on each CPU.
-	
+	<li> Finally, cancel the timer using <a href=https://elixir.bootlin.com/linux/v4.15/source/kernel/time/hrtimer.c#L1029>hrtimer_cancel()</a> when the timer is no longer needed.
 </ol>
 
+<h2>TASK 3</h2>
+<h2> Compare the accuracy in user space and kernel space. </h2>
+<ol>
 
+	<li> Add another kernel module parameter, message_count, to define the number of print messages.
+	<li> Record the current time, expected expiry time, actual expire time (when the interrupt fires) and difference in the actual and expected expiry time 
+	<li> Print the recorded values when the kernel module is removed.
+	<li> Compare the values measured in the kernel module to the values observed in the user space using the program <a href=https://oscourse.github.io/assignments/userspace_timer.c>userspace_timer.c</a>.
+	<li> Report the observations.
 <H2>
 Grading guideline
 </H2>
 
-<p>  20 - Part A: Initialize and fire timer interrupts.
-<br> 20 - Part B: Demonstrate that your code generates 1000 interrupts per second.
-<br> 30 - Part C: Plot the graph Time (seconds) vs Number of interrupts on each CPU.
-<br> 20 - Part D: Report explaining the graph.
+<br> 10 - TASK 1: Submit practice_module.c kernel module.
+<br> 40 - TASK 2: Demonstrate that your code generates 1000 interrupts per second.
+<br> 40 - TASK 3: Submit a report comparing the timer events accuracy in user space and kernel space.
 <br> 10 - Handle all major error conditions. Clean, modular, and commented code. Clean readable output. No "giant" functions. 
 <br> Total = 100
 <br>
