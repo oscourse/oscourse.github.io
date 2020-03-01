@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <time.h>
 
-#define NS 1000000000
+#define NS 1e9
 
 struct timer_values {
 	unsigned long start_time_ns;
