@@ -1,0 +1,144 @@
+<HTML>
+
+<HEAD>
+<TITLE>
+Kernel Modules and Character Device to list all processes
+</TITLE>
+  <meta name="robots" content="noindex,nofollow">
+</HEAD>
+
+<BODY>
+
+<CENTER>
+<H1>Kernel Modules and Character Device to list all processes</H1>
+</CENTER>
+
+<OL>
+
+<LI>
+	<P> Implement a kernel module that
+	creates a <tt>/dev/process_list</tt> character device.
+	The character device should support the <tt>read()</tt> operation. 
+	When the <tt>read()</tt> system call is invoked on your character device from a user space process,
+	your kernel module should return to the following information for 
+	all currently running processes:
+	<ol>
+	<li> process ID 
+	<li> parent process ID 
+	<li> the CPU on which the process is running
+	<li> its current state.
+	</ol>
+
+	For example, the output could be as follows:
+
+	<pre>
+	PID=1 PPID=0 CPU=4 STATE=TASK_RUNNING
+	PID=2 PPID=0 CPU=2 STATE=TASK_INTERRUPTIBLE
+	PID=10 PPID=2 CPU=0 STATE=TASK_UNINTERRUPTIBLE
+	PID=16434 PPID=16424 CPU=10 STATE=TASK_DEAD
+	PID=14820 PPID=16424 CPU=8 STATE=TASK_WAKEKILL,TASK_UNINTERRUPTIBLE
+	...and so forth
+	</pre>
+
+	<p>Note that the <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L638>state</a> field in  <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L629>task_struct</a> can be -1, 0 or greater than 0.  A state value of 1 or more indicates a combination (bitwise OR) of values listed here: 
+<a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L75>
+https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L75
+</a>
+
+	<p>So you have to parse a positive state value to indicate which of the states apply to a process. You can pass the raw state value (as a <tt>long</tt> value) from kernel to user space and decode the state values in your user space program.
+
+</LI>
+
+<LI>
+Also, provide a user-space C program that open your  character device and outputs the list of processes retrieved from your character device.
+
+<p>
+One such application could be written as follows (please fill in the missing code):
+
+<pre>
+char *buffer;
+
+/* allocate memory for character buffers HERE before you use them */
+
+fd = open("/dev/process_list", O_RDONLY);
+/* check for errors HERE */
+
+while(!some termination condition)
+{
+	bytes_read = read(fd, buffer, buffer_length);
+	/* check for errors HERE. Exit loop if all processes have been retrieved. */
+	/* print the output you have read so far. */
+}
+
+close(fd);
+</pre>
+
+</LI>
+</OL>
+
+<!--
+<H2>Part B: Character Device to list ready processes for each CPU</H2>
+<P> Write another kernel module that creates a character device <tt>/dev/runq_list</tt> and its corresponding user space code
+that retrieves the list of processes currently in the <b>ready queue of each CPU</b>. 
+In your output, group processes by the CPU on which they are running.</LI>
+-->
+
+
+<P>BEWARE that bugs in kernel code may either crash your kernel immediately 
+or may have no immediate
+visible effect, but may have a delayed effect that is disastrous.
+Therefore, you cannot assume that the thing
+you did most recently is necessarily the cause of a crash.</P>
+
+<H2>Grading Guidelines</H2>
+
+<pre>
+	Kernel Module- 60
+	User-level code - 30
+	Error checks and coding style - 10
+
+	Total = 100
+</pre>
+
+
+<a name=hints>
+<H2>References</H2>
+</a>
+
+<UL TYPE=DISC>
+
+<li> <a href=https://oscourse.github.io/examples/module/>Example kernel modules hello.c and hellon.c</a>
+<li> <a href=http://lxr.free-electrons.com/>Kernel Cross Reference</a></li>
+
+<li> <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched/signal.h#L565>for_each_process()</a> macro can help you iterate over all processes in the system.
+
+<li> <tt>struct task_struct</tt> definition can be found <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L629>here</a>
+
+<li> Process states are defined <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L75>here</a>
+
+<li> The function <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L1828>task_cpu()</a> can help you extract the currently assigned CPU for a process.
+
+
+ <LI> Introductory material on Linux Kernel
+    <UL>
+
+	<LI>
+	Chapters 1 and 2 of the following online book provide a good introduction
+	to the kernel, though with a bias towards device-driver development.
+	<BR>
+	<a href=http://lwn.net/Kernel/LDD3/>
+	http://lwn.net/Kernel/LDD3/
+	</a>
+	</LI>
+
+	<LI>
+	For more kernel programming help, just google "Linux Kernel" and you'll get lots more.
+	</LI>
+     </UL>
+
+</UL>
+
+
+</BODY>
+</HTML>
+
