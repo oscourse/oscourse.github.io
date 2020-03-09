@@ -10,38 +10,18 @@ Kernel Modules and Character Device to list all processes
 
 <BODY>
 
+<CENTER>
+<H1>Kernel Modules and Character Device to list all processes</H1>
+</CENTER>
+
+<OL>
+
 <h2> Accessing your Virtual Machines</h2>
 <p> <a href=https://docs.google.com/document/d/1S4XSvTLoq3S13eOPyDe63EpB5YjD80N5eoI4qcpCr-8/edit?usp=sharing>Instructions to access your virtual machine remotely</a>
 <p> This assignment will be carried out on a Linux virtual machine. Each student has been assigned a VM with a unique IP address. 
 The login credentials have been emailed to you. 
 You can either use the VM assigned to you or you can use your own Linux VM on your personal computer.
 
-<h2>TASK 1: Learn how to write and execute a Linux kernel module. </h2>
-<p>Kernel modules allow code to be dynamically added to a running kernel. 
-
-	<li> Study the kernel modules <a href=https://oscourse.github.io/examples/module/>hello.c and hellon.c</a>. 
-	They have initialization and cleanup functions that are invoked upon loading and unloading the kernel modules. 
-	The module hellon.c is similar to hello.c, except that it takes command-line arguments during insertion.
-
-	<li> Compile the kernel module:
-		<pre>make</pre>
-
-	<li> Load the kernel module:
-		<pre>sudo insmod hello.ko</pre>
-		<p>If the module was successfully inserted, you will see the message "mymodule: Hello World!" in the kernel console. Use commands "dmesg" or "tail-n 20 /var/log/syslog" to see the kernel log messages.</p>
-
-	<li> Unload the kernel module:
-		<pre>sudo rmmod hello</pre>
-		<p>Upon removing the kernel module, use the "dmesg" command to check if kernel log prints the message "mymodule: Goodbye, cruel world!!"</p>
-
-	<li> For hellon.c, module insertion command is <tt>sudo insmod hellon.ko whom=class howmany=10</tt> (or any other argument values you want). Removal is the same as for hello.c.
-		<p></p>
-
-<CENTER>
-<H1>Kernel Modules and Character Device to list all processes</H1>
-</CENTER>
-
-<OL>
 
 <LI>
 	<P> Implement a kernel module that
@@ -117,6 +97,11 @@ or may have no immediate
 visible effect, but may have a delayed effect that is disastrous.
 Therefore, you cannot assume that the thing
 you did most recently is necessarily the cause of a crash.</P>
+
+<H2>Assignment Deadlines</H2>
+<pre>
+
+</pre>
 
 <H2>Grading Guidelines</H2>
 
