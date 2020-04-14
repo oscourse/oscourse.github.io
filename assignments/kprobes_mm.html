@@ -50,7 +50,7 @@ representing the time and Y-axis representing the virtual address.
 Try at least three different types of target applications, such as 
 kernel compilation (compute and I/O intensive),
 sysbench (compute intensive), iperf (network I/O intensive), or some other applications.
-See if you can find any interesting trends in memory access patterns
+See if you can observe any interesting trends in memory access patterns
 of a process.
 Describe your results in a concise report.
 
@@ -66,10 +66,11 @@ Retrieve the buffer from user space using either an <a href=https://www.tldp.org
 Grading guidelines
 </H2>
 
-<p>  50 - Part A: Demonstrating that your code works for a any arbitrary process
-<br> 40 - Part B: Report explaining scatterplot results from three different applications.
+<p>  50 - Part A: Implementation that works for any arbitrary process
+<br> 20 - Part B: Report explaining scatterplot results from three different applications.
+<br> 50 - Demo and explanation of code and report.
 <br> 10 - Handle all major error conditions. Clean, modular, and commented code. Clean readable output. No "giant" functions. 
-<br> Total = 100
+<br> Total = 130
 <br>
-<br> 10 - Bonus section: (optional) Demonstrate that your code can retrieve tracked virtual addresses from a user space program for any arbitrary process. 
+<br> 10 - Bonus section: (optional) Demonstrate that your code can retrieve tracked virtual addresses using the ioctl() interface from a user space program for any arbitrary process (and explain the code during demo).
 
