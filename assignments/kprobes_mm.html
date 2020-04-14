@@ -1,0 +1,74 @@
+<H1> Assignment: Tracking Page Faults for a Process</H1>
+
+<H2>
+Objective 
+</H2>
+
+<p> You will learn how to use kernel-level probing mechanisms to intercept and track kernel events, here specifically page-faults for a specific process.
+
+<H2> 
+Description
+</H2>
+
+<p> Kprobes enables you to dynamically set a breakpoint in any kernel routine and
+collect debugging and performance information non-disruptively. You
+can trap at almost any kernel code address, specifying a handler
+routine to be invoked when the breakpoint is hit.
+
+<ol>
+
+<li> 
+Learn how to use kprobes and jprobes in the Linux kernel.
+<a href=https://www.kernel.org/doc/Documentation/kprobes.txt> 
+https://www.kernel.org/doc/Documentation/kprobes.txt
+</a>
+
+<li>
+Try these example kernel modules for practice:
+<a href=https://elixir.bootlin.com/linux/latest/source/samples/kprobes>
+https://elixir.bootlin.com/linux/latest/source/samples/kprobes
+</a>
+
+<li>
+Study the 
+<a href=https://elixir.bootlin.com/linux/latest/source/mm/memory.c#L4191>
+handle_mm_fault()
+</a>
+function in the Linux kernel to 
+understand when it is invoked and what it does.
+
+<li> Part A:
+Now create a kernel module that takes the process-ID of an active process as 
+an argument (either module parameter or via an ioctl interface), and tracks 
+all the virtual addresses on which the target process faults.
+Print the virtual addresses to the system log using printk().
+Show that your code works for any arbitrary target process.
+
+<li> Part B:
+Plot the virtual addresses you tracked as a scatter-plot graph with X-axis 
+representing the time and Y-axis representing the virtual address.
+Try at least three different types of target applications, such as 
+kernel compilation (compute and I/O intensive),
+sysbench (compute intensive), iperf (network I/O intensive), or some other applications.
+See if you can find any interesting trends in memory access patterns
+of a process.
+Describe your results in a concise report.
+
+<li> Bonus Section: (optional)
+Store the tracked virtual addresses and the time at
+which each address was trapped in a kernel buffer, possibly a circular array.
+Retrieve the buffer from user space using either an <a href=https://www.tldp.org/LDP/lkmpg/2.4/html/x856.html>ioctl()</a> interfacd or a <a href=https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/proc.html>/proc</a> interface.
+
+</ol>
+
+<H2>
+Grading guidelines
+</H2>
+
+<p>  50 - Part A: Demonstrating that your code works for a any arbitrary process
+<br> 40 - Part B: Report explaining scatterplot results from three different applications.
+<br> 10 - Handle all major error conditions. Clean, modular, and commented code. Clean readable output. No "giant" functions. 
+<br> Total = 100
+<br>
+<br> 10 - Bonus section: (optional) Demonstrate that your code can retrieve tracked virtual addresses from a user space program for any arbitrary process. 
+
