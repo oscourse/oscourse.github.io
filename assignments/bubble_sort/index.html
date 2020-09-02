@@ -41,8 +41,8 @@ $ parallel_bubble 100 5
 </pre>
 
 <li> The initial (parent) process creates a shared memory segment in which it stores an array of N random integers. 
-<li> Next, the parent process forks P worker processes. After <tt>fork</tt> each worker process inherits the attached shared memory segment that was created by the parent.
-<li> Each worker process should execute the parallel bubble sort on (about equal sized) overlapping segments of the array, as explained in <a href=bubble_sort.pdf>the slides</a>.
+<li> Next, the parent process forks P worker processes. After <tt>fork</tt>, each worker process inherits the attached shared memory segment that was created by the parent.
+<li> Each worker process should execute the parallel bubble sort operation on (about equal sized) overlapping segments of the array, as explained in <a href=bubble_sort.pdf>the slides</a>.
 <li> Each worker should use a barrier (busy looping for now) to coordinate with ''neighboring'' workers at the end of each pass.
 <li> You can also store any additional data in the shared memory that's needed for inter-worker synchronization.
 <li> The parent prints out the fully sorted array once all workers processes have finished.
