@@ -27,7 +27,7 @@ You can either use the VM assigned to you or you can use your own Linux VM on yo
 <p>Kernel modules allow the code to be dynamically added to the kernel, dynamically. Try compiling and inserting the kernel modules <a href=https://oscourse.github.io/examples/module/>hello.c and hellon.c</a> from <a href=https://oscourse.github.io/slides/kernel_modules.pdf>kernel module slides</a>.
 
 <ol>
-	<li> Save the Makefile, hello.c, and hellon,c in your home directory. The files hello.c  has initialization and cleanup functions that are invoked upon loading and unloading the kernel module. The second file hellon.c is similar, except that it takes command-line arguments with insmod command to print a custom message.
+	<li> Save the Makefile, hello.c, and hellon.c in your home directory. The files hello.c  has initialization and cleanup functions that are invoked upon loading and unloading the kernel module. The second file hellon.c is similar, except that it takes command-line arguments with insmod command to print a custom message.
 
 	<li> Compile the kernel module:
 		<pre>make</pre>
@@ -40,10 +40,13 @@ You can either use the VM assigned to you or you can use your own Linux VM on yo
 		<pre>sudo rmmod hello</pre>
 		<p>Upon removing the kernel module, use the "dmesg" command to check if kernel log prints the message "mymodule: Goodbye, cruel world!!"</p>
 
-	<li> For hellon,c, module insertion command is <tt>sudo insmod hellon.ko whom=class howmany=10</tt> (or any other argument values you want to give). Removal is the same as for hello.c.
+	<li> For hellon.c, module insertion command is <tt>sudo insmod hellon.ko whom=class howmany=10</tt> (or any other argument values you want to give). Removal is the same as for hello.c.
 </ol>
 
-<h2> Part C: How to browse Linux source code</h2>
+<h2> Part C: Learn how to write a miscellaneous character device driver</h2>
+<p> Follow <a href=https://www.linuxjournal.com/article/2920>this tutorial</a> to learn how to create a miscellaneous character device in Linux kernel.
+
+<h2> Part D: How to browse Linux source code</h2>
 <p> There are a couple of ways you can browse linux source code.
 <ul>
 	<li> Use the <a href=https://elixir.bootlin.com/linux/latest/source>Linux cross reference website</a>
@@ -55,7 +58,7 @@ You can either use the VM assigned to you or you can use your own Linux VM on yo
 	</ul>
 </ul>
 
-<h2>Part D: Write a kernel module to return list of processes to user space</h2>
+<h2>Part E: Write a kernel module to return list of processes to user spacevia a character device</h2>
 
 <p> Implement a kernel module that creates a <tt>/dev/process_list</tt> character device.
 The character device should support the <tt>read()</tt> operation. 
@@ -77,7 +80,7 @@ values listed here.
 
 <P>Beware that bugs in kernel code may either crash your kernel immediately or may have no immediate visible effect, but may have a delayed effect. Therefore, you cannot assume that the thing you did most recently is necessarily the cause of a crash.
 
-<h2>Part E: Write a user space program to retrieve the list of processes from the kernel module</h2>
+<h2>Part F: Write a user space program to retrieve the list of processes from the kernel module</h2>
 <p> Implement a user-space C program that opens your  character device and outputs the list of processes retrieved from your character device.
 
 <p>
@@ -125,9 +128,8 @@ In your output, group processes by the CPU on which they are running.</LI>
 <H2>Grading Guidelines</H2>
 
 <pre>
-	Kernel Module- 60
-	User-level code - 30
-	Error checks and coding style - 10
+	Part A, B, C = 20
+	Part D, E, F = 80
 
 	Total = 100
 </pre>
