@@ -1,4 +1,3 @@
-
 <HTML>
 
 <HEAD>
@@ -16,14 +15,6 @@ Kernel Modules and Character Device to list all processes
 
 <OL>
 
-<h2> Accessing your Virtual Machines</h2>
-<p> <a href=https://docs.google.com/document/d/1S4XSvTLoq3S13eOPyDe63EpB5YjD80N5eoI4qcpCr-8/edit?usp=sharing>Instructions to access your virtual machine remotely</a>
-<p> This assignment will be carried out on a Linux virtual machine. Each student has been assigned a VM with a unique IP address. 
-The login credentials have been emailed to you. 
-You can either use the VM assigned to you or you can use your own Linux VM on your personal computer.
-
-
-<h2> Assignment description</h2>
 <LI>
 	<P> Implement a kernel module that
 	creates a <tt>/dev/process_list</tt> character device.
@@ -99,12 +90,6 @@ visible effect, but may have a delayed effect that is disastrous.
 Therefore, you cannot assume that the thing
 you did most recently is necessarily the cause of a crash.</P>
 
-<H2>Assignment Deadlines</H2>
-<pre>
-	Mar 13: Submit any partial code you have written so far and a plan for completing rest of the assignment.
-	Mar 27: Final submission
-</pre>
-
 <H2>Grading Guidelines</H2>
 
 <pre>
@@ -123,15 +108,15 @@ you did most recently is necessarily the cause of a crash.</P>
 <UL TYPE=DISC>
 
 <li> <a href=https://oscourse.github.io/examples/module/>Example kernel modules hello.c and hellon.c</a>
-<li> <a href=http://lxr.free-electrons.com/>Kernel Cross Reference</a></li>
+<li> <a href=https://elixir.bootlin.com/linux/latest/source>Kernel Cross Reference</a></li>
 
-<li> <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched/signal.h#L565>for_each_process()</a> macro can help you iterate over all processes in the system.
+<li> <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched/signal.h#L588>for_each_process()</a> macro can help you iterate over all processes in the system.
 
 <li> <tt>struct task_struct</tt> definition can be found <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L629>here</a>
 
 <li> Process states are defined <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L75>here</a>
 
-<li> The function <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L1828>task_cpu()</a> can help you extract the currently assigned CPU for a process.
+<li> The function <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L1864>task_cpu()</a> can help you extract the currently assigned CPU for a process.
 
 
  <LI> Introductory material on Linux Kernel
