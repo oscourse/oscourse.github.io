@@ -44,7 +44,11 @@ You can either use the VM assigned to you or you can use your own Linux VM on yo
 </ol>
 
 <h2> Part C: Learn how to write a miscellaneous character device driver</h2>
-<p> Follow <a href=https://www.linuxjournal.com/article/2920>this tutorial</a> to learn how to create a miscellaneous character device in Linux kernel.
+<ul>
+<li> Follow <a href=https://gist.github.com/17twenty/6313566>this example</a> to learn how to create a miscellaneous character device in Linux kernel.
+<li> Modify this program to implement the <tt>.read</tt> file operation to return "Hello World!" message to a user space program that invoves the <tt>read()</tt> system call on your miscellaneous device.
+</ul>
+
 
 <h2> Part D: How to browse Linux source code</h2>
 <p> There are a couple of ways you can browse linux source code.
