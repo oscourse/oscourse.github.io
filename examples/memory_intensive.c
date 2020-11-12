@@ -39,7 +39,7 @@ int main()
 	// What happens if the number of rows increase?
 	// What happens if the number of columns increase?
 	
-	while(1);
+	// while(1);
 
 	for(i = 0; i < rows; i++)
 		free(matrix[i]);
