@@ -1,0 +1,370 @@
+<HTML>
+<HEAD>
+<TITLE>student_1/</TITLE>
+</HEAD>
+<BODY BGCOLOR=white>
+<HR>
+student_1/<p><PRE>
+&gt;&gt;&gt;&gt; file: parallelsort.c
+
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+#include &lt;assert.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;sys/time.h&gt;
+#include &lt;sys/ipc.h&gt;
+#include &lt;sys/shm.h&gt;
+#include &lt;sys/types.h&gt;
+
+#define MAX_COUNT 117 // Max integers to sort
+#define MAX_PROCESS_COUNT 40 // maximum number of processes
+#define MAX_NUM 100 // Generate numbers between 0 and MAX_NUM
+
+// Uncomment the following line to turn on debugging messages
+//#define DEBUG
+
+int N; // Number of integers to sort
+int P; //Number of child processes
+
+typedef struct SharedData
+{
+	long number[MAX_COUNT];
+	int pass;
+	int processState[MAX_PROCESS_COUNT];  
+	int processSwapCount[MAX_PROCESS_COUNT];
+	
+}Data;
+
+
+// generate N random numbers between 0 and MAX_NUM
+<A NAME="3"></A><FONT color = #00FFFF><A HREF="match7-1.html#3" TARGET="1"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_3_3.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+void generate_numbers(Data *data)
+{
+        int i;
+
+        srandom(time(NULL));
+
+        for(i=0; i&lt;N; i++)
+	{
+                data-&gt;number[i] = random()%MAX_NUM;
+	}
+}
+
+void setProcessState(Data *data, int value)
+</FONT>{
+		for(int i=0; i&lt;P ; i++)
+		{
+			data-&gt;processState[i] = value;
+		}
+}
+
+void setProcessSwapCount(Data *data, int value)
+{
+		for(int i=0; i&lt;P ; i++)
+		{
+			data-&gt;processSwapCount[i] = value;
+		}
+}
+
+int sumOfSwaps(Data *data)
+{
+	int sum = 0;
+	for(int i=0; i&lt;P ; i++)
+	{
+		sum = sum + data-&gt;processSwapCount[i];
+	}
+	
+<A NAME="4"></A><FONT color = #FF00FF><A HREF="match7-1.html#4" TARGET="1"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_4_2.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+	return sum;
+}
+
+int checkAllProcessStateFor1(Data *data)
+{
+		int checkFlag = 1;
+		
+		for(int i=0; i&lt;P ; i++)
+		{
+			if(data-&gt;processState[i] != 1)
+</FONT>			{
+<A NAME="0"></A><FONT color = #FF0000><A HREF="match7-1.html#0" TARGET="1"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_0_7.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+					checkFlag = 0;
+					break;
+			}
+			
+		}
+		
+		return checkFlag;
+}
+
+int checkAllProcessStateFor0(Data *data)
+{
+		int checkFlag = 0;
+		
+		for(int i=0; i&lt;P ; i++)
+		{
+			if(data-&gt;processState[i] != 0)
+			{
+					checkFlag = 1;
+					break;
+			}
+			
+		}
+		
+		return checkFlag;
+}
+
+void print_numbers(Data *data)
+{
+        int i;
+
+        for(i=0; i&lt;N; i++)
+                printf("%ld ", data-&gt;number[i]);
+        printf("\n");
+}
+
+int compare_and_swap(int i, int j, Data *data)
+</FONT>{
+#ifdef DEBUG
+<A NAME="1"></A><FONT color = #00FF00><A HREF="match7-1.html#1" TARGET="1"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_1_6.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+        fprintf(stderr,"i %d j %d\n", i, j);
+#endif
+        assert ( i&lt;N );
+        assert ( j&lt;N );
+
+        if( data-&gt;number[i] &gt; data-&gt;number[j]) {
+                long temp = data-&gt;number[i];
+                data-&gt;number[i] = data-&gt;number[j];
+                data-&gt;number[j] = temp;
+                return 1;
+        }
+
+        return 0;
+}
+
+// even-odd pass bubbling for each child process
+void bubble(int start, int n, int id, Data *data)
+</FONT>{
+#ifdef DEBUG
+        fprintf(stderr, "start %d n %d pass %d\n", start, n, pass);
+#endif
+	if(start+n &gt; N)
+	{	
+		n = N - start;
+	}
+	while(-999 != data-&gt;processState[id])
+	{
+		if(data-&gt;processState[id] == 1)
+		{
+			int swap_count = 0;
+			int next = start;
+
+			assert (start &lt; N-1); // bug if we start at the end of array
+
+<A NAME="5"></A><FONT color = #FF0000><A HREF="match7-1.html#5" TARGET="1"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_0_2.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+			if (1 == data-&gt;pass) { // sort odd-even index pairs
+					if ( !(next % 2) )
+					{
+							next = next + 1;
+					}
+			} else  { // sort even-odd index pairs
+					if (next % 2)
+					{
+							next = next + 1;
+					}
+			}
+
+			while ( (next+1) &lt; (start+n) ) {
+</FONT>					swap_count += compare_and_swap(next, next+1, data);
+					next+=2;
+			}
+			
+			data-&gt;processSwapCount[id] = swap_count;
+			data-&gt;processState[id] = 0;
+			while(checkAllProcessStateFor1(data) == 1)
+			{
+				break;
+			}
+		}
+	}
+}
+
+void parallel_even_odd_bubble_sort(Data *data)
+{
+        int last_count, swap_count = N;
+        int pass = 0,i=0;
+
+#ifdef DEBUG
+        print_numbers(data);
+#endif
+
+	setProcessState(data,1);
+        do {
+                last_count = swap_count;
+
+#ifdef DEBUG
+		print_numbers(data);
+		fprintf(stderr,"last_count %d swap_count %d\n", last_count, swap_count);
+#endif
+				
+		if(0 == checkAllProcessStateFor0(data))
+		{
+			swap_count = sumOfSwaps(data);
+			pass = data-&gt;pass;
+			data-&gt;pass = 1 - data-&gt;pass;
+			setProcessSwapCount(data,1);
+			setProcessState(data,1);
+		}
+
+        
+	}while((swap_count!=0) || (last_count !=0)  && (pass !=1));
+		
+	setProcessState(data,-999);
+		
+}
+
+int main(int argc, char *argv[])
+{
+
+        if( argc != 3) {
+                fprintf(stderr, "Usage: %s N\n", argv[0]);
+                return 1;
+        }
+
+        N = strtol(argv[1], (char **)NULL, 10);
+        P = strtol(argv[2], (char **)NULL, 10);
+
+        if( (N &lt; 2) || (N &gt; MAX_COUNT) ) 
+	{
+                fprintf(stderr, "Invalid N. N should be between 2 and %d.\n", MAX_COUNT);
+                return 2;
+        }
+
+	if((P &lt; 1) || (P &gt; MAX_PROCESS_COUNT))
+	{
+		fprintf(stderr, "Invalid N. N should be between 2 and %d.\n", MAX_PROCESS_COUNT);
+                return 3;
+	}
+
+	if(P &gt; N)
+	{
+		fprintf(stderr, "Value of N = %d should be greater than P = %d \n",N,P);
+		return 4;
+	}
+
+	Data *data;
+        key_t key;
+        int shmid;
+	
+<A NAME="2"></A><FONT color = #0000FF><A HREF="match7-1.html#2" TARGET="1"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_2_5.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+	if((key = ftok("abc1.txt", 'A')) &lt; 0)
+	{
+			perror("error while creating key, ftok");
+			exit(1);
+	}
+        if ((shmid = shmget(key, sizeof(data), 0644 | IPC_CREAT)) &lt; 0) {
+                perror("error while creating shared memory, shmget");
+                exit(1);
+        }
+
+        data = shmat(shmid, (void *)0, 0);
+        if (data == (Data *)(-1)) 
+	{
+            perror("error while attaching to shared memory, shmat");
+            exit(1);
+</FONT>        }
+	else
+	{
+			for(int i=0; i&lt;N; i++)
+			{
+				data-&gt;number[i] = 0;
+			}
+			
+			generate_numbers(data);
+			setProcessState(data,1);
+			setProcessSwapCount(data,1);
+			data-&gt;pass = 0;
+	}
+		
+	printf("\nBefore sorting\n");
+	print_numbers(data);
+	printf("\n\n");
+
+	int range = N/P + 1;
+			
+	for(int i=0; i &lt; P; i++)
+	{
+		pid_t pid = fork();
+				
+		if(pid &lt; 0)
+		{
+			perror("error while creating child process, fork");
+			exit(1);
+		}
+		else if(pid == 0)
+		{
+			fprintf(stderr, "This is %d child process and pid is %d.\n\n", i,getpid());
+			
+			
+			int start = i*(range-1);
+
+			if(i == (P-1))
+			{
+
+				int diff = N - (start+range);
+				if(diff &gt; 0)
+				{
+					range = range + diff;
+				}
+			}
+				
+			bubble(start, range, i, data);
+			printf("start:%d End:%d \n",start, start + range);
+			exit(0);
+		}
+		else if(pid &gt; 0)
+		{
+			fprintf(stderr, "This is parent process and pid is %d.\n\n", getpid());
+		}
+	}
+		
+		
+        struct timeval t0;
+        struct timeval t1;
+      
+        gettimeofday(&t0, 0);
+        parallel_even_odd_bubble_sort(data);
+        gettimeofday(&t1, 0);
+
+        long elapsed = (t1.tv_sec-t0.tv_sec)*1000000 + t1.tv_usec-t0.tv_usec;
+	
+	printf("\nAfter sorting\n");
+        print_numbers(data);
+	printf("\n");
+        printf("Sorted in %ld microseconds\n",elapsed);
+        fprintf(stderr, "Done.\n");
+	
+	if(shmdt(data) == -1)
+	{
+		perror("shmdt");
+		exit(1);
+	}
+	if(shmctl(shmid, IPC_RMID, NULL) == -1)
+	{
+		perror("shmctl");
+		exit(1);
+	}
+
+        return 0;
+}
+</PRE>
+</PRE>
+</BODY>
+</HTML>

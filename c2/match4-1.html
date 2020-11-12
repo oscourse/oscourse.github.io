@@ -1,0 +1,322 @@
+<HTML>
+<HEAD>
+<TITLE>student_8/</TITLE>
+</HEAD>
+<BODY BGCOLOR=white>
+<HR>
+student_9/<p><PRE>
+&gt;&gt;&gt;&gt; file: new_parallel.c
+/* Even-Odd Sequential Bubble Sort
+ * Author: Kartik Gopalan
+ * Date: Aug 31 2020
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+#include &lt;assert.h&gt;
+#include&lt;sys/ipc.h&gt;
+#include&lt;sys/shm.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+
+
+#define MAX_COUNT 1000000 // Max integers to sort
+#define MAX_NUM 100 // Generate numbers between 0 and MAX_NUM
+#define MAX_PROCESS 30
+// Uncomment the following line to turn on debugging messages
+//#define DEBUG
+
+long number[MAX_COUNT];
+int N; // Number of integers to sort
+int P; // Number of concurrent worker processes
+int isEvenSwapped;
+int isOddSwapped;
+
+typedef struct bubbleSort {
+
+   long inputArray[MAX_NUM];
+   int swapCountArr[MAX_PROCESS];
+   int swapCompletedArr[MAX_PROCESS];
+
+   int passValue;
+
+} BubbleSort;
+
+//To check if all the swaps are completed or not
+int isSwapCompleted(BubbleSort *bubble, int val){
+
+	int isAllCompleted=1;
+	int valToCompare = 1 - val;
+	for (int i = 0; i &lt; P; i++)
+		{
+				if(bubble-&gt;swapCompletedArr[i]==valToCompare)
+				{
+					isAllCompleted=0;
+					break;
+				}
+		}
+
+	if(isAllCompleted==1){
+		return 1;
+	}else
+	{
+<A NAME="7"></A><FONT color = #0000FF><A HREF="match4-0.html#7" TARGET="0"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_2_3.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+		return 0;
+	}
+	
+}
+//To set values of index to ready for swap
+void setSwapCompleted(BubbleSort *bubble,int value){
+
+	for (int i = 0; i &lt; P; i++)
+		{
+			bubble-&gt;swapCompletedArr[i]=value;
+</FONT>		}	
+}
+//To get swap count
+<A NAME="4"></A><FONT color = #FF00FF><A HREF="match4-0.html#4" TARGET="0"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_4_4.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+int getSwapCount(BubbleSort *bubble){
+
+	int count=0;
+	for (int i = 0; i &lt; P; i++)
+		{
+			if (bubble-&gt;swapCountArr[i] &gt; 0) {
+				count =1;
+				break;
+			}
+		}	
+	return count;
+}
+
+// generate N random numbers between 0 and MAX_NUM
+void generate_numbers()
+</FONT>{
+	int i;
+
+	srand(time(NULL));
+
+	for(i=0; i&lt;N; i++) 
+		number[i] = rand()%MAX_NUM;
+}
+//Print given array
+<A NAME="5"></A><FONT color = #FF0000><A HREF="match4-0.html#5" TARGET="0"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_0_3.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+void print_numbers(BubbleSort *bubble) 
+{
+	int i;
+
+	for(i=0; i&lt;N; i++) 
+		printf("%ld ", bubble-&gt;inputArray[i]);
+	printf("\n");
+}
+
+int compare_and_swap(int i, int j,BubbleSort *bubbleSort) 
+</FONT>{
+#ifdef DEBUG
+<A NAME="0"></A><FONT color = #FF0000><A HREF="match4-0.html#0" TARGET="0"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_0_10.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+	fprintf(stderr,"i %d j %d\n", i, j);
+#endif
+	assert ( i&lt;N );
+	assert ( j&lt;N );
+
+	if( bubbleSort-&gt;inputArray[i] &gt; bubbleSort-&gt;inputArray[j]) {
+		long temp = bubbleSort-&gt;inputArray[i];
+		bubbleSort-&gt;inputArray[i] = bubbleSort-&gt;inputArray[j];
+		bubbleSort-&gt;inputArray[j] = temp;
+		return 1;
+	}
+
+	return 0;
+}
+
+// even-odd pass bubbling from start to start+n
+void  bubble(BubbleSort *bubbleSort,int start, int n, int pass) 
+{
+#ifdef DEBUG
+	fprintf(stderr, "start %d n %d pass %d\n", start, n, pass);
+</FONT>#endif
+	if((start+n)&gt;N)
+	{
+		n=N-start;
+
+	}
+
+	while(bubbleSort-&gt;swapCompletedArr[pass]!=2){
+
+<A NAME="3"></A><FONT color = #00FFFF><A HREF="match4-0.html#3" TARGET="0"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_3_5.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+		if(bubbleSort-&gt;swapCompletedArr[pass]==1){
+			int swap_count = 0;
+			int next = start;
+
+			assert (start &lt; N-1); // bug if we start at the end of array
+
+			if (bubbleSort-&gt;passValue) { // sort odd-even index pairs
+				if ( !(next % 2) ) 
+					next = next + 1;
+			} else  { // sort even-odd index pairs
+				if (next % 2) 
+					next = next + 1;
+			}
+
+			while ( (next+1) &lt; (start+n) ) {
+</FONT>				swap_count += compare_and_swap(next, next+1,bubbleSort);
+				next+=2;
+			}
+			
+			bubbleSort-&gt;swapCountArr[pass]=swap_count;
+			bubbleSort-&gt;swapCompletedArr[pass]=0;
+
+			while(isSwapCompleted(bubbleSort,1)==1){
+				break;
+			}
+		}
+	}
+
+}
+
+void bubble_sort(BubbleSort *bubbleSort) 
+{
+	int last_count, swap_count = N;
+	int pass = 0;
+
+#ifdef DEBUG
+	print_numbers(bubbleStruct);
+#endif	
+		setSwapCompleted(bubbleSort,1);
+	do {
+		last_count = swap_count;
+		if(isSwapCompleted(bubbleSort, 0)){
+			swap_count=getSwapCount(bubbleSort);
+			pass=bubbleSort-&gt;passValue;
+			bubbleSort-&gt;passValue=(1-bubbleSort-&gt;passValue);
+			setSwapCompleted(bubbleSort,1);
+		}
+
+#ifdef DEBUG
+		print_numbers(bubbleStruct);
+		fprintf(stderr,"last_count %d swap_count %d\n", last_count, swap_count);
+#endif
+<A NAME="6"></A><FONT color = #00FF00><A HREF="match4-0.html#6" TARGET="0"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_1_3.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+	} while((swap_count!=0) || (last_count != 0) || (pass!=1));
+}
+
+
+int main(int argc, char *argv[])
+{
+
+	if( argc != 3) {
+		fprintf(stderr, "Usage: %s N\n", argv[0]);
+</FONT>		return 1;
+	}
+
+<A NAME="1"></A><FONT color = #00FF00><A HREF="match4-0.html#1" TARGET="0"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_1_6.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+	N = strtol(argv[1], (char **)NULL, 10);
+
+	if( (N &lt; 2) || (N &gt; MAX_COUNT) ) {
+		fprintf(stderr, "Invalid N. N should be between 2 and %d.\n", MAX_COUNT);
+		return 2;
+	}
+	
+	P = strtol(argv[2], (char **)NULL, 10);
+	if( (P &gt;= N) || (P &gt; MAX_PROCESS) ) {
+		fprintf(stderr, "Invalid P. P should be less than N value %d, or MAXX_PROCESS values %d.\n", N, MAX_PROCESS);
+		return 2;
+	}
+
+
+ 	   key_t key;
+       int shmid;
+</FONT>       int mode;
+<A NAME="2"></A><FONT color = #0000FF><A HREF="match4-0.html#2" TARGET="0"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_2_6.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+
+ 		BubbleSort *bubbleStruct;
+
+       /* make the key: */
+       if ((key = ftok("unique.txt", 'X')) &lt; 0) {
+            perror("ftok");
+            exit(1);
+       }
+       /* create the shared memory segment: */
+       if ((shmid = shmget(key, sizeof(bubbleStruct), 0644 | IPC_CREAT )) &lt; 0) {
+            perror("shmget");
+            exit(1);
+       }
+
+	
+		bubbleStruct=shmat(shmid, (void *)0, 0);
+		if(bubbleStruct == (BubbleSort *)(-1))
+		{
+			perror("shmat");	
+			exit(1);
+</FONT>		}
+		
+			//fprintf(stderr, "Generating.\n");
+			generate_numbers();
+	
+	for (int i = 0; i &lt; N; i++)
+	{
+		bubbleStruct-&gt;inputArray[i]=0;
+	}
+
+	for (int i = 0; i &lt; N; i++)
+	{
+ 		bubbleStruct-&gt;inputArray[i]=number[i];
+
+	}
+	printf("Given \t");
+    print_numbers(bubbleStruct);
+      
+	for (int i = 0; i &lt; P; i++)
+	{
+		bubbleStruct-&gt;swapCountArr[i]=1;
+		bubbleStruct-&gt;swapCompletedArr[i]=0;
+
+	}
+	bubbleStruct-&gt;passValue=0;
+	int noOfIndexPerProcess=N/P + 1;
+
+	for (int i = 0; i &lt; P; i++)
+	{
+		int childId=fork();
+		
+		if(childId == 0){
+			fprintf(stderr, "Child process %d\n",getpid());
+			int range = noOfIndexPerProcess;
+			if (i == P-1) 
+			{
+				if (N - (i*(noOfIndexPerProcess-1) + noOfIndexPerProcess) &gt; 0) 
+				{
+					range += N - (i*(noOfIndexPerProcess-1) + noOfIndexPerProcess);
+				}
+			}
+			bubble(bubbleStruct, i*(noOfIndexPerProcess-1), range, i);
+			exit(0);
+		}else if(childId &lt; 0){
+			perror("error in fork");
+			exit(1);
+		}
+	}
+	
+	bubble_sort(bubbleStruct);
+
+	setSwapCompleted(bubbleStruct,2);
+
+	fprintf(stderr, "Done.\n");
+	print_numbers(bubbleStruct);
+	shmdt(bubbleStruct);
+	shmctl(shmid, IPC_RMID, NULL);
+	return 0;
+}
+
+</PRE>
+</PRE>
+</BODY>
+</HTML>
