@@ -1,0 +1,505 @@
+<HTML>
+<HEAD>
+<TITLE>student_1/</TITLE>
+</HEAD>
+<BODY BGCOLOR=white>
+<HR>
+student_10/work/<p><PRE>
+&gt;&gt;&gt;&gt; file: main.c
+
+#include "parallel_bubble.h"
+
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/ipc.h&gt;
+#include &lt;sys/shm.h&gt;
+
+int main(int argc, char* argv[]){
+	//Check and Get the arguments.
+	if(argc != 3){
+		fprintf(stderr, "Usage: %s N P\n", argv[0]);
+		return 1; 
+	}
+	int N = strtol(argv[1], (char **)NULL, 10);
+<A NAME="0"></A><FONT color = #FF0000><A HREF="match25-0.html#0" TARGET="0"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_0_3.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+	int P = strtol(argv[2], (char **)NULL, 10);
+	if( (N &lt; 2) || (N &gt; MAX_COUNT) ) {
+		fprintf(stderr, "Invalid N. N should be between 2 and %d.\n", MAX_COUNT);
+		return 2;
+	}
+	if( (P &lt; 2) || (P &gt; MAX_PROCESS) ) {
+		fprintf(stderr, "Invalid P. P should be between 2 and %d.\n", MAX_PROCESS);
+		return 3;
+</FONT>	}
+	
+	Data *data = createSHM(N, P);
+	
+	//Create the P# of processes to handle the bubble sort
+	int range = N/P + 1;
+
+
+
+	for(int i = 0; i &lt; P; i++){
+		int pid = fork();
+		if(pid &lt; 0){
+			perror("fork");
+			exit(1);
+		}
+		else if(pid == 0){
+			fprintf(stderr, "This is %dth child process, my pid is %d.\n\n", i, getpid());
+			bubble(data, i*(range-1), range, i);
+			exit(0);
+		}
+		else if(pid &gt; 0){
+			fprintf(stderr, "This is parent process, my pid is %d.\n\n", getpid());
+		}
+	}
+	parallel_bubble_sort(data, P);
+	/* detach from the segment: */
+        if (shmdt(data) == -1) {
+            perror("shmdt");
+            exit(1);
+        }
+	deleteSHM();
+	return 0;
+}
+&gt;&gt;&gt;&gt; file: parallel_bubble.c
+
+#include "parallel_bubble.h"
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+#include &lt;sys/time.h&gt;
+#include &lt;sys/ipc.h&gt;
+#include &lt;sys/shm.h&gt;
+#include &lt;assert.h&gt;
+
+
+/**
+ * Provide the concrete definition for struct Data to flesh out
+ * abstract Data data type.
+ */
+struct Data
+{
+	int N;// number of data.
+	int P;//number of process.
+	int pass;// 0: even odd 1:odd even
+	long data[MAX_COUNT];//data array
+	int state[MAX_PROCESS];//state for each child process. -1: exit  0: done  1: to go
+	int numSwap[MAX_PROCESS];//number of swap for each child process.
+};
+
+
+/**
+ * This function print the data inside the Data.
+ */
+void
+print_numbers(Data *data){
+	for(int i = 0; i &lt; data-&gt;N; i++){
+		printf("%ld ", data-&gt;data[i]);
+	}
+	printf("\n");
+}
+/**
+ * This function randomly generates N number.
+ *
+ * data: the array of numbers stored in Data.
+ * N: number of data.
+ *
+ * returns: 0 if success. 
+ */
+int
+generateRandomData(long *data, int N){
+	srandom(time(NULL));
+	for(int i = 0; i &lt; N; i++){
+		data[i] = random() % MAX_VALUE;
+	}
+	return 0;
+}
+/**
+ * This function sets all the value as the augument value.
+ *
+ * state: the state array.
+ * N: #state.
+ * value: the value to be set.
+ *
+ * returns: 0 if success.
+ */ 
+int
+setState(int *state, int P, int value){
+	for(int i = 0; i &lt; P; i++){
+		state[i] = value;
+	}
+	return 0;
+}
+
+/**
+ * This function sets all the value in array numSwap as value.
+ *
+ * numSwap: the swap array.
+ * N: #swap.
+ * value: the value to be set.
+ *
+ * returns: 0 if success.
+ */
+int
+setSwap(int *numSwap, int P, int value){
+	for(int i = 0; i &lt; P; i++){
+		numSwap[i] = value;
+	}
+	return 0;
+}
+
+/**
+ * Sum the array with integer.
+ *
+ * data: the integer array to be sumed.
+ * P: length of data.
+ *
+ * returns: the summation of given array.
+ */
+int
+summation(int *data, int P){
+	int res = 0;
+	for(int i = 0; i &lt; P; i++){
+		res += data[i];
+	}
+	return res;
+}
+
+/**
+ * This function initiates all the members in Data.
+ *
+ * data: the Data type reference.
+ *
+ * returns: 0 if success.
+ */
+int
+initiateData(Data *data, int inN, int inP){
+	data-&gt;N = inN;
+	data-&gt;P = inP;
+	data-&gt;pass = 0;
+	generateRandomData(data-&gt;data, data-&gt;N);
+	setState(data-&gt;state, MAX_PROCESS, 0);
+	setSwap(data-&gt;numSwap, MAX_PROCESS, 0);
+	setState(data-&gt;state, inP, 1);
+	setSwap(data-&gt;numSwap, inP, 0);
+	return 0;	
+}
+
+/**
+ * This function creates the shared memory and return it 
+ * after initialization.
+ *
+ * N: the number of data.
+ *
+ * returns: the pointer to the Data.
+ */
+Data*
+createSHM(int N, int P){
+	//Create the shared memory.
+	key_t key;
+	int shmid;
+	Data *data;
+
+	/* make the key */
+	if((key = ftok("Makefile", 'A')) == -1){
+		perror("ftok");
+		exit(1);
+	}
+
+	/* create the shared memory segment */
+	if((shmid = shmget(key, SHM_SIZE, 0644 | IPC_CREAT/* | IPC_EXCL*/)) == -1){
+		perror("shmget failed");
+		exit(1);
+	}
+	/* attach to the segment to get a pointer to it */
+	data = shmat(shmid, (void *)0, 0);
+	if(data == (Data*)(-1)){
+		perror("shmat");
+		exit(1);
+	}else{
+		initiateData(data, N, P);
+	}
+	return data;
+}
+
+/**
+ * This function deletes the shared memory.
+ *
+ * returns: 0 if successfully delete the SHM.
+ */
+int deleteSHM(){
+	key_t key;
+       	int shmid;
+	
+        /* make the key: */
+        if ((key = ftok("Makefile", 'A')) == -1) {
+             perror("ftok");
+             exit(1);
+        }
+
+        /* connect to memory segment: */
+        if ((shmid = shmget(key, SHM_SIZE, 0644)) == -1) {
+             perror("shmget_delete");
+             exit(1);
+        }
+
+         /* delete he segment */
+        if( shmctl(shmid, IPC_RMID, NULL) == -1) {
+             perror("shmctl");
+             exit(1);
+        }
+
+        return(0);	
+}
+
+/**
+ * This function compares and swaps the element in
+ * two index.
+ *
+ * number: the list of data to be compared and swaped.
+ * i:
+ * j:
+ * N: number of data in data.
+ * returns: 0/1.
+ */
+int
+compare_and_swap(long *number, int i, int j, int N)
+{
+	assert ( i&lt;N );
+	assert ( j&lt;N );
+
+	if( number[i] &gt; number[j]) {
+		long temp = number[i];
+		number[i] = number[j];
+		number[j] = temp;
+		return 1;
+	}
+
+	return 0;
+}
+
+
+
+/**
+ * This function is doing bubble in different range.
+ *
+ * data: the shared memory needs to be sorted.
+ * start: start index.
+ * n: segment length.
+ * childId: the child ID indicates the index of child.
+ */
+void
+bubble(Data *data, int start, int n, int childId) 
+{
+	if(childId == data-&gt;P - 1){
+		n = data-&gt;N - start;
+
+	}
+	fprintf(stderr, "start: %d, n: %d, childId: %d\n", start, n, childId);
+	while(data-&gt;state[childId] != -1){
+		if(data-&gt;state[childId]){
+
+		/*	for(int i=0;i&lt;6;i++){
+				if(!data-&gt;state[i])
+					while(1);
+			}*/
+			int swap_count = 0;
+			int next = start;
+
+			assert (start &lt; data-&gt;N-1); // bug if we start at the end of array
+
+<A NAME="1"></A><FONT color = #00FF00><A HREF="match25-0.html#1" TARGET="0"><IMG SRC="http://moss.stanford.edu/bitmaps/tm_1_2.gif" ALT="other" BORDER="0" ALIGN=left></A>
+
+			if (data-&gt;pass) { // sort odd-even index pairs
+				if ( !(next % 2) ) 
+					next = next + 1;
+			} else  { // sort even-odd index pairs
+				if (next % 2) 
+					next = next + 1;
+			}
+
+			while ( (next+1) &lt; (start+n) ) {
+</FONT>				swap_count += compare_and_swap(data-&gt;data, next, next+1, data-&gt;N);
+				next+=2;
+			}
+			
+			//Update the record for itself in data.
+			data-&gt;numSwap[childId] = swap_count;
+			data-&gt;state[childId] = 0;
+		}
+	}
+}
+
+/**
+ * This function dose the parallel bubble sort.
+ *
+ * data: the pointer of Data.
+ * P: number of child processes.
+ */
+void
+parallel_bubble_sort(Data *data, int P)
+{
+	int last_count, swap_count = data-&gt;N;
+
+	//Calculate the time of running.
+	struct timeval starting_time;
+	struct timeval ending_time;
+	gettimeofday(&starting_time, NULL);
+#ifdef DEBUG
+	fprintf(stderr, "The array before parallel bubble sorting is:\n");
+	print_numbers(data);
+#endif
+
+
+	do{
+		last_count = swap_count;
+		if( !summation(data-&gt;state, P) ){
+			swap_count = summation(data-&gt;numSwap, P);
+			data-&gt;pass = 1 - data-&gt;pass;
+			setSwap(data-&gt;numSwap, P, 0);
+			setState(data-&gt;state, P, 1);
+		}
+	} while((swap_count!=0) || (last_count != 0));
+	//Terminate all the child processes.
+	setState(data-&gt;state, P, -1);
+	//Print the time duration of sorting.
+	gettimeofday(&ending_time, NULL);
+	long int ldDuration = (ending_time.tv_sec-starting_time.tv_sec)*1000000 + ending_time.tv_usec - starting_time.tv_usec;
+	fprintf(stderr, "Sorting time is %ld microsecond.\n", ldDuration);
+#ifdef DEBUG
+	fprintf(stderr, "The array after parallel bubble sorting is:\n");
+	print_numbers(data);
+#endif
+}
+
+
+&gt;&gt;&gt;&gt; file: parallel_bubble.h
+#ifndef PARALLEL_BUBBLE_H
+#define PARALLEL_BUBBLE_H
+
+#define MAX_COUNT 10000 //max number of data to sort
+#define MAX_PROCESS 100 //max number of child process
+#define SHM_SIZE 102400//the share memory size
+#define MAX_VALUE 1000 //the max value of data
+
+#define DEBUG
+
+typedef struct Data Data;
+
+
+/**
+ * This function print the data inside the Data.
+ */
+void print_numbers(Data *data);
+
+/**
+ * This function randomly generates N number.
+ *
+ * data: the array of numbers stored in Data.
+ * N: number of data.
+ *
+ * returns: 0 if success. 
+ */
+int generateRandomData(long *data, int N);
+
+/**
+ * This function sets all the value as the augument value.
+ *
+ * state: the state array.
+ * N: #state.
+ * value: the value to be set.
+ *
+ * returns: 0 if success.
+ */ 
+int setState(int *state, int P, int value);
+
+/**
+ * This function sets all the value in array numSwap as value.
+ *
+ * numSwap: the swap array.
+ * N: #swap.
+ * value: the value to be set.
+ *
+ * returns: 0 if success.
+ */
+int setSwap(int *numSwap, int P, int value);
+
+/**
+ * Sum the array with integer.
+ *
+ * data: the integer array to be sumed.
+ * P: length of data.
+ *
+ * returns: the summation of given array.
+ */
+int summation(int *data, int P);
+
+/**
+ * This function initiates all the members in Data.
+ *
+ * data: the Data type reference.
+ *
+ * returns: 0 if success.
+ */
+int initiateData(Data *data, int inN, int inP);
+
+/**
+ * This function creates the shared memory and return it 
+ * after initialization.
+ *
+ * inN: the number of data.
+ * inP: the number of processes.
+ *
+ * returns: the pointer to the Data.
+ */
+Data* createSHM(int N, int P);
+
+
+/**
+ * This function deletes the shared memory.
+ *
+ * returns: 0 if successfully delete the SHM.
+ */
+int deleteSHM();
+
+/**
+ * This function compares and swaps the element in
+ * two index.
+ *
+ * number: the list of data to be compared and swaped.
+ * i:
+ * j:
+ * N: number of data in data.
+ * returns: 0/1.
+ */
+int compare_and_swap(long *number, int i, int j, int N);
+
+/**
+ * This function is doing bubble in different range.
+ *
+ * data: the shared memory needs to be sorted.
+ * start: start index.
+ * n: segment length.
+ * childId: the child ID indicates the index of child.
+ */
+void bubble(Data *data, int start, int n, int childId);
+
+/**
+ * This function dose the parallel bubble sort.
+ *
+ * data: the pointer of Data.
+ * P: number of child processes.
+ */
+void parallel_bubble_sort(Data *data, int P);
+
+#endif
+</PRE>
+</PRE>
+</BODY>
+</HTML>
