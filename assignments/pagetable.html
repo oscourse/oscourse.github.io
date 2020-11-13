@@ -1,17 +1,17 @@
 <H1> Kernel Module to translate virtual to physical address mapping by page table walk</H1>
 
-<!--
 <H2>
 Objective 
 </H2>
 
 <p> 
+<!--
 You will learn how to develop and use kernel modules. 
-You will learn how the Linux OS maintains virtual to physical address mappings in per-process page tables.
 -->
+You will learn how the Linux OS maintains virtual to physical address mappings in per-process page tables.
+You will also learn how to use the <tt>ioctl()</tt> interface to interact with your character device.
 
-<h2>Problem Description:
-Write a kernel module to translate virtual addresses to physical addresses for a target process</h2>
+<h2>Part A: Write a kernel module to translate virtual addresses to physical addresses for a target process</h2>
 
 <p>Create a kernel module that takes the process-ID of an active process as 
 an argument (module parameter) and outputs all the virtual to physical address mappings 
@@ -63,7 +63,7 @@ You can either use the VM assigned to you or you can use your own Linux VM on yo
 </ul>
 -->
 
-<h2> Understand how to look up the virtual address to physical address mapping in the Linux kernel.</h2>
+<h3> Understand how to look up the virtual address to physical address mapping in the Linux kernel.</h3>
 <ol>
 	<li><a href="https://oscourse.github.io/slides/pagetable.pdf">Slides to 5-level page table</a>
 	<li> Get Page Global Directory (PGD) from mm_struct. mm_struct structure holds the process virtual memory information. CR3 register is loaded with <b>mm_struct->pgd</b> which points to the process page table or base physical address of page global directory.     
@@ -82,13 +82,34 @@ You can either use the VM assigned to you or you can use your own Linux VM on yo
 	<li>Test applications: <a href="https://oscourse.github.io/examples/computation_intensive.c">computation_intensive.c</a>, <a href="https://oscourse.github.io/examples/memory_intensive.c">memory_intensive.c</a></li>
 </ol>
 
+<h2>Part B: Create an ioctl interface retrieve a virtual page number to physical page number mapping.</h2>
+
+<ol>
+
+<li> Learn how to use an <tt>ioctl()</tt> interface using this <a href=https://www.tldp.org/LDP/lkmpg/2.4/html/x856.html>example</a>. Download it, compile it, and run it on your VM. You can change the code to use miscelleneous character device, instead of a regular character device.
+<!--
+ or a <a href=https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/proc.html>/proc</a> interface.
+-->
+
+<li> Next, modify your kernel module from Part A to implement a character device with the following behavior.
+	<ul>
+		<li> The character device should provide an <tt>ioctl()</tt> interface to a user-space application.
+		<li> Implement an <tt>ioctl()</tt> command called <tt>IOCTL_GET_PFN</tt>. 
+		<li> The <tt>IOCTL_GET_PFN</tt> command should  accept a virtual page number of the target process (specified earlier as the module argument) as the <tt>ioctl</tt> parameter. This is the last <tt>ioctl_param</tt> argument to the <tt>device_ioctl()</tt> function in the above example. 
+		<tt> It should return the physical page number mapped to the given virtual page number, as the return value of the <tt>ioctl()</tt> call.
+	</ul>
+
+<li> Write a user-space program that invokes the <tt>ioctl()</tt> command on your character device to convert virtual page numbers to physical page numbers for the target process.
+
+</ol>
 
 <H2>
 Grading guideline
 </H2>
 
-<br> 80 - Demonstrating that your code prints the virtual address to page frame number mappings for any arbitrary process.
-<br> 20 - Readme file. Handle all major error conditions. Clean, modular, and commented code. Clean readable output. 
+<br> 45 - Part A
+<br> 45 - Part B
+<br> 10 - Readme file. Handle all major error conditions. Clean, modular, and commented code. Clean readable output. 
 <br> Total = 100
 <br>
 
