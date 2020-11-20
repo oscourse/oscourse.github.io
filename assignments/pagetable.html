@@ -1,4 +1,4 @@
-<H1> Kernel Module to translate virtual to physical address mapping by page table walk</H1>
+<H1> Kernel Module to translate virtual address to physical frame number by page table walk</H1>
 
 <H2>
 Objective 
@@ -11,11 +11,10 @@ You will learn how to develop and use kernel modules.
 You will learn how the Linux OS maintains virtual to physical address mappings in per-process page tables.
 You will also learn how to use the <tt>ioctl()</tt> interface to interact with your character device.
 
-<h2>Part A: Write a kernel module to translate virtual addresses to physical addresses for a target process</h2>
+<h2>Part A: Write a kernel module to translate virtual addresses to physical frame number  for a target process</h2>
 
 <p>Create a kernel module that takes the process-ID of an active process as 
-an argument (module parameter) and outputs all the virtual to physical address mappings 
-of the target process. Print the virtual address and the corresponding  physical addresses 
+an argument (module parameter) and outputs all the virtual address to physical frame number mappings of the target process. Print the virtual address and the corresponding  physical frame number 
 to the system log using printk(). Show that your code works for any arbitrary target process.
 
 <!--
