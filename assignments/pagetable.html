@@ -85,7 +85,7 @@ You can either use the VM assigned to you or you can use your own Linux VM on yo
 
 <ol>
 
-<li> Learn how to use an <tt>ioctl()</tt> interface using this <a href=https://www.tldp.org/LDP/lkmpg/2.4/html/x856.html>example</a>. Download it, compile it, and run it on your VM. 
+<li> Learn how to use an <tt>ioctl()</tt> interface using this <a href=https://github.com/Roja-Eswaran/IOCTL-Interface.git>example</a>. Download it, compile it, and run it on your VM. 
 <!--
 You can change the code to use miscelleneous character device, instead of a regular character device.
 -->
@@ -97,7 +97,7 @@ You can change the code to use miscelleneous character device, instead of a regu
 	<ul>
 		<li> The character device should provide an <tt>ioctl()</tt> interface to a user-space application.
 		<li> Implement an <tt>ioctl()</tt> command called <tt>IOCTL_GET_PFN</tt>. 
-		<li> The <tt>IOCTL_GET_PFN</tt> command should  accept a virtual page number of the target process (specified earlier as the module argument) as the <tt>ioctl</tt> parameter. This is the last <tt>ioctl_param</tt> argument to the <tt>device_ioctl()</tt> function in the above example. 
+		<li> The <tt>IOCTL_GET_PFN</tt> command should  accept a virtual page number of the target process (specified earlier as the module argument) as the <tt>ioctl</tt> parameter. This is the last <tt>ioctl_param</tt> argument to  <tt>my_ioctl()</tt> function in the above example. 
 		<li> It should return the physical page number mapped to the given virtual page number, as the return value of the <tt>ioctl()</tt> call.
 	</ul>
 
