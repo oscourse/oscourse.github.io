@@ -24,5 +24,5 @@ int main()
 
 	//printf("parent sleeps for 5 seconds\n"); 
 	//sleep(5);
-	printf("parent carries on\n"); 
+	printf("parent(%d) carries on\n", getpid()); 
 }
