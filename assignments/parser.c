@@ -58,6 +58,9 @@ void tokenize (char * string)
 			assert ( (tokens = realloc(tokens, sizeof(char*) * size)) != NULL);
 		}
 	}
+
+	tokens[token_count] = NULL; // execvp expects a NULL at the end
+
 }
 
 void read_command() 
