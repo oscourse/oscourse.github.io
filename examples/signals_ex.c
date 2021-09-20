@@ -35,7 +35,7 @@ Sigfunc *install_signal_handler(int signo, Sigfunc *handler)
 /* SIGINT handler */
 void int_handler(int sig)
 {
-  printf("!!Got interrupt!!\n");
+  printf("Child got SIGINT!!\n");
   exit(2);
 }
 
@@ -66,5 +66,6 @@ int main(int argc, char *argv[])
   sleep(5);
 
   /* ... and  then interrupts it */
+  printf("Parent sending SIGINT to child\n");
   kill(pid, SIGINT);
 }
