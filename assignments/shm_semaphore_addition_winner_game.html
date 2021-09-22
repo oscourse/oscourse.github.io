@@ -28,7 +28,7 @@ of these three versions of your multi-process game.
 <br>
 The main (parent) process does the following:
 <ul>
-	<li> Creates a shared memory region that hold three variables -- two numbers and a winner PID.
+	<li> Creates a shared memory region that hold at least three variables -- two numbers and a winner PID -- plus any additional information you want to keep.
 	<li> Writes two positive numbers, 1 and 2, into the two numbers in the shared memory region.
 	<li> Forks <B>P</B> child processes.
 	<li> Waits for all the children to complete.
