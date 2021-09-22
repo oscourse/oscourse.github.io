@@ -95,7 +95,7 @@ You have to write three versions of the locking function.
 	while ( sem_try_wait(...) &lt 0 ) {
 		if( errno == EAGAIN)
 			continue;
-		else perror("");
+		else perror("sem_try_wait failed:");
 	}
 	</pre>
 	</li>
@@ -103,14 +103,14 @@ You have to write three versions of the locking function.
 		Another in which you replace the "continue;" statement above with "sched_yield();"
 	</li>
 	<li>
-		And third in which you use a blocking semaphore, using sem_wait().
+		And third in which you use a blocking semaphore, using sem_wait(), instead of sem_try_wait(). Change the logic of the abover code as needed.
 	</li>
 </ol>
 
 <H2>Part C: Comparing the three versions of the Addition game</H2> 
 <P>In this part, you are asked to write user-level profiling code in order
-to compare the relative performance of the three versions of locking
-you wrote in Part B. Using gettimeofday() system call, measure and 
+to compare the relative performance of the three versions of locking mechanisms
+you wrote in Part B. Using the gettimeofday() system call, measure and 
 plot the following two graphs and <i>explain the results you obtain</i>.</P> 
 <ul>
 	<li>
@@ -124,25 +124,25 @@ plot the following two graphs and <i>explain the results you obtain</i>.</P>
  
 <H2>Grading Guidelines</H2> 
 <pre> 
-	Part A: Multi-Process Addition without locking - 30
+	Part A: Multi-Process Addition without locking - 20
 		Creation and execution of processes 
 		Creation and use of shared memory data region 
  
-	Part B: Multi-process Addition with Locking - 65
-		Creation and initialization of semaphores 
+	Part B: Multi-process Addition with Locking - 50
+		Proper semaphore initialization.
 		Correct use of locking/unlocking so that only one process is in the critical section at a time 
 		Busy-wait locking with "sem_trywait()" and "continue" 
 		Busy-wait locking with "sem_trywait()" and "sched_yield()" 
 		Busy-wait locking with "sem_wait()" 
  
-	Part C: Comparing the Game of Turns - 40
+	Part C: Comparing the Game of Turns - 25
 		Correct implementation and collection of profiling statistics 
 		Final report with profiling results, graphs and explanations 
  
-	Error Handling, README, Makefile and Coding style - 10
+	Error Handling, README, Makefile and Coding style - 5
 		Cleanup of shared memory region, checking for return values/error conditions, etc.
  
-	Total = 145
+	Total = 100
 </pre> 
  
 <H2>Submission Guidelines</H2> 
