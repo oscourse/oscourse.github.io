@@ -20,63 +20,34 @@ of these three versions of your multi-process game.
  
 <H2>Objectives</H2> 
 <ul> 
-	<li> 
-		Learn use of inter-process communication using shared memory and semaphores.
-	</li> 
-	<li> 
-		Learn the basic workings of process scheduling with synchronization.
-	</li> 
+	<li> Learn the use of shared memory and semaphores for inter-process communication.
+	<li> Measure the effectiveness of process scheduling with synchronization.
 </ul> 
  
 <H2>Part A: Multi-Process Addition Game Without Locking</H2> 
-<P> 
-In this part, you are asked to write a simple program that takes two command-line arguments <b>P</b> and <b>M</b>.<br>
+<P> In this part, you are asked to write a simple program that takes two command-line arguments <b>P</b> and <b>M</b>.<br>
 <br>
 The main (parent) process does the following:
 <ul>
-	<li>
-		Creates a shared memory region.
-	</li>
-	<li>
-		Writes two positive integer values, 1 and 2, into the shared memory region.
-	</li>
-	<li>
-		Forks <B>P</B> other child processes.
-	</li>
-	<li>
-		Waits for all the children to complete.
-	</li>
-	<li>
-		Prints of the larger of the two integer values in the shared memory.
-	</li>
-	<li>
-		Reads a "winner" value, which is also located in the shared memory region and prints it out.
-	</li>
-	<li>
-	Exits.
-	</li>
+	<li> Creates a shared memory region.
+	<li> Writes two positive integer values, 1 and 2, into the shared memory region.
+	<li> Forks <B>P</B> other child processes.
+	<li> Waits for all the children to complete.
+	<li> Prints of the larger of the two integer values in the shared memory.
+	<li> Reads a "winner" value, which is also located in the shared memory region and prints it out.
+	<li> Exits.
 </ul>
 
 Each child process repeats the following steps in a loop until the larger of the two numbers in the shared memory is greater than <b>M</b> (passed via command-line arguments). Don't introduce any locking yet! Wait to do that in Part B below.
 <ul>
-	<li>
-		Read the two integers from the shared memory.
-	</li>
-	<li>
-		If any one of them is greater than <b>M</b>, then exit.
-	</li>
-	<li>
-		Else add the two integers.
-	</li>
-	<li>
-		Replace the smaller number in the shared memory with the result of the addition.
-	</li>
-	<li>
-		If the result of addition is greater than <b>M</b>, then write this child's process ID into a "winner" variable in the shared memory region (the one which the parent process will read at the end).
-	</li>
+	<li> Read the two integers from the shared memory.
+	<li> If any one of them is greater than <b>M</b>, then exit.
+	<li> Else add the two integers.
+	<li> Replace the smaller number in the shared memory with the result of the addition.
+	<li> If the result of addition is greater than <b>M</b>, then write this child's process ID into a "winner" variable in the shared memory region (the one which the parent process will read at the end).
 </ul>
 
-Run this program several times for identical values of P and M. (Choose large enough P and M). Observe the parent's output. Is it the same every time?
+Run this program several times for identical values of P and M. Choose large enough M and a reasonably large P. Observe the parent's output. 
  
 <H2>Part B: Addition Game with Locking</H2> 
 Now introduce locking/unlocking around the critical section in the child process. At the beginning of each iteration, acquire the lock. At the end each iteration, release the lock. Something as follows:
