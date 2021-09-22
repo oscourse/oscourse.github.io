@@ -29,28 +29,25 @@ of these three versions of your multi-process game.
 <br>
 The main (parent) process does the following:
 <ul>
-	<li> Creates a shared memory region.
-	<li> Writes two positive integer values, 1 and 2, into the shared memory region.
-	<li> Forks <B>P</B> other child processes.
+	<li> Creates a shared memory region that hold three variables -- two numbers and a winner PID.
+	<li> Writes two positive numbers, 1 and 2, into the two numbers in the shared memory region.
+	<li> Forks <B>P</B> child processes.
 	<li> Waits for all the children to complete.
-	<li> Prints of the larger of the two integer values in the shared memory.
-	<li> Reads a "winner" value, which is also located in the shared memory region and prints it out.
+	<li> Prints of the larger of the two numbers and the winner PID from the shared memory.
 	<li> Exits.
 </ul>
 
 Each child process repeats the following steps in a loop until the larger of the two numbers in the shared memory is greater than <b>M</b> (passed via command-line arguments). Don't introduce any locking yet! Wait to do that in Part B below.
 <ul>
-	<li> Read the two integers from the shared memory.
-	<li> If any one of them is greater than <b>M</b>, then exit.
-	<li> Else add the two integers.
-	<li> Replace the smaller number in the shared memory with the result of the addition.
-	<li> If the result of addition is greater than <b>M</b>, then write this child's process ID into a "winner" variable in the shared memory region (the one which the parent process will read at the end).
+	<li> If any one of the two numbers in the shared memory is greater than <b>M</b>, then exit.
+	<li> Else replace the smaller number in the shared memory with the sum of the two numbers.
+	<li> If the result of addition is greater than <b>M</b>, then write this child's process ID into a "winner" variable in the shared memory.
 </ul>
 
 Run this program several times for identical values of P and M. Choose large enough M and a reasonably large P. Observe the parent's output. 
  
 <H2>Part B: Addition Game with Locking</H2> 
-Now introduce locking/unlocking around the critical section in the child process. At the beginning of each iteration, acquire the lock. At the end each iteration, release the lock. Something as follows:
+Now introduce locking/unlocking around the critical section in each child process. At the beginning of each iteration, acquire the lock. At the end each iteration, release the lock. Something as follows:
 <pre>
 	while(...) {
 		lock
