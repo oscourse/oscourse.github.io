@@ -53,7 +53,7 @@ Here are some possible race conditions that you may want to look for. These may 
 </ul>
 
 <p><b>Instrumentation:</b>
-You can also add additional print statements in the child processes to observe their behavior, but remember that print statements can alter the execution timing of the children by introducing I/O operations (to stdout). Or you could collect "instrumentation" data in the child and print from parent. You could think of ways you can observe child's behavior without altering it too much.
+You can also add additional print statements in the child processes to observe their behavior, but remember that print statements can alter the execution timing of the children by introducing I/O operations (to stdout). Or you could collect necessary data in the child and print it from parent. Think of ways to observe child's behavior without altering it too much.
  
 <H2>Part B: Addition Game with Locking</H2> 
 Now introduce locking/unlocking around the critical section in each child process. At the beginning of each iteration, acquire the lock. At the end each iteration, release the lock. Something as follows:
