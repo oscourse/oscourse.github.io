@@ -67,12 +67,12 @@ Now introduce locking/unlocking around the critical section in each child proces
 You have to write three versions of the locking function.
 <ol>
 	<li>
-		One in which the child <b>busy-waits</b> using sem_try_wait(). Something as follows:
+		One in which the child <b>busy-waits</b> using sem_trywait(). Something as follows:
 	<pre>
-	while ( sem_try_wait(...) &lt 0 ) {
+	while ( sem_trywait(...) &lt 0 ) {
 		if( errno == EAGAIN)
 			continue;
-		else perror("sem_try_wait failed:");
+		else perror("sem_trywait failed:");
 	}
 	</pre>
 	</li>
@@ -80,7 +80,7 @@ You have to write three versions of the locking function.
 		Another in which you replace the "continue;" statement above with "sched_yield();"
 	</li>
 	<li>
-		And third in which you use a blocking semaphore, using sem_wait(), instead of sem_try_wait(). Change the logic of the abover code as needed.
+		And third in which you use a blocking semaphore, using sem_wait(), instead of sem_trywait(). Change the logic of the abover code as needed.
 	</li>
 </ol>
 
