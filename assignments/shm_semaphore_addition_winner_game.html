@@ -40,10 +40,19 @@ Each child process repeats the following steps in a loop until the larger of the
 <ul>
 	<li> If any one of the two numbers in the shared memory is greater than <b>M</b>, then exit.
 	<li> Else replace the smaller number in the shared memory with the sum of the two numbers.
-	<li> If the result of addition is greater than <b>M</b>, then write this child's process ID into a "winner" variable in the shared memory.
+	<li> If the result of addition is greater than <b>M</b>, then write this child's process ID into a "winner" variable in the shared memory and exit.
 </ul>
 
-Run this program several times for identical values of P and M. Choose large enough M and a reasonably large P. Observe the parent's output. 
+Run this program several times for identical values of P and M. Choose large enough M and a reasonably large P. Observe the output. 
+
+Here are some possible race conditions that you may want to look for. These may or may not show up depending on your execution environment.
+<ul>
+	<li> Does more than one child process ever try to mark itself as winner? 
+	<li> Does the sum always update correctly? Could one child process overwrite the sum of another?
+	<li> Does the parent always declare the correct process to be the winner?
+</ul>
+
+You can also add additional print statements in the child processes to observe their behavior, but remember that print statements can alter the execution timing of the children by introducing I/O operations (to stdout). Or you could collect "instrumentation" data in the child and print from parent. You could think of ways you can observe child's behavior without altering it too much.
  
 <H2>Part B: Addition Game with Locking</H2> 
 Now introduce locking/unlocking around the critical section in each child process. At the beginning of each iteration, acquire the lock. At the end each iteration, release the lock. Something as follows:
