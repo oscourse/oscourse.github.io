@@ -106,7 +106,7 @@ plot the following two graphs.
 </a>
 <ul>
 	<li>Read the Linux man pages for  <tt>sem_init(), sem_trywait(), sem_wait()</tt>, and <tt>sem_post()</tt>.
-	<li>Place your semaphore variable in the shared memory region alongside P, M, and the two integers, so that all processes can perform UP and DOWN operations on the semaphore. This is related to the <tt>pshared</tt> argument for <tt>sem_init()</tt> mentioned below.
+	<li>Place your semaphore variable in the shared memory region alongside the two integers, and the winner variables, so that all processes can perform UP and DOWN operations on the semaphore. This is related to the <tt>pshared</tt> argument for <tt>sem_init()</tt> mentioned below.
 	<li>To compile your code, use the <tt>-lpthread</tt> flag, even though this code doesn't use threads. E.g. <tt>gcc -o assignment2 assignment2.c -lpthread</tt>.
 	<li><a href=http://www.csc.villanova.edu/~mdamian/threads/posixsem.html>Here's an example of how to use sem_init(), sem_wait(), and sem_post().</a> But note that <tt>sem_init()</tt> in this example sets the second argument (<tt>pshared</tt>) to 0. You may want to set <tt>pshared</tt> to 1. Read the <tt>sem_init()</tt> man page to find out what the <tt>pshared</tt> argument does.
 </ul>
