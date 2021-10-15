@@ -67,7 +67,7 @@ Now introduce locking/unlocking around the critical section in each child proces
 You have to write three versions of the locking function.
 <ol>
 	<li>
-		One in which the child <b>busy-waits</b> using sem_trywait(). Something as follows:
+		One in which the child <b>busy-waits</b> using <tt>sem_trywait()</tt>. Something as follows:
 	<pre>
 	while ( sem_trywait(...) &lt 0 ) {
 		if( errno == EAGAIN)
@@ -77,15 +77,13 @@ You have to write three versions of the locking function.
 	</pre>
 	</li>
 	<li>
-		Another in which you replace the "continue;" statement above with "sched_yield();"
+		Another in which you replace the <tt>continue;</tt> statement above with <tt>sched_yield();</tt>
 	</li>
 	<li>
 		And third in which you use a blocking semaphore, using sem_wait(), instead of sem_trywait(). Change the logic of the above code as needed.
 	</li>
 </ol>
-<ul>
-	<li><a href=http://www.csc.villanova.edu/~mdamian/threads/posixsem.html>Here's an example of how to use sem_init(), sem_wait(), and sem_post().</a>
-</ul>
+
 
 <H2>Part C: Comparing the three versions of the Addition game</H2> 
 <P>In this part, you are asked to write user-level profiling code in order
@@ -102,6 +100,15 @@ plot the following two graphs.
 </ul>
 <p> Explain the results you obtain in a PDF report that you must include with your submission.
 
+<a name="hints">
+<H2> Hints </H2>
+</a>
+<ul>
+	<li>Read the Linux man pages for  <tt>sem_init(), sem_trywait(), sem_wait()</tt>, and <tt>sem_post()</tt>.
+	<li>Place your semaphore variable in the shared memory region alongside P, M, and the two integers, so that all processes can perform UP and DOWN operations on the semaphore. This is related to the <tt>pshared</tt> argument for <tt>sem_init()</tt> mentioned below.
+	<li>To compile your code, use the <tt>-lpthread</tt> flag, even though this code doesn't use threads. E.g. <tt>gcc -o assignment2 assignment2.c -lpthread</tt>.
+	<li><a href=http://www.csc.villanova.edu/~mdamian/threads/posixsem.html>Here's an example of how to use sem_init(), sem_wait(), and sem_post().</a> But note that <tt>sem_init()</tt> in this example sets the second argument (<tt>pshared</tt>) to 0. You may want to set <tt>pshared</tt> to 1. Read the <tt>sem_init()</tt> man page to find out what the <tt>pshared</tt> argument does.
+</ul>
  
 <H2>Grading Guidelines</H2> 
 <pre> 
