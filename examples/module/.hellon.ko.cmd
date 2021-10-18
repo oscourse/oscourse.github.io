@@ -1,1 +1,0 @@
-cmd_/home/kartik/cs552/examples/module/hellon.ko := ld -m elf_i386 -m elf_i386 -r -o /home/kartik/cs552/examples/module/hellon.ko /home/kartik/cs552/examples/module/hellon.o /home/kartik/cs552/examples/module/hellon.mod.o
