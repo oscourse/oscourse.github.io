@@ -76,12 +76,12 @@ your kernel module should return to the following information about all currentl
 	<li> its current state.
 </ul>
 
-	<p>Note that the <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L638>state</a> field in  <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L629>task_struct</a> can be -1, 0 or greater than 0.  A state value of 1 or more indicates a combination (bitwise OR) 
+	<p>Note that the <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L731>state</a> field in  <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L729>task_struct</a> can be -1, 0 or greater than 0.  A state value of 1 or more indicates a combination (bitwise OR) 
 <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L75>
 values listed here.
 </a>
 
-	<p>So you will have to parse the <tt>task-->state</tt> value to figure out which of the states apply to a process. You can pass the raw state value (as a <tt>long</tt> value) from kernel to user space and decode the state values in your user space program.
+	<p>So you will have to parse the <tt>task-->__state</tt> value to figure out which of the states apply to a process. You can pass the raw state value (as a <tt>long</tt> value) from kernel to user space and decode the state values in your user space program.
 
 <P>Beware that bugs in kernel code may either crash your kernel immediately or may have no immediate visible effect, but may have a delayed effect. Therefore, you cannot assume that the thing you did most recently is necessarily the cause of a crash.
 
@@ -149,13 +149,13 @@ In your output, group processes by the CPU on which they are running.</LI>
 <li> <a href=https://oscourse.github.io/examples/module/>Example kernel modules hello.c and hellon.c</a>
 <li> <a href=https://elixir.bootlin.com/linux/latest/source>Kernel Cross Reference</a></li>
 
-<li> <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched/signal.h#L588>for_each_process()</a> macro can help you iterate over all processes in the system.
+<li> <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched/signal.h#L603>for_each_process()</a> macro can help you iterate over all processes in the system.
 
 <li> <tt>struct task_struct</tt> definition can be found <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L629>here</a>
 
-<li> Process states are defined <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L75>here</a>
+<li> Process states are defined <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L82>here</a>
 
-<li> The function <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L1864>task_cpu()</a> can help you extract the currently assigned CPU for a process.
+<li> The function <a href=https://elixir.bootlin.com/linux/latest/source/include/linux/sched.h#L2115>task_cpu()</a> can help you extract the currently assigned CPU for a process.
 
 
  <LI> Introductory material on Linux Kernel
