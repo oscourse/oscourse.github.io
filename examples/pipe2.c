@@ -45,7 +45,7 @@ int main()
     if ( pid2 == 0 ) {
         close(0);   /* close normal stdin (fd = 0)*/
         dup2(fds[0],0);   /* make stdin same as fds[0] */
-        close(fds[1]); /* we don't need the write end -- fds[1]*/
+        //close(fds[1]); /* we don't need the write end -- fds[1]*/
 
         if( execlp("less", "less", (char *) 0) < 0) {
 		perror("Child");
