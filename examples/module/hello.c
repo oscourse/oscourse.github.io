@@ -7,7 +7,7 @@ int __init init_module()
 {
 	printk(KERN_ALERT "mymodule: Hello World!\n");
 
-	return 0;
+	return -1;
 }
 
 
