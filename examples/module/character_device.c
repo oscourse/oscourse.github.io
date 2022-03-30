@@ -101,4 +101,3 @@ module_exit(my_exit)
 MODULE_DESCRIPTION("Miscellaneous character device module\n");
 MODULE_AUTHOR("Kartik Gopalan");
 MODULE_LICENSE("GPL");
-
