@@ -1,0 +1,1 @@
+cmd_/home/kartik/kfifo/record-example.ko := ld -r -m elf_i386 -T /usr/src/linux-headers-4.19.0-16-common/scripts/module-common.lds  --build-id  -o /home/kartik/kfifo/record-example.ko /home/kartik/kfifo/record-example.o /home/kartik/kfifo/record-example.mod.o ;  true
