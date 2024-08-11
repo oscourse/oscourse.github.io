@@ -1,4 +1,4 @@
-<html>
+
 <head>
   <meta name="robots" content="noindex,nofollow">
   <META http-equiv="expires" content="0">
@@ -6,8 +6,475 @@
 </head>
 
 <body>
+<a name=top></a>
+<center>
+<H1> CS550 - Operating Systems - Fall 2021</H1>
+<H3> Prof. Kartik Gopalan</H3>
+</center>
 
-</body>
+<p align="center">
+<a href="#syllabus">[Syllabus]</a> 
+<a href="#slides">[Course Material]</a> 
+<a href="policies.html">[Policies]</a>
+<!--
+<a href="https://sites.google.com/binghamton.edu/oscourse/policies">[Policies]</a> 
+<a href="https://goo.gl/forms/BkIvdvVeoCgSAKZL2">[Feedback]</a> 
+-->
+</p>
 
-</html>
+
+<p>
+<table bgcolor="lightgrey" border="0" width="100%">
+  <tbody>
+    <tr>
+	<td valign="top">
+		<font size="4"><strong><b><a name="syllabus">Syllabus</a></strong></font>
+	</td>
+    </tr>
+  </tbody>
+</table>
+
+<!--
+<p>
+<b> Class Information</b>
+<ul>
+	<li>Course webpage: <a href=https://oscourse.github.io>https://oscourse.github.io</a>
+<!--	<li>Course webpage: <a href=https://sites.google.com/binghamton.edu/oscourse/home>https://sites.google.com/binghamton.edu/oscourse</a> -->
+	<li>Lecture hours: Mon and Wed 4:40PM to 6:05PM US ET
+	<li>Lecture location: 
+		<ul>
+			<li> In-person: Lecture Hall 7: LH007
+			<li> Online via Zoom at <a href=https://binghamton.zoom.us/j/91275738635>https://binghamton.zoom.us/j/91275738635</a>. Password: 550.
+		</ul>
+	<li>Lectures will be recorded, posted online on Panopto, and linked from this website.
+	<li>All class materials will be available on this website.
+</ul>
+--!>
+<p>
+<b>Instructor:</b> <a href="http://kartikgopalan.github.io/">Prof. Kartik Gopalan</a>. 
+<ul>
+	<li>Office hours: Mon and Wed 2pm to 3pm or by appointment.
+	<li>Office hour location: Online via Zoom at <a href=https://binghamton.zoom.us/j/91275738635>https://binghamton.zoom.us/j/91275738635</a>. Password: 550.
+	<li>Email: oscourse@binghamton.edu 
+</ul>
+
+<p>
+<b>Teaching Assistants:</b> 
+<ul>
+	<li>Roja Eswaran and Mingjie Yan
+	<li>Office Hours: Mon 1-2PM, Tue 4-5PM, Thu 5-6PM, Fri 2-3PM
+	<li>Office hour location: Online via Zoom at <a href=https://binghamton.zoom.us/j/91275738635>https://binghamton.zoom.us/j/91275738635</a>. Password: 550
+	<li>Email: oscourse@binghamton.edu 
+</ul>
+
+<p>
+<b> Course Description: </b>
+Advanced topics in operating systems. including  process and threads, concurrency, deadlocks, race conditions, synchronization, scheduling, virtual memory, file systems, storage systems, virtualization, security, and kernel programming.
+
+<p>
+<b>Credit hours and course expectations:</b>
+This course is a 3-credit course, which means that students are expected to do at least 9 to 9.5 hours of course-related work or activity each week during the semester. This includes scheduled class lecture/discussion meeting times as well as time spent completing assigned readings, studying for tests and examinations, participating in lab sessions, preparing written assignments, and other course-related tasks.
+
+
+<p>
+<b> Learning Objectives: </b>
+In this course, you will learn classical and advanced concepts in Operating Systems. Topics include:
+</p>
+<ul>
+<li> Processes, Threads, and Events
+<li> Concurrency
+<li> Scheduling
+<li> Virtual Memory 
+<li> Storage and File Systems
+<li> Virtualization 
+<li> Security 
+<li> Introduction to Linux Kernel Programming
+</ul>
+We will cover a mix of background material and advanced topics. Programming assignments will help you get your hands dirty with Linux kernel coding.
+
+<p>
+<b>Prerequisites:</b>
+<ul>
+<li> CS350 -- Undergraduate OS. 
+<li> You must be proficient with C programming.
+<li> Proficiency in the use of a debugger (such as gdb) is expected. 
+<li> You must be comfortable working and programming in the Linux environment.
+</ul>
+
+<p>
+<b><a name=textbooks>Textbooks:</a></b>
+<ul>
+	<li> There is no required textbook for this course. 
+	<li> A good reference book is <b>Modern Operating Systems</b>, by Andrew Tanenbaum, Prentice Hall; 4th edition. 
+</ul>
+
+<p>
+<b>Other Recommended Books:</b>
+<ul>
+  	<li> Kernighan, Ritchie, The C Programming Language.
+	<li> Linux Device Drivers, 3rd Edition  by Jonathan Corbet, Alessandro Rubini, and Greg Kroah-Hartman. (This book is also available online at <a href=http://lwn.net/Kernel/LDD3/>http://lwn.net/Kernel/LDD3/</a>).
+	<li> Unix Network programming, Vol 1: The Socket Networking API (3rd edition),  by W. Richard Stevens, Bill Fenner, Andrew M. Rudoff, Addison-Wesley Professional.
+	<li> <a href=http://pages.cs.wisc.edu/~remzi/OSTEP/> <i>Operating Systems: Three Easy Pieces (a.k.a. the OSTEP book)</i> <br> </a> Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau </i>  
+	<li> Silberschatz, Galvin, Gagne, Operating System Concepts; 7th or 8th edition
+	<li> Virtual Machines: Versatile Platforms for Systems and Processes, By James E. Smith Jim, Jr. Smith, Ravi Nair.
+</ul>
+
+<!--
+<p>
+<b>Lecture Slides and Supplemental Materials</b> 
+<ul>
+	<li> All <a href=https://oscourse.github.io/#slides>course materials</a> will be posted on this course website. These include slides, recorded lectures, sample questions, assignments, and any other relevant information.
+	<li> We will also cover various research papers available online. Links will be posted on this course website against each topic.
+</ul>
+-->
+
+<p>
+<b><a name=grading>Evaluation:</a></b> 
+<ul>
+  <li>66% - Three written tests 
+	<ul>
+	<li> Tests will be held in-person.
+	<li> Test 1 will be held on Oct 6 during class hours. There are two classrooms for social distancing:
+		<ul>
+			<li>Go to Lecture Hall 7 if your last name starts with A to L
+			<li>Go to Fine Arts 212 if your last name starts with M to Z.
+		</ul>
+	<li> Test 2 will be held on Nov 8 during class hours.
+	<li> Test 3 will be held on Mon Dec 13 12:50PM to 2:20PM in LH 008.
+	</ul>
+  <li>34% - Three programming assignments (11, 11, 12).
+	<ul>
+	<ul>
+		<li> <a href=https://docs.google.com/document/d/1m-7sBSG44eVDrIZ8Gj0PVxOaGnPEvKJ7nuw8GgRxKuw/edit>Instructions for accessing your VM</a>
+		<li><a href=/assignments/process_tree.html>Assignment 1: Process Tree</a> - Due Sept 12
+		<li><a href=/assignments/shm_semaphore_addition_winner_game.html>Assignment 2: Multi-process Game Of Turns</a>
+		<ul>
+			<li> Part A: Due Sep 30
+			<li> Part B and C: Due Oct 22.
+		</ul>
+		<li><a href=assignments/kernel_module_character_device_list_of_processes.html>Assignment 3: Kernel Module to list all processes and their states</a>
+		<ul>
+			<li> Parts A,B,C,D: Due Nov 19. Submit a 1-page document describing what you did and what you learned
+			<li> Parts E and F: Due Dec 7. Submit code on Brightspace and sign up for demo.
+		</ul>
+	</ul>
+  	<li> Assignments can be completed in teams of two or individually. 
+  	<li> Assignment demos will be conducted individually and online using Zoom.
+	<li> Assignments should be submitted via Brightspace. 
+		<ul>
+		<li> Submit all your code and your PDF report as ONE zipped file, not multiple files.
+		<li> Name your assignment directory as "your_username/" and the name the zip file as "your_username.zip", so that when yoursubmission is unzipped, a directory with your username will be created. Replace "your_username" above  with your BU login username (don't use your B-number).
+		</ul>
+	</ul>
+<!--<li> 10% - Homework Assignments -->
+</ul>
+
+<p>
+<b><a name=grading>Grading Method:</a></b> 
+<ul>
+  <li>All grades will be posted on Brightspace after grading is completed.
+  <li>A weighted total will be computed based on the above mentioned distribution between tests and assignments. Similar weighted totals will be assigned for similar grade. For instance, in some of the past offerings of this course, a weighted total of 90% or more corresponded to a grade of A, 80-89% corresponded to A-, 70-79%  corresponded to B+, and 60-69% corresponded to B, and so forth. These grade distributions vary from year to year.
+
+  <li><b>Important:</b> Academic dishonesty and missed work may adversely affect your grades. Please carefully read the Course Policies section for detailed information about academic honesty, missed exams, late submissions, grade change requests, etc.
+</ul>
+
+<p>
+<a href="#syllabus">[Syllabus]</a> 
+<a href="#slides">[Course Material]</a> 
+<a href="policies.html">[Policies]</a> 
+<!--
+<a href="https://sites.google.com/binghamton.edu/oscourse/policies">[Policies]</a> 
+<a href="https://goo.gl/forms/BkIvdvVeoCgSAKZL2">[Feedback]</a> 
+-->
+</p>
+
+<p>
+<table bgcolor="lightgrey" border="0" width="100%">
+  <tbody>
+    <tr>
+	<td valign="top">
+		<font size="4"><strong><a name="slides">Lecture Slides and Supplemental Materials</a></strong></font>
+	</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+	<li> <font color=red> Please clear your browser's cache and reload this page to see the latest listing of slides below.</a> </font><br>
+</ul>
+
+<ol>
+
+
+<li> <a href=slides/logistics.pdf>Course Information</a> 
+	<ul>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=ec1713cd-947f-4e59-afc4-ad8f016f976f>Zoom Recording</a>
+	</ul>
+
+<li> <a href=slides/introduction.pdf>Introduction </a> 
+	<ul>
+		<li> <a href=https://youtu.be/fR9yPrXFIZE>Pre-recorded Lecture</li></a>
+		<li> <a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=ec1713cd-947f-4e59-afc4-ad8f016f976f&start=1105>Zoom Recording - Part 1</a>
+		<li> <a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=398ee0fa-bdff-4cc7-b255-ada2016e42fe>Zoom Recording: Introduction to OS - Part 2 - Interfaces of a Computer System </a>
+		<li> <a href=tests/introduction_questions.pdf>Sample Questions</li></a>
+		<li> Chapter 1 of Tanenbaum's book.
+		<li> Chapter 1 of OSTEP book.
+	</ul>
+
+<li> <a href=slides/processes.pdf> Processes </a>
+	<ul>
+		<li> <a href=https://youtu.be/Hu82HSUi5iQ>Pre-recorded Lecture</a>
+		<li> Not recorded: Definition of processes, process states. Please refer to the pre-recorded lecture link above.
+		<li> <a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=3af25c1f-3aeb-477f-a504-ad940188be3c>Zoom Recording: Processes - Part 1 - Memory Layout (old recording)</a>
+		<li> <a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=521f087c-6e53-418f-bc22-ad94016df677>Zoom Recording: Processes - Part 2 - fork system call</a>
+		<li> <a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=91f52ce8-8e3f-4dba-9ca0-ad9401848632>Zoom Recording: Processes - Part 3 - fork system call - continued</a>
+		<li> <a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=e8da9c8f-424e-497b-b371-ad9601718dfd>Zoom Recording: Processes - Part 4 - fork and exec</a>
+		<li> <a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=fc4c7772-8c19-48c6-8cef-ada2016e6e91>Zoom Recording: Processes - Part 5 - Process Lifecycle (Process State Diagram) </a>
+		<li> <a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=ac82fe2c-8284-48f8-9ea4-ada40171027a>Zoom Recording: Processes - Part 6 - Orphan and Zombie processes</a>
+		<li> <a href=tests/processes_samples.pdf>Sample Questions</li></a>
+		<li> References: Chapter 2, Sections 10.2, and 10.3 of Tanenbaum's book
+	</ul>
+
+<li> <a href=slides/ipc.pdf>Inter Process Communication</a>
+	<ul>
+		<li><a href=https://youtu.be/biXBs1amGxs>Pre-recorded lecture</a> 
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=6a715824-9b43-43a0-ae61-ada40171377d>Zoom Recording: IPC - Part 1 - Pipes</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a02c4e56-207c-4ad3-9607-ada901727ba2>Zoom Recording: IPC - Part 2 - Signals and Shared Memory</a>
+		<li> <a href=tests/ipc_samples.pdf>Sample Questions</li></a>
+		<li> Chapters 7 to 10, and 14, Advanced Programming in Unix Environment, by Richard Stevens.
+		<li> Unix man pages 
+	</ul>
+
+
+<li> <a href=slides/threads.pdf>Threads</a> (Study on your own)
+	<ul>
+		<li><a href=https://youtu.be/5vB3Kt2aHkM>Pre-recorded Lecture</a>
+		<li><a href=tests/threads_samples.pdf>Sample Questions</li></a>
+		<li> Chapter 2 (Section 2.2), Modern Operating Systems, Andrew Tanenbaum
+		<li> Chapter 11: Advanced Programming in Unix Environment, by Richard Stevens
+	</ul>
+
+<li> <a href=slides/concurrency_race_and_locks.pdf>Race Conditions and Deadlocks</a>
+	<ul>
+		<li> <a href=https://youtu.be/OcKBHUTs2eA>Pre-recorded Lecture</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=2e9faa12-074d-45ab-9a45-adab0170dd87>Zoom Recording: Concurrency - Part 1 - Race conditions and Locks</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=bb18fc3e-db7f-4c2e-bf14-adb00170fb69>Zoom Recording: Concurrency - Part 2 - Locks, Deadlocks, Priority Inversion</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=53260a32-956f-4353-b5dd-adb70170d397>Zoom Recording: Concurrency - Part 3 - Interrupts and Locks</a>
+		<li> <a href=tests/concurrency_a_samples.pdf>Sample Questions</li></a>
+		<li> Chapters 2 (2.3)  and 6, Tanenbaum's Modern OS
+	</ul>
+
+<li> <a href=slides/concurrency_semaphores_pc.pdf>Semaphores, Monitors and Condition Variables, Producer-Consumer Problem</a>
+	<ul>
+		<li><a href=https://youtu.be/8JCL-3am0CU>Pre-recorded Lecture</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=330041ea-83fe-4aed-a1a8-adb20177e056>Zoom Recording: Semaphore, Mutex, Producer-Consumer Problem - Part 1</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=8367b159-0264-43d6-a9af-adbe017550c7>Zoom Recording: Assignment 2, Monitors and Condition Variables - Part 2</a>
+		<li> <a href=tests/concurrency_b_samples.pdf>Sample Questions</li></a>
+		<li> Chapters 2 (2.3)  and 6, Tanenbaum's Modern OS
+	</ul>
+
+
+<!--
+<li> <a href=slides/threads_vs_events.pdf>Events vs Threads</a>
+	<ul>
+		<li><a href=tests/events_vs_threads_samples.pdf>Sample Questions</li></a>
+	</ul>
+-->
+
+
+<li> <a href=slides/kernel_modules.pdf>Kernel Modules </a>
+<li> <a href=slides/system_calls.pdf>System Calls</a>
+	<ul>
+		<li><a href=https://youtu.be/uNW0GKXyFNQ>Pre-recorded Lecture - Kernel Modules</a>
+		<li><a href=https://youtu.be/Hc45ySBCjPw>Pre-recorded Lecture - System Calls</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=b633a77e-52ea-4d10-b7df-adc00170c534>Zoom Recording: Kernel Modules and System Calls - Part 1</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=aa543b47-853d-473c-933a-adc501703e77>Zoom Recording: Kernel Modules and Character Devices</li>
+		<li> <a href=examples/module/index.html>Example Code - Kernel Modules</a>
+		<li><a href=tests/kernel_modules_samples.pdf>Sample Questions - Kernel Modules</a>
+		<li><a href=tests/syscalls_samples.pdf>Sample Questions - System Calls</a>
+<!--
+		<li><a href=slides/system_call_extra_slides.pdf>Additional slides explaining syscall implementation</a>
+-->
+	</ul>
+
+<li> <a href=slides/virtual_memory_intro.pdf>Virtual Memory Management </a>
+	<ul>
+		<li> <a href=https://youtu.be/rdpwFMr5gC4>Pre-recorded lecture</a> 
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=7740fd76-68a6-429d-92b0-adc7016f026b>Zoom Recording: Virtual Memory and Address Translation - Part 1</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=f532fbed-3c39-417b-80e1-adcc01751929>Zoom Recording: Virtual Memory - Page Tables - Part 2</a>
+		<li><a href=tests/virtual_memory_questions.pdf>Sample Questions</li></a>
+		<li> Chapter 3, Tanenbaum's book
+	</ul>
+
+<li> <a href=slides/superpages.pdf>TLB Coverage and Superpages </a> 
+	<ul>
+		<li><a href=https://youtu.be/cScfSwwhEMs>Pre-recorded Lecture</a>
+		<li><a href=tests/superpages_questions.pdf>Sample Questions</li></a>
+		<li> Paper: <a href=paper/navarro02superpages.pdf> Practical, Transparent, Operating System Support for Superpages </a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a702003f-5033-46f1-a279-adce0171f689>Zoom Recording: TLB Coverage and Superpages - Part 1</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=0112fdd9-e3eb-44b1-b37e-add3017400d5>Zoom Recording: TLB Coverage and Superpages - Part 2</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=5e184c52-d149-4629-8465-addc017e2559>Zoom Recording: Assignment 3, Superpages - Part 3</a>
+		<li><a href=https://youtu.be/cScfSwwhEMs?t=1378>Rest of the superpage lecture: Demotions, Fragmentation control, Performance</a>
+	</ul>
+
+<li> <a href=slides/unix_ritchie.pdf> "The UNIX time-sharing system"</a>, Dennis M. Ritchie and Ken Thompson, 1974
+	<ul>
+	<li><a href=https://youtu.be/rZyBUE-HlVI>Pre-recorded Lecture: Introduction to File Systems</a>
+	<li><a href=tests/file_systems_questions.pdf>Sample Questions</a>
+	<li> <a href=paper/ritchie74.pdf>Paper</a> 
+	<li> Chapter 4 Tanenbaum's book
+	<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=1cc7fca4-f133-4662-b4a8-addc017e8e4a>Zoom Recording: UNIX and File System- Part 1</a>
+	<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=e0d606f1-cee8-4b99-8500-ade10186b3e0>Zoom Recording: UNIX File System - Part 2</a>
+	<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=c1e56ae3-8338-4796-80d6-ade3018076cb>Zoom Recording: UNIX i-node, File System Cache, Log structured File Systems - Part 3</a>
+	</ul>
+
+<li> <a href=slides/raid.pdf>RAID</a>
+	<ul>
+		<li><a href=https://youtu.be/iPVCe77d5I8>Pre-recorded Lecture</a>
+		<li><a href=tests/raid_questions.pdf>Sample Questions</a>
+		<li><a href=paper/patterson88case.pdf>Paper</a>
+		<li> Chapter 5, Tanenbaum's book
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=b8d20cee-3b88-46f9-b3a9-ade301809af1>Zoom Recording: RAID - Part 1</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=2b263ec9-65ea-4696-94d1-ade80181a45b>Zoom Recording: RAID - Part 2</a>
+	</ul>
+
+
+<li> <a href=slides/virtual_machine_intro.pdf> Introduction to Virtual Machines </a>
+	<ul>
+		<li><a href=https://youtu.be/UFhe79nYPTE>Pre-recorded Lecture</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a83b2eaf-1f04-443b-9507-adef01825cf5>Zoom Recording: Introduction to Virtual Machines - Part 1</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=25666187-0eed-4ef1-96d9-adf1017f2fee>Zoom Recording: System Virtual Machines - Part 2</a>
+		<li><a href=tests/virtual_machines_questions.pdf>Sample Questions</li></a>
+		<li> <a name=smith03overview href=slides/smith03overview.pdf> Chapter 1, "Virtual Machines - Versatile platforms for Systems and Processes", Smith and Nair.</a>
+		<li> Chapter 7 Tanenbaum's book 
+	</ul>
+
+<li> <a href=slides/live_migration.pdf>Live Migration</a>
+	<ul>
+		<li><a href=https://youtu.be/4axYrG5QBvY>Pre-recorded Lecture</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=16b503c7-5b93-4bbb-9fcd-adf1017f0b2b>Zoom Recording: Live VM Migration - Part 1</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=ef7ce42d-bc2d-4f47-8447-adf601817b5f>Zoom Recording: Live VM Migration - Part 2</a>
+		<li><a href=tests/live_migration_questions.pdf>Sample Questions</li></a>
+		<li><a href=https://www.usenix.org/legacy/event/nsdi05/tech/full_papers/clark/clark.pdf>C. Clark et. al, "Live migration of virtual machines", NSDI 2005</a>
+		<li><a href=http://dl.acm.org/citation.cfm?id=1618528>M. Hines, U. Deshpande, K. Gopalan, "Post-copy live migration of virtual machines", Operating Systems Review 2009.</a>
+	</ul>
+
+<li> <a href=slides/security.pdf>System Security </a>
+	<ul>
+		<li><a href=https://youtu.be/IsliF-Hn_aY>Pre-recorded Lecture</a>
+		<li><a href=tests/security_questions.pdf>Sample Questions</li></a>
+		<li> Chapter 9 Tanenbaum's book
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=ddac2905-5ff5-411b-b330-adf70021ca0e>Zoom Recording: System Security - Part 1</a>
+		<li><a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=e8b9bad2-8e80-4346-a074-adf80179240e>Zoom Recording: System Security - Part 2</a>
+	</ul>
+
+<li> <a href=slides/containers.pdf> Operating-System-Level Virtualization (Containers)</a>
+	<ul>
+		<li><a href=https://youtu.be/yQRnvnykrFI>Pre-recorded Lecture</a>
+		<li><a href=tests/containers_questions.pdf>Sample Questions</li></a>
+		<li>Various sources on the internet
+	</ul>
+
+<li> <a href=slides/io_models.pdf> I/O Models</a>
+	<ul>
+		<li> <a href=https://youtu.be/SDk6nZ26wKw>Pre-recorded Lecture</a>
+		<li><a href=tests/io_models_questions.pdf>Sample Questions</li></a>
+		<li> Chapter 6, Unix Network Programming, 3rd Edition, by Richard Stevens
+		<a href=https://binghamton.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=605a1e94-3372-47eb-b36f-adf801794ad5>Zoom Recording: I/O Models</a>
+	</ul>
+
+<li> <a href=slides/segmentation.pdf>Segmentation</a>
+	<ul>
+		<li><a href=https://youtu.be/eOLTiIuYZLE>Pre-recorded Lecture</a>
+		<li><a href=tests/segmentation_questions.pdf>Sample Questions</li></a>
+		<li> Chapter 3 Tanenbaum's book
+	</ul>
+
+
+
+<li> <a href=slides/system_design.pdf>Principles of System Design</a>
+	<ul>
+		<li><a href=https://youtu.be/_q2vH5c5g4U>Pre-recorded Lecture</a>
+		<li> <a href=paper/lampson83hints.pdf>Hints for Computer System Design</a>
+		<li><a href=tests/system_design_questions.pdf>Sample Questions</li></a>
+		<li> Chapter 6 from <a href=https://www.amazon.com/Engineering-Approach-Computer-Networking-Telephone-dp-0201634422/dp/0201634422/ref=mt_other?_encoding=UTF8&me=&qid=>Srinivasan Keshav's book</a>.
+	</ul>
+
+<!--
+<li> <a href=slides/intel_vt.pdf> Hardware support for virtualization</a>
+	<ul>
+	<li><a href=paper/neiger06intel.pdf>[neiger06intel]</a></li>
+	</ul>
+-->
+
+</ol>
+
+<p>
+
+<p>
+<a href="#syllabus">[Syllabus]</a> 
+<a href="#slides">[Course Materials]</a> 
+<a href="policies.html">[Policies]</a> 
+<!--
+<a href="https://sites.google.com/binghamton.edu/oscourse/policies">[Policies]</a> 
+<a href="https://goo.gl/forms/BkIvdvVeoCgSAKZL2">[Feedback]</a> 
+-->
+</p>
+
+
+<!--
+<p> Background material for assignments:
+<ul>
+	<li>VM Assignment and Process Creation
+	<a href=https://docs.google.com/document/d/1m-7sBSG44eVDrIZ8Gj0PVxOaGnPEvKJ7nuw8GgRxKuw/edit?ts=599af03d#heading=h.r4xftb9u6u09>[Virtual Machine Instructions]</a>
+	<a href=labs/vm_assignment.pdf>[Slides]</a></li>
+
+	<li>Linux Kernel Compilation and System Calls 
+	<a href=labs/kernel_compilation_system_calls.pptx>[Slides]</a></li>
+
+	<li>Git, GitHub and Linux Kernel Modules
+	<a href=labs/short_git_tutorial.pdf>[Short Git Tutorial]</a>
+	<a href=examples/hello_template.c>[hello_template.c]</a></li>
+
+	<li>Miscellaneous Character Device and Process List
+	<a href=labs/misc_char_dev_process_list.pptx>[Slides]</a></li>
+
+	<li>In-Kernel Synchronization Using Mutex or Semaphores
+	<a href=labs/in_kernel_synchronization.pptx>[Slides]</a></li>
+</ul>
+-->
+<!-- <li><a href=https://docs.google.com/document/d/1CXQED71LhEV44zkT9oN177muh3yD0beehFaKYAtvZSc/edit?usp=sharing>Network Boot Image Instructions</a> -->
+<!-- <li> <a href=slides/network_boot_image.pdf>Network Boot Instructions</a> -->
+<!-- <li><a href=https://docs.google.com/document/d/1WaQs7uf9KFRpBlcVzQasMOITQaNdTkTOxFjwyym21Rw/edit?usp=sharing>Instructions to use VM on Google Cloud</a> -->
+
+
+<!--
+	<li><a href=https://oscourse.github.io/examples/>Example code</a></li>
+	<li><a href=https://oscourse.github.io/examples/makefile_example/>Example makefile</a></li>
+
+
+<p> <font color=red>Update on Mar 16 2020: Due to COVID-19 related changes, the course grading has been modified as follows. </font>
+<ul>
+	<li>[DONE] Feb 26: Test 1 (20%) during class time in EB-G7 and EB-N01, Lectures 1-7.
+	<li>[DONE] Feb 28: <a href=hw1.html>Assignment 1</a> due (12%)
+	<li><font color=red>[CANCELLED]</font> Mar 23: Test 2 
+	<li>[NO CHANGE] <a href=hw2.html>Assignment 2</a>  (12%)
+	<ul>
+		<li> Mar 13: Submit any partial code you have written so far and a plan for completing rest of the assignment.
+		<li> Mar 27: Final submission
+	</ul>
+	<li><font color=red>[NEW]</font> April 15: Written Assignment due (10%).
+	<li> [NO CHANGE]May 3: <a href=hw3.html>Assignment 3</a> due (12%)
+	<li><font color=red>[REVISED]</font> May 08: Final Test (30%): Time 3:15PM to 5:15PM. 
+	<ul>
+		<li> Syllabus: Lectures 10-21. 
+		<li> Test will promptly start at 3:15PM and end at 5:15PM
+		<li> Log into BOTH <a href=https://mycourses.binghamton.edu>mycourses</a> and <a href=https://binghamton.zoom.us/j/217122885>Zoom</a>.
+		<li> Navigate to "Content", then "Final Test". 
+		<li> Wait for test password to be announced on Zoom.
+	</ul>
+</ul>
+-->
+
+</body></html>
 
